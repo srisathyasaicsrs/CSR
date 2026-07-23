@@ -9,7 +9,7 @@
     <meta content="About Sri Sathya Sai District, Mandals, Economy, Geography, Culture, Administration, srisathyasai.ap.gov.in" name="description">
 
     <!-- Favicon -->
-    <link href="img/csr_white_logo.png" rel="icon">
+    <link href="img/csr_logo.svg" rel="icon" type="image/svg+xml">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -81,7 +81,10 @@
         }
 
         .bg-district-header {
-            background: linear-gradient(135deg, rgba(0, 24, 56, 0.9), rgba(0, 40, 88, 0.85)), url('img/aboutus-v1.jpg') center/cover no-repeat;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(6, 163, 218, 0.35), transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(52, 173, 84, 0.30), transparent 50%),
+                linear-gradient(135deg, #001838, #002858 55%, #003a6b);
             padding: 80px 0;
             color: #FFFFFF;
         }
@@ -123,7 +126,7 @@
         <div class="container">
             <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
                 <div class="d-flex align-items-center gap-3">
-                    <img src="img/csr_white_logo.png" alt="CSR Sri Sathya Sai Logo" class="csr_logo bg-dark p-2 rounded">
+                    <img src="img/csr_logo.svg" alt="CSR Sri Sathya Sai Logo" class="csr_logo rounded">
                     <div>
                         <h3 class="mb-0 fw-bold text-dark">SRI SATHYA SAI DISTRICT</h3>
                         <p class="mb-0 text-muted small fw-semibold">Corporate Social Responsibility (CSR) Cell • Govt of Andhra Pradesh</p>
@@ -270,23 +273,18 @@
     </div>
     <!-- About Main Content End -->
 
-    <!-- Partners Carousel Start -->
+    <!-- Partners CTA Start -->
     <div class="container-fluid py-5 bg-white border-top">
-        <div class="container">
+        <div class="container text-center">
             <div class="section-title text-center position-relative pb-3 mb-4 mx-auto" style="max-width: 600px;">
                 <h5 class="fw-bold text-primary text-uppercase">Our Collaborators</h5>
-                <h2 class="mb-0">Corporate Partners</h2>
+                <h2 class="mb-0">Become a Founding CSR Partner</h2>
             </div>
-            <div class="owl-carousel vendor-carousel">
-                <div class="p-2 text-center"><img src="img/vendor-1.jpg" alt="Partner Logo" class="img-fluid rounded"></div>
-                <div class="p-2 text-center"><img src="img/vendor-2.jpg" alt="Partner Logo" class="img-fluid rounded"></div>
-                <div class="p-2 text-center"><img src="img/vendor-3.jpg" alt="Partner Logo" class="img-fluid rounded"></div>
-                <div class="p-2 text-center"><img src="img/vendor-4.jpg" alt="Partner Logo" class="img-fluid rounded"></div>
-                <div class="p-2 text-center"><img src="img/vendor-5.jpg" alt="Partner Logo" class="img-fluid rounded"></div>
-            </div>
+            <p class="text-muted mb-3">This portal is onboarding its first corporate partners for Sri Sathya Sai District.</p>
+            <a href="index.html#partner-form" class="btn btn-primary rounded-pill px-4 py-2 fw-bold"><i class="bi bi-heart-fill me-2"></i>Register Your Interest</a>
         </div>
     </div>
-    <!-- Partners End -->
+    <!-- Partners CTA End -->
 
     <!-- Footer Start -->
     <div class="container-fluid text-white py-4" style="background: #001838;">

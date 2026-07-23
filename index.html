@@ -9,7 +9,7 @@
     <meta content="Official CSR Portal of Sri Sathya Sai District Administration, Govt of Andhra Pradesh (srisathyasai.ap.gov.in). Connecting corporate CSR funds with rural development, health, education, and infrastructure." name="description">
 
     <!-- Favicon -->
-    <link href="img/csr_white_logo.png" rel="icon">
+    <link href="img/csr_logo.svg" rel="icon" type="image/svg+xml">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -152,7 +152,10 @@
         }
 
         .hero-banner {
-            background: linear-gradient(135deg, rgba(0, 24, 56, 0.9), rgba(0, 40, 88, 0.85)), url('img/carousel-1.jpg') center/cover no-repeat;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(6, 163, 218, 0.35), transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(52, 173, 84, 0.30), transparent 50%),
+                linear-gradient(135deg, #001838, #002858 55%, #003a6b);
             padding: 100px 0 90px;
             color: #FFFFFF;
         }
@@ -202,7 +205,7 @@
         <div class="container">
             <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
                 <div class="d-flex align-items-center gap-3">
-                    <img src="img/csr_white_logo.png" alt="CSR Sri Sathya Sai Logo" class="csr_logo bg-dark p-2 rounded">
+                    <img src="img/csr_logo.svg" alt="CSR Sri Sathya Sai Logo" class="csr_logo rounded">
                     <div>
                         <h3 class="mb-0 fw-bold text-dark">SRI SATHYA SAI DISTRICT</h3>
                         <p class="mb-0 text-muted small fw-semibold">Corporate Social Responsibility (CSR) Cell • Govt of Andhra Pradesh</p>
@@ -295,33 +298,34 @@
             <div class="row g-4 text-center">
                 <div class="col-lg-3 col-md-6">
                     <div class="p-3">
-                        <i class="bi bi-building-check display-5 text-primary mb-2"></i>
-                        <h2 class="fw-bold text-dark mb-1" data-toggle="counter-up">248</h2>
-                        <p class="text-muted fw-semibold mb-0">Completed CSR Initiatives</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="p-3">
-                        <i class="bi bi-currency-rupee display-5 text-success mb-2"></i>
-                        <h2 class="fw-bold text-dark mb-1">₹<span data-toggle="counter-up">185</span> Cr+</h2>
-                        <p class="text-muted fw-semibold mb-0">CSR Outlay Mobilized</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="p-3">
-                        <i class="bi bi-people-fill display-5 text-warning mb-2"></i>
-                        <h2 class="fw-bold text-dark mb-1"><span data-toggle="counter-up">650</span>K+</h2>
-                        <p class="text-muted fw-semibold mb-0">Beneficiaries Reached</p>
+                        <i class="bi bi-map-fill display-5 text-primary mb-2"></i>
+                        <h2 class="fw-bold text-dark mb-1" data-toggle="counter-up">5</h2>
+                        <p class="text-muted fw-semibold mb-0">Revenue Divisions</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="p-3">
                         <i class="bi bi-geo-alt-fill display-5 text-info mb-2"></i>
                         <h2 class="fw-bold text-dark mb-1" data-toggle="counter-up">32</h2>
-                        <p class="text-muted fw-semibold mb-0">Mandals Covered across 5 Revenue Divisions</p>
+                        <p class="text-muted fw-semibold mb-0">Mandals Covered</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="p-3">
+                        <i class="bi bi-houses-fill display-5 text-success mb-2"></i>
+                        <h2 class="fw-bold text-dark mb-1" data-toggle="counter-up">467</h2>
+                        <p class="text-muted fw-semibold mb-0">Villages / Gram Panchayats</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="p-3">
+                        <i class="bi bi-people-fill display-5 text-warning mb-2"></i>
+                        <h2 class="fw-bold text-dark mb-1"><span data-toggle="counter-up">18.4</span> Lakh+</h2>
+                        <p class="text-muted fw-semibold mb-0">Population (2011 Census)</p>
                     </div>
                 </div>
             </div>
+            <p class="text-center text-muted small mt-4 mb-0">Source: District formation notification (4 April 2022) &amp; 2011 Census figures for the Sri Sathya Sai revenue divisions.</p>
         </div>
     </div>
     <!-- Facts End -->
@@ -480,6 +484,7 @@
                     <a href="#partner-form" class="btn btn-outline-primary rounded-pill px-4 fw-bold">Propose Custom Project</a>
                 </div>
             </div>
+            <p class="text-muted small mb-4" style="max-width: 720px;"><i class="bi bi-info-circle me-1"></i>These are indicative priority proposals open for corporate adoption. Estimated outlays are planning figures for discussion with the District CSR Cell, not confirmed or collected funds.</p>
 
             <div class="row g-4">
                 <!-- Project 1 -->
@@ -487,19 +492,16 @@
                     <div class="project-card">
                         <div class="p-4">
                             <span class="badge bg-light text-primary border border-primary mb-2">Education</span>
-                            <h5 class="fw-bold text-dark mb-2">Smart Classroom Panels in 50 ZP Schools</h5>
+                            <h5 class="fw-bold text-dark mb-2">Smart Classroom Panels in ZP Schools</h5>
                             <p class="text-muted small mb-4">Equipping rural government schools with digital interactive boards, computer labs, and solar energy backup across Puttaparthi division.</p>
-                            
-                            <div class="mb-3">
-                                <div class="d-flex justify-content-between small fw-bold mb-1">
-                                    <span>Pledged: ₹1.2 Cr</span>
-                                    <span class="text-primary">Target: ₹2.0 Cr</span>
-                                </div>
-                                <div class="progress-bar-custom">
-                                    <div class="progress-fill" style="width: 60%;"></div>
+
+                            <div class="mb-3 pt-2 border-top">
+                                <div class="d-flex justify-content-between small fw-bold">
+                                    <span class="text-muted">Estimated Outlay</span>
+                                    <span class="text-primary">₹2.0 Cr (indicative)</span>
                                 </div>
                             </div>
-                            <a href="#partner-form" class="btn btn-sm btn-primary rounded-pill w-100 py-2 fw-bold">Adopt This Project</a>
+                            <a href="#partner-form" class="btn btn-sm btn-primary rounded-pill w-100 py-2 fw-bold">Propose to Adopt</a>
                         </div>
                     </div>
                 </div>
@@ -510,18 +512,15 @@
                         <div class="p-4">
                             <span class="badge bg-light text-success border border-success mb-2">Drinking Water</span>
                             <h5 class="fw-bold text-dark mb-2">Community RO Water Hubs in Kadiri</h5>
-                            <p class="text-muted small mb-4">Establishing 25 automated water purification stations with solar pumping to provide safe drinking water in fluorosis-affected villages.</p>
-                            
-                            <div class="mb-3">
-                                <div class="d-flex justify-content-between small fw-bold mb-1">
-                                    <span>Pledged: ₹85 Lakhs</span>
-                                    <span class="text-success">Target: ₹1.1 Cr</span>
-                                </div>
-                                <div class="progress-bar-custom">
-                                    <div class="progress-fill" style="width: 77%;"></div>
+                            <p class="text-muted small mb-4">Establishing automated water purification stations with solar pumping to provide safe drinking water in fluorosis-affected villages.</p>
+
+                            <div class="mb-3 pt-2 border-top">
+                                <div class="d-flex justify-content-between small fw-bold">
+                                    <span class="text-muted">Estimated Outlay</span>
+                                    <span class="text-success">₹1.1 Cr (indicative)</span>
                                 </div>
                             </div>
-                            <a href="#partner-form" class="btn btn-sm btn-success text-white rounded-pill w-100 py-2 fw-bold">Adopt This Project</a>
+                            <a href="#partner-form" class="btn btn-sm btn-success text-white rounded-pill w-100 py-2 fw-bold">Propose to Adopt</a>
                         </div>
                     </div>
                 </div>
@@ -532,18 +531,15 @@
                         <div class="p-4">
                             <span class="badge bg-light text-warning border border-warning mb-2">Healthcare</span>
                             <h5 class="fw-bold text-dark mb-2">Mobile Tele-Medicine Diagnostic Vans</h5>
-                            <p class="text-muted small mb-4">Deploying 4 specialized health vans with diagnostic labs, ECG, and doctor tele-consultations for remote Penukonda & Madakasira mandals.</p>
-                            
-                            <div class="mb-3">
-                                <div class="d-flex justify-content-between small fw-bold mb-1">
-                                    <span>Pledged: ₹40 Lakhs</span>
-                                    <span class="text-warning">Target: ₹1.5 Cr</span>
-                                </div>
-                                <div class="progress-bar-custom">
-                                    <div class="progress-fill" style="width: 28%;"></div>
+                            <p class="text-muted small mb-4">Deploying specialized health vans with diagnostic labs, ECG, and doctor tele-consultations for remote Penukonda &amp; Madakasira mandals.</p>
+
+                            <div class="mb-3 pt-2 border-top">
+                                <div class="d-flex justify-content-between small fw-bold">
+                                    <span class="text-muted">Estimated Outlay</span>
+                                    <span class="text-warning">₹1.5 Cr (indicative)</span>
                                 </div>
                             </div>
-                            <a href="#partner-form" class="btn btn-sm btn-warning text-dark rounded-pill w-100 py-2 fw-bold">Adopt This Project</a>
+                            <a href="#partner-form" class="btn btn-sm btn-warning text-dark rounded-pill w-100 py-2 fw-bold">Propose to Adopt</a>
                         </div>
                     </div>
                 </div>
@@ -582,26 +578,44 @@
     </div>
     <!-- Officer's Message End -->
 
-    <!-- Corporate Partners Carousel Start -->
+    <!-- Corporate Partners Section Start -->
     <div id="partners" class="container-fluid py-5">
         <div class="container py-4">
-            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 650px;">
                 <h5 class="fw-bold text-primary text-uppercase">Our Collaborators</h5>
-                <h2 class="mb-0">Corporate & Institutional Partners</h2>
+                <h2 class="mb-0">Become a Founding CSR Partner</h2>
             </div>
 
-            <div class="bg-white p-4 rounded-4 shadow-sm border">
-                <div class="owl-carousel vendor-carousel">
-                    <div class="p-2 text-center"><img src="img/vendor-1.jpg" alt="Partner Logo" class="img-fluid rounded"></div>
-                    <div class="p-2 text-center"><img src="img/vendor-2.jpg" alt="Partner Logo" class="img-fluid rounded"></div>
-                    <div class="p-2 text-center"><img src="img/vendor-3.jpg" alt="Partner Logo" class="img-fluid rounded"></div>
-                    <div class="p-2 text-center"><img src="img/vendor-4.jpg" alt="Partner Logo" class="img-fluid rounded"></div>
-                    <div class="p-2 text-center"><img src="img/vendor-5.jpg" alt="Partner Logo" class="img-fluid rounded"></div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="bg-white p-4 rounded-4 shadow-sm border h-100 text-center">
+                        <i class="bi bi-award-fill display-6 text-primary mb-3"></i>
+                        <h6 class="fw-bold text-dark">Statutory Tax Benefits</h6>
+                        <p class="text-muted small mb-0">Projects eligible for 80G and Section 35AC exemptions under Collectorate facilitation.</p>
+                    </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="bg-white p-4 rounded-4 shadow-sm border h-100 text-center">
+                        <i class="bi bi-graph-up-arrow display-6 text-success mb-3"></i>
+                        <h6 class="fw-bold text-dark">Transparent Impact Reporting</h6>
+                        <p class="text-muted small mb-0">Geo-tagged milestone tracking and quarterly audit reports shared with every partner.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="bg-white p-4 rounded-4 shadow-sm border h-100 text-center">
+                        <i class="bi bi-signpost-split-fill display-6 text-warning mb-3"></i>
+                        <h6 class="fw-bold text-dark">Single Window Clearance</h6>
+                        <p class="text-muted small mb-0">Fast-tracked land allocation and local NOCs handled directly by the District CSR Cell.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <p class="text-muted mb-3">This portal is onboarding its first corporate partners — your organization's name and logo will feature here once a CSR partnership is confirmed with the District Administration.</p>
+                <a href="#partner-form" class="btn btn-primary rounded-pill px-4 py-2 fw-bold"><i class="bi bi-heart-fill me-2"></i>Register Your Interest</a>
             </div>
         </div>
     </div>
-    <!-- Corporate Partners Carousel End -->
+    <!-- Corporate Partners Section End -->
 
     <!-- Corporate Proposal Form Start -->
     <div id="partner-form" class="container-fluid py-5 bg-light border-top">
