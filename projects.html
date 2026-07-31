@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Priority CSR Projects | Sri Sathya Sai District, Govt of AP</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Sri Sathya Sai District Priority Projects Directory, CSR Investment Opportunities, Andhra Pradesh, Penukonda, Puttaparthi" name="description">
+
+    <!-- Favicon -->
+    <link href="img/csr_logo.png" rel="icon" type="image/png">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link href="animate.min.css" rel="stylesheet">
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #06A3DA;
+            --secondary: #34AD54;
+            --dark-navy: #002858;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #334455;
+            background-color: #F8FAFC;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Bai Jamjuree', sans-serif;
+        }
+
+        .topbar {
+            background-color: #001838;
+            color: #CBD5E1;
+            font-size: 13.5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .header-brand-container {
+            background: #FFFFFF;
+            padding: 14px 0;
+            box-shadow: 0 4px 20px rgba(0, 40, 88, 0.06);
+        }
+
+        .project-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 40, 88, 0.04);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 12px 30px rgba(6, 163, 218, 0.12);
+        }
+
+        .filter-box {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 4px 20px rgba(0, 40, 88, 0.04);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid topbar px-5 d-none d-lg-block">
+        <div class="row gx-0 align-items-center" style="height: 42px;">
+            <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center gap-3">
+                    <span class="text-white fw-bold"><i class="bi bi-shield-check text-primary me-1"></i><span data-i18n="govt_ap">Govt of Andhra Pradesh</span></span>
+                    <span class="text-muted">|</span>
+                    <span data-i18n="portal_title">Sri Sathya Sai District CSR Portal</span>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center text-lg-end">
+                <div class="d-inline-flex align-items-center gap-2">
+                    <button id="lang-btn-en" class="btn btn-sm btn-primary py-0 px-2 fw-bold" onclick="i18nEngine.setLanguage('en')">EN</button>
+                    <button id="lang-btn-te" class="btn btn-sm btn-outline-primary py-0 px-2 fw-bold" onclick="i18nEngine.setLanguage('te')">తెలుగు</button>
+                    <a href="login.html" class="btn btn-sm btn-outline-light py-0 px-3 fw-bold ms-2"><i class="bi bi-box-arrow-in-right me-1"></i><span data-i18n="nav_login">Portal Login</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Header Brand Start -->
+    <div class="header-brand-container">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-3">
+                    <img src="img/csr_logo.png" alt="CSR Logo" style="height: 62px; object-fit: contain;">
+                    <div>
+                        <h4 class="mb-0 fw-bold text-dark" style="color: #002858;" data-i18n="portal_title">Sri Sathya Sai District CSR Portal</h4>
+                        <small class="text-muted fw-semibold">District Collectorate & Magistrate • Puttaparthi</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header Brand End -->
+
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5 py-3 py-lg-0" style="background: #001838 !important;">
+            <a href="index.html" class="navbar-brand p-0 d-lg-none">
+                <h2 class="text-primary m-0"><i class="bi bi-building me-2"></i>CSR Portal</h2>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="index.html" class="nav-item nav-link" data-i18n="nav_home">Home</a>
+                    <a href="about-district.html" class="nav-item nav-link" data-i18n="nav_about">About District</a>
+                    <a href="projects.html" class="nav-item nav-link active" data-i18n="nav_projects">Priority Projects</a>
+                    <a href="index.html#partners" class="nav-item nav-link" data-i18n="nav_collaborators">Collaborators</a>
+                    <a href="login.html" class="nav-item nav-link" data-i18n="nav_login">Portal Login</a>
+                </div>
+                <a href="index.html#partner-form" class="btn btn-primary py-2 px-4 ms-3 rounded-pill fw-bold" data-i18n="btn_submit_eoi">Submit CSR Proposal</a>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Hero Title Header -->
+    <div class="container-fluid bg-primary py-5 bg-header mb-5">
+        <div class="row py-4">
+            <div class="col-12 text-center">
+                <h1 class="display-5 text-white animated zoomIn fw-bold" data-i18n="nav_projects">Priority Projects Directory</h1>
+                <p class="text-white-50 lead mb-0">Browse pre-cleared district development projects open for Corporate Social Responsibility funding.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Directory Content -->
+    <div class="container py-4">
+        <!-- Interactive Filter Toolbar -->
+        <div class="filter-box mb-5">
+            <h5 class="fw-bold text-dark mb-3"><i class="bi bi-funnel-fill text-primary me-2"></i>Filter & Search Projects</h5>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Search Keywords</label>
+                    <input type="text" id="search-input" class="form-control" placeholder="Search title, location, details...">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label small fw-semibold">Focus Sector</label>
+                    <select id="sector-filter" class="form-select">
+                        <option value="All">All Sectors</option>
+                        <option value="Education">Education & Skills</option>
+                        <option value="Health">Healthcare & Tele-Medicine</option>
+                        <option value="Roads">Roads & Connectivity</option>
+                        <option value="Drains">Drains & Water Supply</option>
+                        <option value="Solar">Solar & Green Energy</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label small fw-semibold">Mandal / Division</label>
+                    <select id="mandal-filter" class="form-select">
+                        <option value="All">All 32 Mandals</option>
+                        <option value="Penukonda">Penukonda Division</option>
+                        <option value="Puttaparthi">Puttaparthi Division</option>
+                        <option value="Hindupur">Hindupur Division</option>
+                        <option value="Dharmavaram">Dharmavaram Division</option>
+                        <option value="Kadiri">Kadiri Division</option>
+                        <option value="Madakasira">Madakasira Division</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button class="btn btn-outline-secondary w-100 fw-bold" onclick="resetFilters()"><i class="bi bi-arrow-counterclockwise me-1"></i> Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Cards Grid -->
+        <div class="row g-4" id="project-grid-container">
+            <!-- Dynamic project cards rendered via js/project-tracker.js -->
+        </div>
+    </div>
+
+    <!-- Footer Start -->
+    <div class="container-fluid text-white py-4 mt-5" style="background: #001838;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8 text-center text-md-start mb-3 mb-md-0">
+                    <p class="mb-0 small" data-i18n="footer_rights">Content Owned & Maintained by Sri Sathya Sai District Administration • Govt of Andhra Pradesh</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- JS Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/pdf-generator.js"></script>
+    <script src="js/kv-storage.js"></script>
+    
+    <script>
+        const sampleProjects = [
+            {
+                id: "proj-101",
+                title: "Penukonda EV & Automotive Skill Hub",
+                mandal: "Penukonda",
+                sector: "Education",
+                budget: "₹1.20 Crores",
+                sponsor: "KIA Motors India",
+                status: "In Progress",
+                progressPct: 75,
+                description: "State-of-the-art skill development center providing specialized EV technician training for local youth."
+            },
+            {
+                id: "proj-102",
+                title: "Puttaparthi Tele-Medicine & Health Kiosks",
+                mandal: "Puttaparthi",
+                sector: "Health",
+                budget: "₹85 Lakhs",
+                sponsor: "Open for Adoption",
+                status: "Proposed",
+                progressPct: 0,
+                description: "Tele-consultation kiosks connecting remote rural mandal clinics with Puttaparthi super-specialists."
+            },
+            {
+                id: "proj-103",
+                title: "Hindupur Industrial Sub-Division Drainage",
+                mandal: "Hindupur",
+                sector: "Drains",
+                budget: "₹2.50 Crores",
+                sponsor: "Open for Adoption",
+                status: "Proposed",
+                progressPct: 0,
+                description: "Closed storm water network and water recycling bio-filters for the Hindupur commercial zone."
+            },
+            {
+                id: "proj-104",
+                title: "Dharmavaram Weaver Colony Smart Digital Classrooms",
+                mandal: "Dharmavaram",
+                sector: "Education",
+                budget: "₹45 Lakhs",
+                sponsor: "Tata Trusts Foundation",
+                status: "Under Review",
+                progressPct: 20,
+                description: "Smart interactive boards, solar roof backup, and computer labs across 8 weavers' colony schools."
+            },
+            {
+                id: "proj-105",
+                title: "Kadiri Clean Drinking Water RO Plants",
+                mandal: "Kadiri",
+                sector: "Drains",
+                budget: "₹60 Lakhs",
+                sponsor: "Open for Adoption",
+                status: "Proposed",
+                progressPct: 0,
+                description: "15 high-capacity community RO purification stations in drought and fluoride prone habitations."
+            },
+            {
+                id: "proj-106",
+                title: "Lepakshi Tourist Corridor Solar Lighting & Plantation",
+                mandal: "Lepakshi",
+                sector: "Solar",
+                budget: "₹35 Lakhs",
+                sponsor: "Open for Adoption",
+                status: "Proposed",
+                progressPct: 0,
+                description: "Smart standalone solar street lighting and shade tree plantation along the Lepakshi heritage road."
+            }
+        ];
+
+        function renderProjectCards(list) {
+            const container = document.getElementById("project-grid-container");
+            if (!container) return;
+
+            if (list.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="bi bi-search display-4 text-muted mb-3 d-block"></i>
+                        <h5>No projects found matching your criteria</h5>
+                        <p class="text-muted">Try adjusting your keyword search or sector filters.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = list.map(p => `
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge bg-primary px-3 py-1">${p.sector}</span>
+                            <span class="badge bg-light text-dark border"><i class="bi bi-geo-alt-fill text-primary me-1"></i>${p.mandal}</span>
+                        </div>
+                        <h5 class="fw-bold text-dark mt-2 mb-2" style="font-size: 17px;">${p.title}</h5>
+                        <p class="text-muted small mb-3 flex-grow-1">${p.description}</p>
+                        
+                        <div class="p-3 bg-light rounded-3 mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <small class="text-muted fw-semibold">Target Outlay:</small>
+                                <span class="fw-bold text-success">${p.budget}</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <small class="text-muted fw-semibold">Sponsor:</small>
+                                <small class="fw-bold text-dark">${p.sponsor}</small>
+                            </div>
+                            ${p.progressPct > 0 ? `
+                                <div class="progress mt-2" style="height: 6px;">
+                                    <div class="progress-bar bg-success" style="width: ${p.progressPct}%"></div>
+                                </div>
+                            ` : ''}
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-sm btn-outline-primary w-50 fw-bold" onclick='downloadProjectPDF(${JSON.stringify(p)})'>
+                                <i class="bi bi-file-earmark-pdf me-1"></i> PDF Brief
+                            </button>
+                            <a href="index.html#partner-form" class="btn btn-sm btn-primary w-50 fw-bold">
+                                <i class="bi bi-heart-fill me-1"></i> Adopt
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProjects() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const sector = document.getElementById("sector-filter").value;
+            const mandal = document.getElementById("mandal-filter").value;
+
+            const filtered = sampleProjects.filter(p => {
+                const matchQuery = p.title.toLowerCase().includes(query) || p.description.toLowerCase().includes(query) || p.mandal.toLowerCase().includes(query);
+                const matchSector = (sector === "All") || (p.sector === sector);
+                const matchMandal = (mandal === "All") || (p.mandal === mandal);
+                return matchQuery && matchSector && matchMandal;
+            });
+
+            renderProjectCards(filtered);
+        }
+
+        function resetFilters() {
+            document.getElementById("search-input").value = "";
+            document.getElementById("sector-filter").value = "All";
+            document.getElementById("mandal-filter").value = "All";
+            renderProjectCards(sampleProjects);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderProjectCards(sampleProjects);
+            document.getElementById("search-input").addEventListener("input", filterProjects);
+            document.getElementById("sector-filter").addEventListener("change", filterProjects);
+            document.getElementById("mandal-filter").addEventListener("change", filterProjects);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+/* dashboard.css - Custom Dashboard & Analytics Styling */
+:root {
+    --primary: #06A3DA;
+    --secondary: #34AD54;
+    --dark-navy: #002858;
+    --sidebar-width: 260px;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #F1F5F9;
+    color: #334455;
+}
+
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.dashboard-sidebar {
+    width: var(--sidebar-width);
+    background: #001838;
+    color: #CBD5E1;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dashboard-content {
+    flex-grow: 1;
+    padding: 30px;
+    background: #F8FAFC;
+    overflow-y: auto;
+}
+
+.stat-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 15px rgba(0, 40, 88, 0.04);
+    transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+}
+
+.stat-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.nav-link-dash {
+    color: #94A3B8;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 10px;
+    margin: 4px 12px;
+    transition: all 0.2s ease;
+}
+
+.nav-link-dash:hover, .nav-link-dash.active {
+    color: #FFFFFF;
+    background: rgba(6, 163, 218, 0.15);
+}
+
+.table-card {
+    background: #FFFFFF;
+    border-radius: 16px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 15px rgba(0, 40, 88, 0.04);
+    overflow: hidden;
+}

@@ -102,19 +102,19 @@
     <div class="topbar py-2 d-none d-lg-block">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div class="d-flex align-items-center gap-4">
                         <span><i class="bi bi-geo-alt-fill text-info me-1"></i> Collectorate Complex, Puttaparthi, AP - 515134</span>
                         <span><i class="bi bi-envelope-fill text-info me-1"></i> collector-sssai@ap.gov.in</span>
                         <span><i class="bi bi-globe text-info me-1"></i> <a href="https://srisathyasai.ap.gov.in/" target="_blank" class="text-info fw-bold">srisathyasai.ap.gov.in</a></span>
                     </div>
                 </div>
-                <div class="col-md-4 text-end">
-                    <div class="d-inline-flex align-items-center gap-3">
-                        <a href="https://www.facebook.com/share/1Bb5U9uBBv/" target="_blank" class="btn btn-sm btn-outline-light rounded-circle btn-sm-square me-1"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://x.com/Collector_SSSD" target="_blank" class="btn btn-sm btn-outline-light rounded-circle btn-sm-square me-1"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/districtcollector_srisathyasai/" target="_blank" class="btn btn-sm btn-outline-light rounded-circle btn-sm-square"><i class="fab fa-instagram"></i></a>
-                        <a href="index.html#partner-form" class="btn btn-sm btn-primary rounded-pill px-3 ms-2 fw-bold"><i class="bi bi-heart-fill me-1"></i> Corporate Portal</a>
+                <div class="col-md-5 text-end">
+                    <div class="d-inline-flex align-items-center gap-2">
+                        <button id="lang-btn-en" class="btn btn-sm btn-primary py-0 px-2 fw-bold" onclick="i18nEngine.setLanguage('en')">EN</button>
+                        <button id="lang-btn-te" class="btn btn-sm btn-outline-primary py-0 px-2 fw-bold text-white" onclick="i18nEngine.setLanguage('te')">తెలుగు</button>
+                        <a href="login.html" class="btn btn-sm btn-outline-light py-0 px-3 fw-bold ms-2"><i class="bi bi-box-arrow-in-right me-1"></i> <span data-i18n="nav_login">Portal Login</span></a>
+                        <a href="index.html#partner-form" class="btn btn-sm btn-primary rounded-pill px-3 ms-2 fw-bold"><i class="bi bi-heart-fill me-1"></i> <span data-i18n="btn_submit_eoi">Submit Proposal</span></a>
                     </div>
                 </div>
             </div>
@@ -129,7 +129,7 @@
                 <div class="d-flex align-items-center gap-3">
                     <img src="img/csr_logo.png" alt="Sri Sathya Sai District Logo" class="csr_logo rounded">
                     <div>
-                        <h3 class="mb-0 fw-bold text-dark">SRI SATHYA SAI DISTRICT</h3>
+                        <h3 class="mb-0 fw-bold text-dark" data-i18n="portal_title">SRI SATHYA SAI DISTRICT</h3>
                         <p class="mb-0 text-muted small fw-semibold">Corporate Social Responsibility (CSR) Cell • Govt of Andhra Pradesh</p>
                     </div>
                 </div>
@@ -155,14 +155,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="about-district.html" class="nav-item nav-link active">About District Profile</a>
-                    <a href="index.html#focus-sectors" class="nav-item nav-link">Priority Sectors</a>
-                    <a href="index.html#projects" class="nav-item nav-link">Open CSR Projects</a>
-                    <a href="index.html#messages" class="nav-item nav-link">Leadership Message</a>
-                    <a href="https://srisathyasai.ap.gov.in/" target="_blank" class="nav-item nav-link">Official Govt Site <i class="bi bi-box-arrow-up-right small"></i></a>
+                    <a href="index.html" class="nav-item nav-link" data-i18n="nav_home">Home</a>
+                    <a href="about-district.html" class="nav-item nav-link active" data-i18n="nav_about">About District</a>
+                    <a href="projects.html" class="nav-item nav-link" data-i18n="nav_projects">Priority Projects</a>
+                    <a href="index.html#focus-sectors" class="nav-item nav-link" data-i18n="sector_title">Priority Sectors</a>
+                    <a href="index.html#partners" class="nav-item nav-link" data-i18n="nav_collaborators">Corporate Partners</a>
+                    <a href="login.html" class="nav-item nav-link" data-i18n="nav_login">Portal Login</a>
                 </div>
-                <a href="index.html#partner-form" class="btn btn-primary py-2 px-4 ms-3 rounded-pill d-none d-lg-block fw-bold"><i class="bi bi-file-earmark-plus me-1"></i> Partner With Us</a>
+                <a href="index.html#partner-form" class="btn btn-primary py-2 px-4 ms-3 rounded-pill d-none d-lg-block fw-bold" data-i18n="btn_submit_eoi"><i class="bi bi-file-earmark-plus me-1"></i> Partner With Us</a>
             </div>
         </nav>
 
@@ -420,6 +420,9 @@
     <script src="waypoints.min.js"></script>
     <script src="counterup.min.js"></script>
     <script src="owl.carousel.min.js"></script>
+
+    <!-- Custom Portal Modules -->
+    <script src="js/i18n.js"></script>
 
     <!-- Template Javascript -->
     <script src="main.js"></script>
