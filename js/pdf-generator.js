@@ -12,6 +12,7 @@
         const sector = projectData.sector || "Infrastructure";
         const budget = projectData.budget || "As per EoI";
         const description = projectData.description || "Detailed project proposal under District CSR Facilitation Cell.";
+        const logoUrl = window.location.origin + window.location.pathname.replace(/[^\/]*$/, '') + "img/csr_logo.png";
 
         const printWindow = window.open("", "_blank", "width=850,height=1100");
         const html = `
@@ -41,7 +42,7 @@
                         <h5 class="fw-semibold text-dark mb-0">District Collectorate & Magistrate, Sri Sathya Sai District</h5>
                         <small class="text-muted">Corporate Social Responsibility (CSR) Facilitation Cell • srisathyasai.ap.gov.in</small>
                     </div>
-                    <img src="img/csr_logo.png" style="height: 70px; object-fit: contain;" alt="CSR Logo" onerror="this.style.display='none'">
+                    <img src="${logoUrl}" style="height: 70px; object-fit: contain;" alt="CSR Logo" onerror="this.style.display='none'">
                 </div>
 
                 <div class="badge bg-primary px-3 py-2 fs-6 mb-3">OFFICIAL CSR PROJECT PROPOSAL BRIEF</div>

@@ -8,7 +8,8 @@
 
     document.addEventListener("DOMContentLoaded", function () {
         const userStr = localStorage.getItem("csr_current_user");
-        if (!userStr && window.location.pathname.includes("dashboard.html")) {
+        const isDashboardPage = document.getElementById("collector-panel") !== null;
+        if (!userStr && isDashboardPage) {
             window.location.href = "login.html";
             return;
         }

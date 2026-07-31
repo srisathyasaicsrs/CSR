@@ -328,7 +328,7 @@
                         </div>
 
                         <div class="d-flex gap-2">
-                            <button class="btn btn-sm btn-outline-primary w-50 fw-bold" onclick='downloadProjectPDF(${JSON.stringify(p)})'>
+                            <button class="btn btn-sm btn-outline-primary w-50 fw-bold" data-project-id="${p.id}" onclick="downloadProjectPDF(sampleProjects.find(x=>x.id==='${p.id}'))">
                                 <i class="bi bi-file-earmark-pdf me-1"></i> PDF Brief
                             </button>
                             <a href="index.html#partner-form" class="btn btn-sm btn-primary w-50 fw-bold">
