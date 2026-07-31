@@ -749,3 +749,101 @@ h6,
 .carousel-item .carousel-video {
     bottom: 6px !important;
 }
+
+/* Corporate Partner Bottom Scroller System */
+.partner-scroller-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 24px 0;
+    box-shadow: 0 10px 30px rgba(0, 40, 88, 0.05);
+    border: 1px solid #E2E8F0;
+}
+
+.partner-scroller-container::before,
+.partner-scroller-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.partner-scroller-container::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0));
+}
+
+.partner-scroller-container::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0));
+}
+
+.partner-scroller-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    animation: partnerScroll 25s linear infinite;
+}
+
+.partner-scroller-container:hover .partner-scroller-track {
+    animation-play-state: paused;
+}
+
+@keyframes partnerScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.partner-card-item {
+    width: 320px;
+    flex-shrink: 0;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s ease;
+}
+
+.partner-card-item:hover {
+    border-color: #06A3DA;
+    background: #FFFFFF;
+    box-shadow: 0 8px 20px rgba(6, 163, 218, 0.12);
+    transform: translateY(-3px);
+}
+
+.partner-logo-img {
+    width: 68px;
+    height: 68px;
+    object-fit: contain;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 6px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.partner-placeholder-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #F1F5F9, #E2E8F0);
+    border: 2px dashed #94A3B8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #06A3DA;
+    font-size: 26px;
+    flex-shrink: 0;
+}
