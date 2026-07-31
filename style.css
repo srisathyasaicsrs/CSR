@@ -12,7 +12,7 @@
     background-image: url(../img/roads.png);
     background-repeat: no-repeat;
     background-position-x: center;
-
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .box_roads:hover{
@@ -22,7 +22,8 @@
     background-image: url(../img/roads_active.png);
     background-repeat: no-repeat;
     background-position-x: center;
-    
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 66, 147, 0.15);
 }
 
 .box_drainage{
@@ -31,6 +32,7 @@
     background-image: url(../img/drainage.png);
     background-repeat: no-repeat;
     background-position-x: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 
@@ -41,7 +43,8 @@
     background-image: url(../img/drainage_active.png);
     background-repeat: no-repeat;
     background-position-x: center;
-    
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 66, 147, 0.15);
 }
 
 .box_endowments{

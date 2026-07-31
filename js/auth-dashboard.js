@@ -44,6 +44,28 @@
             initCollectorCharts();
         }
 
+        // Bind Static Events
+        const logoutBtn = document.getElementById("logout-btn");
+        if (logoutBtn) {
+            logoutBtn.addEventListener("click", logoutUser);
+        }
+
+        const createSponsorForm = document.getElementById("create-sponsor-form");
+        if (createSponsorForm) {
+            createSponsorForm.addEventListener("submit", createSponsorAccount);
+        }
+
+        const proposalTableBody = document.getElementById("proposal-table-body");
+        if (proposalTableBody) {
+            proposalTableBody.addEventListener("click", function(e) {
+                const approveBtn = e.target.closest(".approve-btn");
+                if (approveBtn) {
+                    const id = approveBtn.getAttribute("data-id");
+                    approveProposal(id);
+                }
+            });
+        }
+
         // Render Data Tables
         renderProposalTable();
         renderSponsorUserList();
@@ -85,7 +107,7 @@
         }
     }
 
-    window.renderProposalTable = function () {
+    function renderProposalTable() {
         const tableBody = document.getElementById("proposal-table-body");
         if (!tableBody || typeof kvStorage === "undefined") return;
 
@@ -104,24 +126,24 @@
                     ${p.status === 'Approved' ? `
                         <button class="btn btn-xs btn-outline-secondary disabled py-0 px-2" style="font-size: 11px;">Approved</button>
                     ` : `
-                        <button class="btn btn-xs btn-success py-1 px-2 fw-bold" style="font-size: 11px;" onclick="approveProposal('${p.id}')">
+                        <button class="btn btn-xs btn-success py-1 px-2 fw-bold approve-btn" style="font-size: 11px;" data-id="${p.id}">
                             <i class="bi bi-check-lg me-1"></i> Approve
                         </button>
                     `}
                 </td>
             </tr>
         `).join('');
-    };
+    }
 
-    window.approveProposal = function (id) {
+    function approveProposal(id) {
         if (typeof kvStorage !== "undefined") {
             kvStorage.updateProposalStatus(id, "Approved");
             renderProposalTable();
             alert("Proposal pre-approval recorded. Single window clearance status updated.");
         }
-    };
+    }
 
-    window.createSponsorAccount = function (e) {
+    function createSponsorAccount(e) {
         e.preventDefault();
         const company = document.getElementById("new-sponsor-company").value;
         const email = document.getElementById("new-sponsor-email").value;
@@ -146,9 +168,9 @@
             alert(`Sponsor Account Successfully Created!\n\nCompany: ${company}\nUser Login ID: ${email}\nRole: Corporate Sponsor Portal Access`);
             document.getElementById("create-sponsor-form").reset();
         }
-    };
+    }
 
-    window.renderSponsorUserList = function () {
+    function renderSponsorUserList() {
         const container = document.getElementById("sponsor-list-body");
         if (!container || typeof kvStorage === "undefined") return;
 
@@ -162,10 +184,10 @@
                 <td><span class="badge bg-success">${s.status}</span></td>
             </tr>
         `).join('');
-    };
+    }
 
-    window.logoutUser = function () {
+    function logoutUser() {
         localStorage.removeItem("csr_current_user");
         window.location.href = "login.html";
-    };
+    }
 })();
