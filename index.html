@@ -255,6 +255,10 @@
             <a href="index.html" class="navbar-brand p-0 d-lg-none">
                 <h3 class="m-0 text-white fw-bold"><i class="fa fa-hand-holding-heart me-2"></i>SSS CSR</h3>
             </a>
+            <!-- Always-visible Login button on mobile (next to hamburger) -->
+            <a href="login.html" class="btn btn-outline-light btn-sm rounded-pill fw-bold d-lg-none ms-auto me-2 px-3" id="mobile-login-btn">
+                <i class="bi bi-box-arrow-in-right me-1"></i> Login
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars"></span>
             </button>
@@ -265,9 +269,10 @@
                     <a href="projects.html" class="nav-item nav-link" data-i18n="nav_projects">Priority Projects</a>
                     <a href="#focus-sectors" class="nav-item nav-link" data-i18n="sector_title">Priority Sectors</a>
                     <a href="#partners" class="nav-item nav-link" data-i18n="nav_collaborators">Corporate Partners</a>
-                    <a href="login.html" class="nav-item nav-link" data-i18n="nav_login">Portal Login</a>
                 </div>
-                <a href="#partner-form" class="btn btn-primary py-2 px-4 ms-3 rounded-pill d-none d-lg-block fw-bold" data-i18n="btn_submit_eoi"><i class="bi bi-file-earmark-plus me-1"></i> Partner With Us</a>
+                <!-- Desktop Login & Proposal Buttons -->
+                <a href="login.html" class="btn btn-outline-light py-2 px-4 ms-3 rounded-pill d-none d-lg-flex align-items-center fw-bold" data-i18n="nav_login"><i class="bi bi-box-arrow-in-right me-2"></i>Portal Login</a>
+                <a href="#partner-form" class="btn btn-primary py-2 px-4 ms-2 rounded-pill d-none d-lg-block fw-bold" data-i18n="btn_submit_eoi"><i class="bi bi-file-earmark-plus me-1"></i> Partner With Us</a>
             </div>
         </nav>
 
