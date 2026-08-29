@@ -1,0 +1,22 @@
+{
+  "name": "sss-csr-portal",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-29",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "sss-csr-db",
+      "database_id": "4c75dea8-3281-4768-b030-588dc7efab2b"
+    }
+  ]
+}

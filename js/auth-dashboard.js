@@ -326,10 +326,14 @@
                 const sector = (document.getElementById("new-sponsor-sector") || {}).value || "Education";
                 const mandal = document.getElementById("new-sponsor-mandal").value;
                 try {
-                    await window.csrApi.createSponsor({ company: company, email: email, phone: phone, sector: sector, mandal: mandal });
+                    const created = await window.csrApi.createSponsor({ company: company, email: email, phone: phone, sector: sector, mandal: mandal });
                     sponsorForm.reset();
                     await fetchSponsorsData();
-                    window.alert("Sponsor record saved. Create a Supabase Auth user for this email and set app metadata csr_role=sponsor so they can log in.");
+                    if (created && created.temporary_password) {
+                        window.alert("Sponsor login created. Share this one-time password securely: " + created.temporary_password);
+                    } else {
+                        window.alert("Sponsor record saved and linked to the existing account for that email.");
+                    }
                 } catch (err) {
                     window.alert("Could not save the sponsor record.");
                 }

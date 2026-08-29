@@ -71,6 +71,48 @@
             background: #F0F9FF;
             color: #06A3DA;
         }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #94A3B8;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin: 8px 0 16px;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #E2E8F0;
+        }
+
+        .btn-google {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            border: 2px solid #E2E8F0;
+            background: #FFFFFF;
+            color: #1E293B;
+            font-weight: 700;
+            border-radius: 999px;
+            padding: 14px 18px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-google:hover,
+        .btn-google:focus {
+            border-color: #06A3DA;
+            box-shadow: 0 8px 20px rgba(6, 163, 218, 0.12);
+            color: #001838;
+        }
     </style>
 </head>
 
@@ -105,8 +147,8 @@
                 </div>
             </div>
 
-            <!-- Login Form -->
-            <form onsubmit="handleLogin(event)">
+            <!-- Staff email login -->
+            <form id="staff-login-form" onsubmit="handleLogin(event)">
                 <div class="mb-3">
                     <label class="form-label small fw-semibold">Official Email</label>
                     <input type="email" id="username-input" class="form-control form-control-lg"
@@ -121,8 +163,31 @@
                 <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold py-3 btn-portal">
                     <i class="bi bi-box-arrow-in-right me-2"></i> Enter Authorized Workspace
                 </button>
-                <p id="login-status" class="small mt-3 mb-0 eoi-form-status" role="status" aria-live="polite"></p>
             </form>
+
+            <!-- Sponsor company signup / login (Cloudflare Auth) -->
+            <div id="sponsor-login-panel" hidden>
+                <p class="small text-muted mb-3">Sponsor companies create an account on this portal. Use the company email and a password of at least 8 characters.</p>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Company / Foundation Name</label>
+                    <input type="text" id="sponsor-company-input" class="form-control form-control-lg" placeholder="Company name" autocomplete="organization">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Official Email</label>
+                    <input type="email" id="sponsor-email-input" class="form-control form-control-lg" placeholder="csr@company.com" autocomplete="username">
+                </div>
+                <div class="mb-4">
+                    <label class="form-label small fw-semibold">Password</label>
+                    <input type="password" id="sponsor-password-input" class="form-control form-control-lg" placeholder="At least 8 characters" autocomplete="current-password">
+                </div>
+                <button type="button" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold py-3 mb-2" onclick="handleSponsorLogin()">
+                    Sign in as Sponsor
+                </button>
+                <button type="button" class="btn btn-outline-primary btn-lg w-100 rounded-pill fw-bold py-3" onclick="handleSponsorSignup()">
+                    Create sponsor account
+                </button>
+            </div>
+            <p id="login-status" class="small mt-3 mb-0 eoi-form-status" role="status" aria-live="polite"></p>
 
             <div class="text-center mt-4 d-flex justify-content-center gap-3">
                 <a href="index.html" class="text-decoration-none small text-muted"><i class="bi bi-arrow-left me-1"></i> Return to Main Portal Homepage</a>
@@ -134,9 +199,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.8/dist/umd/supabase.min.js"></script>
-    <script src="js/supabase-config.js"></script>
-    <script src="js/supabase-client.js"></script>
+    <script src="js/csr-client.js"></script>
     <script src="js/i18n.js"></script>
     <script src="js/login.js"></script>
 </body>
