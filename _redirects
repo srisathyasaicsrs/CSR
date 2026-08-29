@@ -1,4 +1,8 @@
 /projects    /projects.html    200
 /login       /login.html       200
-/dashboard   /dashboard.html   200
+/dashboard   /dashboard.html    200
 /about       /about-district.html 200
+/about-district /about-district.html 200
+/privacy-policy /privacy-policy.html 200
+/contact-us /contact-us.html 200
+/website-policies /website-policies.html 200

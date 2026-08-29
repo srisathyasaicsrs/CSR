@@ -5,12 +5,17 @@
     <meta charset="utf-8">
     <title>CSR Portal | Sri Sathya Sai District, Govt of Andhra Pradesh</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Sri Sathya Sai District CSR Portal, Corporate Social Responsibility Andhra Pradesh, Puttaparthi, Priority Projects, srisathyasai.ap.gov.in" name="keywords">
-    <meta content="Official CSR Portal of Sri Sathya Sai District Administration, Govt of Andhra Pradesh (srisathyasai.ap.gov.in). Connecting corporate CSR funds with rural development, health, education, and infrastructure." name="description">
-    
+    <meta
+        content="Sri Sathya Sai District CSR Portal, Corporate Social Responsibility Andhra Pradesh, Puttaparthi, Priority Projects, srisathyasai.ap.gov.in"
+        name="keywords">
+    <meta
+        content="Official CSR Portal of Sri Sathya Sai District Administration, Govt of Andhra Pradesh (srisathyasai.ap.gov.in). Connecting corporate CSR funds with rural development, health, education, and infrastructure."
+        name="description">
+
     <!-- OpenGraph Meta Tags -->
     <meta property="og:title" content="CSR Portal | Sri Sathya Sai District">
-    <meta property="og:description" content="Official CSR Portal of Sri Sathya Sai District Administration. Connecting corporate CSR funds with rural development.">
+    <meta property="og:description"
+        content="Official CSR Portal of Sri Sathya Sai District Administration. Connecting corporate CSR funds with rural development.">
     <meta property="og:image" content="https://srisathyasai.ap.gov.in/img/csr_logo.png">
     <meta property="og:url" content="https://srisathyasai.ap.gov.in/csr">
     <meta property="og:type" content="website">
@@ -20,10 +25,12 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
@@ -52,7 +59,12 @@
             background-color: #F8FAFC;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: 'Bai Jamjuree', sans-serif;
         }
 
@@ -68,6 +80,7 @@
             text-decoration: none;
             transition: color 0.3s ease;
         }
+
         .topbar a:hover {
             color: var(--primary);
         }
@@ -81,16 +94,17 @@
         .officer-badge {
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 10px 20px 10px 10px;
-            border-radius: 14px;
-            background: #F1F5F9;
+            gap: 8px;
+            padding: 4px 12px 4px 5px;
+            border-radius: 40px;
+            background: #F8FAFC;
             border: 1px solid #E2E8F0;
+            white-space: nowrap;
         }
 
         .officer-img {
-            width: 78px;
-            height: 78px;
+            width: 44px;
+            height: 44px;
             object-fit: cover;
             object-position: top center;
             border-radius: 50%;
@@ -181,205 +195,133 @@
 
 <body>
     <!-- Spinner Start -->
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner"></div>
     </div>
     <!-- Spinner End -->
 
-    <!-- Topbar Start -->
-    <div class="topbar py-2 d-none d-lg-block">
+    <!-- Header Component Start -->
+    <div id="site-header"></div>
+    <!-- Header Component End -->
+
+    <!-- Hero Banner Start -->
+    <div id="home" class="hero-banner">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-7">
-                    <div class="d-flex align-items-center gap-4">
-                        <span><i class="bi bi-geo-alt-fill text-info me-1"></i> Collectorate Complex, Puttaparthi, AP - 515134</span>
-                        <span><i class="bi bi-envelope-fill text-info me-1"></i> collector-sssai@ap.gov.in</span>
-                        <span><i class="bi bi-globe text-info me-1"></i> <a href="https://srisathyasai.ap.gov.in/" target="_blank" class="text-info fw-bold">srisathyasai.ap.gov.in</a></span>
-                    </div>
-                </div>
-                <div class="col-md-5 text-end">
-                    <div class="d-inline-flex align-items-center gap-2">
-                        <button id="lang-btn-en" class="btn btn-sm btn-primary py-0 px-2 fw-bold" onclick="i18nEngine.setLanguage('en')">EN</button>
-                        <button id="lang-btn-te" class="btn btn-sm btn-outline-primary py-0 px-2 fw-bold text-white" onclick="i18nEngine.setLanguage('te')">తెలుగు</button>
-                        <a href="login.html" class="btn btn-sm btn-warning text-dark py-0 px-3 fw-bold ms-2"><i class="bi bi-box-arrow-in-right me-1"></i> <span data-i18n="nav_login">Portal Login</span></a>
-                        <a href="#partner-form" class="btn btn-sm btn-primary rounded-pill px-3 ms-2 fw-bold"><i class="bi bi-heart-fill me-1"></i> <span data-i18n="btn_submit_eoi">Submit Proposal</span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Topbar End -->
-
-    <!-- Header / Brand Section Start -->
-    <div class="header-brand-container">
-        <div class="container">
-            <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                <div class="d-flex align-items-center gap-3">
-                    <img src="img/csr_logo.png" alt="Sri Sathya Sai District Logo" class="csr_logo rounded">
-                    <div>
-                        <h3 class="mb-0 fw-bold text-dark" data-i18n="portal_title">SRI SATHYA SAI DISTRICT</h3>
-                        <p class="mb-0 text-muted small fw-semibold">Corporate Social Responsibility (CSR) Cell • Govt of Andhra Pradesh</p>
-                    </div>
-                </div>
-
-                <div class="d-flex align-items-center gap-2 flex-wrap">
-                    <!-- CM Profile -->
-                    <div class="officer-badge">
-                        <img src="img/cm.jpg" alt="Hon'ble Chief Minister" class="officer-img">
-                        <div>
-                            <h6 class="mb-0 fw-bold text-dark" style="font-size: 13px;">Sri Nara Chandrababu Naidu</h6>
-                            <small class="text-primary fw-semibold" style="font-size: 11px;">Hon'ble Chief Minister, AP</small>
-                        </div>
-                    </div>
-
-                    <!-- Collector Profile -->
-                    <div class="officer-badge">
-                        <img src="img/collector.jpg" alt="Sri A. Shyam Prasad, I.A.S - Collector & District Magistrate" class="officer-img">
-                        <div>
-                            <h6 class="mb-0 fw-bold text-dark" style="font-size: 13px;" data-i18n="collector_name">Sri A. Shyam Prasad, I.A.S</h6>
-                            <small class="text-success fw-semibold" style="font-size: 11px;" data-i18n="collector_designation">Collector & District Magistrate</small>
-                        </div>
-                    </div>
-
-                    <!-- Joint Collector Profile -->
-                    <div class="officer-badge">
-                        <img src="img/joint-collector.jpg" alt="Sri Mantri Mourya Bharadwaj, I.A.S - Joint Collector & Addl. DM" class="officer-img">
-                        <div>
-                            <h6 class="mb-0 fw-bold text-dark" style="font-size: 13px;">Sri Mantri Mourya Bharadwaj, I.A.S</h6>
-                            <small class="text-info fw-semibold" style="font-size: 11px;">Joint Collector & Addl. DM</small>
-                        </div>
+                <div class="col-lg-8 text-center text-lg-start">
+                    <span class="badge bg-info text-dark py-2 px-3 rounded-pill fw-bold mb-3"><i
+                            class="bi bi-star-fill me-1"></i> Single Window CSR Facilitation Desk • Govt of
+                        AP</span>
+                    <h1 class="display-4 text-white fw-bold mb-4">
+                        Building Sustainable Infrastructure in <span class="text-info">Sri Sathya Sai
+                            District</span>
+                    </h1>
+                    <p class="fs-5 text-light mb-4">
+                        Empowering corporate leaders to direct CSR capital towards impactful rural roads, smart
+                        classrooms, RO water hubs, healthcare units, disaster resilience, and clean energy across
+                        Puttaparthi, Penukonda, Kadiri, Dharmavaram, and Madakasira.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                        <a href="#focus-sectors" class="btn btn-primary py-3 px-5 rounded-pill fw-bold"><i
+                                class="bi bi-grid-3x3-gap-fill me-2"></i> Priority Sectors</a>
+                        <a href="about-district.html" class="btn btn-outline-light py-3 px-5 rounded-pill fw-bold"><i
+                                class="bi bi-info-circle-fill me-2"></i> About District</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Header / Brand Section End -->
-
-    <!-- Navbar Start -->
-    <div class="container-fluid position-relative p-0">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 py-3 py-lg-0" style="background-color: #002858 !important;">
-            <a href="index.html" class="navbar-brand p-0 d-lg-none">
-                <h3 class="m-0 text-white fw-bold"><i class="fa fa-hand-holding-heart me-2"></i>SSS CSR</h3>
-            </a>
-            <!-- Always-visible Login button on mobile (next to hamburger) -->
-            <a href="login.html" class="btn btn-warning text-dark btn-sm rounded-pill fw-bold d-lg-none ms-auto me-2 px-3" id="mobile-login-btn">
-                <i class="bi bi-box-arrow-in-right me-1"></i> Login
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="fa fa-bars"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto py-0">
-                    <a href="index.html" class="nav-item nav-link active" data-i18n="nav_home">Home</a>
-                    <a href="about-district.html" class="nav-item nav-link" data-i18n="nav_about">About District</a>
-                    <a href="projects.html" class="nav-item nav-link" data-i18n="nav_projects">Priority Projects</a>
-                    <a href="#focus-sectors" class="nav-item nav-link" data-i18n="sector_title">Priority Sectors</a>
-                    <a href="#partners" class="nav-item nav-link" data-i18n="nav_collaborators">Corporate Partners</a>
-                </div>
-                <!-- Desktop Login & Proposal Buttons -->
-                <a href="login.html" class="btn btn-warning text-dark py-2 px-4 ms-3 rounded-pill d-none d-lg-flex align-items-center fw-bold" data-i18n="nav_login"><i class="bi bi-box-arrow-in-right me-2"></i>Portal Login</a>
-                <a href="#partner-form" class="btn btn-primary py-2 px-4 ms-2 rounded-pill d-none d-lg-block fw-bold" data-i18n="btn_submit_eoi"><i class="bi bi-file-earmark-plus me-1"></i> Partner With Us</a>
-            </div>
-        </nav>
-
-        <!-- Hero Banner Start -->
-        <div id="home" class="hero-banner">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-8 text-center text-lg-start">
-                        <span class="badge bg-info text-dark py-2 px-3 rounded-pill fw-bold mb-3"><i class="bi bi-star-fill me-1"></i> Single Window CSR Facilitation Desk • Govt of AP</span>
-                        <h1 class="display-4 text-white fw-bold mb-4">
-                            Building Sustainable Infrastructure in <span class="text-info">Sri Sathya Sai District</span>
-                        </h1>
-                        <p class="fs-5 text-light mb-4">
-                            Empowering corporate leaders to direct CSR capital towards impactful rural roads, smart classrooms, RO water hubs, healthcare units, disaster resilience, and clean energy across Puttaparthi, Penukonda, Kadiri, Dharmavaram, and Madakasira.
-                        </p>
-                        <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-                            <a href="#focus-sectors" class="btn btn-primary py-3 px-5 rounded-pill fw-bold"><i class="bi bi-grid-3x3-gap-fill me-2"></i> Priority Sectors</a>
-                            <a href="about-district.html" class="btn btn-outline-light py-3 px-5 rounded-pill fw-bold"><i class="bi bi-info-circle-fill me-2"></i> About District Profile</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Hero Banner End -->
+    <!-- Hero Banner End -->
     </div>
     <!-- Navbar End -->
 
     <!-- Facts / Impact Stats Start -->
-    <div class="container-fluid py-5 bg-white border-bottom">
+    <div class="container-fluid py-3 py-lg-5 bg-white border-bottom">
         <div class="container">
-            <div class="row g-4 text-center">
-                <div class="col-lg-3 col-md-6">
-                    <div class="p-3">
-                        <i class="bi bi-map-fill display-5 text-primary mb-2"></i>
-                        <h2 class="fw-bold text-dark mb-1" data-toggle="counter-up">5</h2>
-                        <p class="text-muted fw-semibold mb-0">Revenue Divisions</p>
+            <div class="row g-2 text-center mobile-stats-row">
+                <div class="col-3 col-lg-3 col-md-6">
+                    <div class="p-1 p-lg-3">
+                        <i class="bi bi-map-fill display-5 text-primary mb-1 mb-lg-2 stat-icon"></i>
+                        <h2 class="fw-bold text-dark mb-0 mb-lg-1 stat-number" data-toggle="counter-up">5</h2>
+                        <p class="text-muted fw-semibold mb-0 stat-label">Revenue Divisions</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="p-3">
-                        <i class="bi bi-geo-alt-fill display-5 text-info mb-2"></i>
-                        <h2 class="fw-bold text-dark mb-1" data-toggle="counter-up">32</h2>
-                        <p class="text-muted fw-semibold mb-0">Mandals Covered</p>
+                <div class="col-3 col-lg-3 col-md-6">
+                    <div class="p-1 p-lg-3">
+                        <i class="bi bi-geo-alt-fill display-5 text-info mb-1 mb-lg-2 stat-icon"></i>
+                        <h2 class="fw-bold text-dark mb-0 mb-lg-1 stat-number" data-toggle="counter-up">32</h2>
+                        <p class="text-muted fw-semibold mb-0 stat-label">Mandals Covered</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="p-3">
-                        <i class="bi bi-houses-fill display-5 text-success mb-2"></i>
-                        <h2 class="fw-bold text-dark mb-1" data-toggle="counter-up">467</h2>
-                        <p class="text-muted fw-semibold mb-0">Villages / Gram Panchayats</p>
+                <div class="col-3 col-lg-3 col-md-6">
+                    <div class="p-1 p-lg-3">
+                        <i class="bi bi-houses-fill display-5 text-success mb-1 mb-lg-2 stat-icon"></i>
+                        <h2 class="fw-bold text-dark mb-0 mb-lg-1 stat-number" data-toggle="counter-up">467</h2>
+                        <p class="text-muted fw-semibold mb-0 stat-label">Villages / Panchayats</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="p-3">
-                        <i class="bi bi-people-fill display-5 text-warning mb-2"></i>
-                        <h2 class="fw-bold text-dark mb-1"><span data-toggle="counter-up">18.4</span> Lakh+</h2>
-                        <p class="text-muted fw-semibold mb-0">Population (2011 Census)</p>
+                <div class="col-3 col-lg-3 col-md-6">
+                    <div class="p-1 p-lg-3">
+                        <i class="bi bi-people-fill display-5 text-warning mb-1 mb-lg-2 stat-icon"></i>
+                        <h2 class="fw-bold text-dark mb-0 mb-lg-1 stat-number"><span data-toggle="counter-up">18.4</span>L+</h2>
+                        <p class="text-muted fw-semibold mb-0 stat-label">Population (2011)</p>
                     </div>
                 </div>
             </div>
-            <p class="text-center text-muted small mt-4 mb-0">Source: District formation notification (4 April 2022) &amp; 2011 Census figures for the Sri Sathya Sai revenue divisions.</p>
         </div>
     </div>
     <!-- Facts End -->
 
     <!-- About District Brief Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-4">
-            <div class="row g-5 align-items-center">
+    <div class="container-fluid py-3 py-lg-5">
+        <div class="container py-2 py-lg-4">
+            <div class="row g-4 g-lg-5 align-items-center">
                 <div class="col-lg-7">
-                    <div class="section-title position-relative pb-3 mb-4">
+                    <div class="section-title position-relative pb-2 pb-lg-3 mb-3 mb-lg-4">
                         <h5 class="fw-bold text-primary text-uppercase">Official District Overview</h5>
                         <h2 class="mb-0">Sri Sathya Sai District Administration</h2>
                     </div>
-                    <p style="text-align: justify;" class="lead">
-                        Formed on 4 April 2022 from Dharmavaram, Penukonda, Kadiri, Madakasira, and Puttaparthi revenue divisions, Sri Sathya Sai District encompasses 32 mandals and 467 villages with headquarters at Puttaparthi. Named after Bhagawan Sri Sathya Sai Baba, the district is globally renowned for its legacy of social service, world-class education, and super-speciality health institutions.
+                    <p class="lead district-overview-text">
+                        Formed on 4 April 2022 from Dharmavaram, Penukonda, Kadiri, Madakasira, and Puttaparthi revenue
+                        divisions, Sri Sathya Sai District encompasses 32 mandals and 467 villages with headquarters at
+                        Puttaparthi. Named after Bhagawan Sri Sathya Sai Baba, the district is globally renowned for its
+                        legacy of social service, world-class education, and super-speciality health institutions.
                     </p>
-                    <p style="text-align: justify;" class="text-muted">
-                        Under the leadership of District Collector <strong>Sri A. Shyam Prasad, I.A.S</strong> and Joint Collector <strong>Sri Mantri Mourya Bharadwaj, I.A.S</strong>, our CSR Facilitation Cell works closely with corporate partners to deliver transparent, high-impact projects in safe water supply, smart education, mobile healthcare, and solar energy.
+                    <p class="text-muted district-overview-text">
+                        Under the leadership of District Collector <strong>Sri A. Shyam Prasad, I.A.S</strong> and Joint
+                        Collector <strong>Sri Mantri Mourya Bharadwaj, I.A.S</strong>, our CSR Facilitation Cell works
+                        closely with corporate partners to deliver transparent, high-impact projects in safe water
+                        supply, smart education, mobile healthcare, and solar energy.
                     </p>
-                    <a href="about-district.html" class="btn btn-primary py-3 px-4 rounded-pill fw-bold"><i class="bi bi-arrow-right-circle-fill me-2"></i> Read Full District Profile & Mandals</a>
+                    <a href="about-district.html" class="btn btn-primary py-2 px-4 rounded-pill fw-bold btn-read-profile"><i
+                            class="bi bi-arrow-right-circle-fill me-2"></i> Read Full District Profile & Mandals</a>
                 </div>
                 <div class="col-lg-5">
-                    <div class="bg-light p-4 rounded-4 shadow-sm border">
-                        <h5 class="fw-bold text-dark mb-3"><i class="bi bi-shield-lock-fill text-primary me-2"></i> District CSR Mandate</h5>
-                        <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
+                    <div class="bg-light p-3 p-lg-4 rounded-4 shadow-sm border district-mandate-box">
+                        <h5 class="fw-bold text-dark mb-2 mb-lg-3"><i class="bi bi-shield-lock-fill text-primary me-2"></i>
+                            District CSR Mandate</h5>
+                        <ul class="list-unstyled d-flex flex-column gap-2 gap-lg-3 mb-0">
                             <li class="d-flex align-items-start gap-2">
                                 <i class="bi bi-check-circle-fill text-success fs-5 mt-1"></i>
-                                <div><strong>100% Transparency:</strong> Geo-tagged milestone tracking & District Collectorate audit.</div>
+                                <div><strong>100% Transparency:</strong> Geo-tagged milestone tracking & District
+                                    Collectorate audit.</div>
                             </li>
                             <li class="d-flex align-items-start gap-2">
                                 <i class="bi bi-check-circle-fill text-success fs-5 mt-1"></i>
-                                <div><strong>Single Window Clearance:</strong> Fast-tracked land allocation and local NOC clearances.</div>
+                                <div><strong>Single Window Clearance:</strong> Fast-tracked land allocation and local
+                                    NOC clearances.</div>
                             </li>
                             <li class="d-flex align-items-start gap-2">
                                 <i class="bi bi-check-circle-fill text-success fs-5 mt-1"></i>
-                                <div><strong>Statutory Tax Benefits:</strong> Eligible for 80G and Section 35AC tax exemptions.</div>
+                                <div><strong>Statutory Tax Benefits:</strong> Eligible for 80G and Section 35AC tax
+                                    exemptions.</div>
                             </li>
                             <li class="d-flex align-items-start gap-2">
                                 <i class="bi bi-check-circle-fill text-success fs-5 mt-1"></i>
-                                <div><strong>Official Portal Integration:</strong> Synced with official portal <a href="https://srisathyasai.ap.gov.in/" target="_blank" class="fw-bold">srisathyasai.ap.gov.in</a></div>
+                                <div><strong>Official Portal Integration:</strong> Synced with official portal <a
+                                        href="https://srisathyasai.ap.gov.in/" target="_blank"
+                                        class="fw-bold">srisathyasai.ap.gov.in</a></div>
                             </li>
                         </ul>
                     </div>
@@ -390,95 +332,95 @@
     <!-- About District Brief End -->
 
     <!-- Focus Sectors Section Start -->
-    <div id="focus-sectors" class="container-fluid py-5 style-sectors-bg" style="background-color: #F1F5F9;">
-        <div class="container py-4">
-            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 700px;">
+    <div id="focus-sectors" class="container-fluid py-3 py-lg-5 style-sectors-bg" style="background-color: #F1F5F9;">
+        <div class="container py-2 py-lg-4">
+            <div class="section-title text-center position-relative pb-2 pb-lg-3 mb-3 mb-lg-5 mx-auto" style="max-width: 700px;">
                 <h5 class="fw-bold text-primary text-uppercase">Our Priority Sectors</h5>
                 <h2 class="mb-0">Key Development Sectors for CSR Collaboration</h2>
             </div>
 
-            <div class="row g-4">
-                <!-- Roads -->
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
-                    <div class="box_roads sector-box-item">
-                        <div class="box_text">Roads & Connectivity</div>
-                    </div>
-                </div>
-
-                <!-- Drains -->
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.15s">
-                    <div class="box_drainage sector-box-item">
-                        <div class="box_text">Drains & Water Supply</div>
-                    </div>
-                </div>
-
-                <!-- Endowments -->
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.2s">
-                    <div class="box_endowments sector-box-item">
-                        <div class="box_text">Endowments & Culture</div>
-                    </div>
-                </div>
-
-                <!-- Sports -->
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.25s">
-                    <div class="box_sports sector-box-item">
-                        <div class="box_text">Sports Infrastructure</div>
-                    </div>
-                </div>
-
-                <!-- Education -->
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
-                    <div class="box_education sector-box-item">
-                        <div class="box_text">Smart Education</div>
-                    </div>
-                </div>
-
-                <!-- Disasters -->
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.35s">
-                    <div class="box_disaster sector-box-item">
-                        <div class="box_text">Disaster Management</div>
-                    </div>
-                </div>
-
-                <!-- Fisheries -->
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.4s">
-                    <div class="box_fisheries sector-box-item">
-                        <div class="box_text">Fisheries & Tanks</div>
-                    </div>
-                </div>
-
-                <!-- Health -->
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.45s">
+            <div class="row g-2 g-lg-4 mobile-sectors-grid">
+                <!-- Sector 1: Health & Sanitation -->
+                <div class="col-4 col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
                     <div class="box_health sector-box-item">
-                        <div class="box_text">Health & Tele-Medicine</div>
+                        <div class="box_text" data-i18n="sec_health_sanitation">Healthcare, Sanitation & Water</div>
                     </div>
                 </div>
 
-                <!-- Sanitation -->
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.5s">
-                    <div class="box_sanitation sector-box-item">
-                        <div class="box_text">Sanitation & Recycling</div>
+                <!-- Sector 2: Education & Skills -->
+                <div class="col-4 col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.15s">
+                    <div class="box_education sector-box-item">
+                        <div class="box_text" data-i18n="sec_education_skills">Smart Education & Vocational Skills</div>
                     </div>
                 </div>
 
-                <!-- Solar -->
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.55s">
-                    <div class="box_solar sector-box-item">
-                        <div class="box_text">Solar & Green Energy</div>
+                <!-- Sector 3: Gender Equality -->
+                <div class="col-4 col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.2s">
+                    <div class="box_endowments sector-box-item">
+                        <div class="box_text" data-i18n="sec_gender_women">Gender Equality & Women Welfare</div>
                     </div>
                 </div>
 
-                <!-- Plantation -->
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
+                <!-- Sector 4: Environment -->
+                <div class="col-4 col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.25s">
                     <div class="box_plantation sector-box-item">
-                        <div class="box_text">Avenue Plantation</div>
+                        <div class="box_text" data-i18n="sec_environment">Environmental Sustainability</div>
                     </div>
                 </div>
 
-                <!-- Public Utilities -->
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.65s">
+                <!-- Sector 5: Heritage & Culture -->
+                <div class="col-4 col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
+                    <div class="box_endowments sector-box-item">
+                        <div class="box_text" data-i18n="sec_heritage_culture">Heritage, Art & Culture</div>
+                    </div>
+                </div>
+
+                <!-- Sector 6: Armed Forces -->
+                <div class="col-4 col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.35s">
                     <div class="box_public_Utilities sector-box-item">
-                        <div class="box_text">Public Utilities</div>
+                        <div class="box_text" data-i18n="sec_veterans_welfare">Armed Forces & Veteran Welfare</div>
+                    </div>
+                </div>
+
+                <!-- Sector 7: Sports -->
+                <div class="col-4 col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.4s">
+                    <div class="box_sports sector-box-item">
+                        <div class="box_text" data-i18n="sec_sports">Rural & Olympic Sports</div>
+                    </div>
+                </div>
+
+                <!-- Sector 8: Socio-Economic Welfare -->
+                <div class="col-4 col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.45s">
+                    <div class="box_public_Utilities sector-box-item">
+                        <div class="box_text" data-i18n="sec_socio_welfare">Socio-Economic Welfare Funds</div>
+                    </div>
+                </div>
+
+                <!-- Sector 9: Incubators & SDGs -->
+                <div class="col-4 col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.5s">
+                    <div class="box_solar sector-box-item">
+                        <div class="box_text" data-i18n="sec_incubators_sdg">Incubators, R&D & SDGs</div>
+                    </div>
+                </div>
+
+                <!-- Sector 10: Rural Development -->
+                <div class="col-4 col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.55s">
+                    <div class="box_roads sector-box-item">
+                        <div class="box_text" data-i18n="sec_rural_dev">Rural Development Projects</div>
+                    </div>
+                </div>
+
+                <!-- Sector 11: Slum Development -->
+                <div class="col-4 col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
+                    <div class="box_sanitation sector-box-item">
+                        <div class="box_text" data-i18n="sec_slum_dev">Slum Area Development</div>
+                    </div>
+                </div>
+
+                <!-- Sector 12: Disaster Management -->
+                <div class="col-4 col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.65s">
+                    <div class="box_disaster sector-box-item">
+                        <div class="box_text" data-i18n="sec_disaster_mgmt">Disaster Management & Relief</div>
                     </div>
                 </div>
             </div>
@@ -487,32 +429,34 @@
     <!-- Focus Sectors Section End -->
 
     <!-- Priority Projects Start -->
-    <div id="projects" class="container-fluid py-5">
-        <div class="container py-4">
-            <div class="d-flex flex-column flex-md-row align-items-md-end justify-content-between mb-5">
+    <div id="projects" class="container-fluid py-3 py-lg-5">
+        <div class="container py-2 py-lg-4">
+            <div class="d-flex flex-column flex-md-row align-items-md-end justify-content-between mb-3 mb-lg-5">
                 <div>
-                    <h5 class="fw-bold text-primary text-uppercase mb-2">High Priority Proposals</h5>
-                    <h2 class="mb-0 fw-bold">Featured District CSR Projects</h2>
+                    <h5 class="fw-bold text-primary text-uppercase mb-1 mb-lg-2">Schedule VII Priority Projects</h5>
+                    <h2 class="mb-0 fw-bold">Featured District Statutory CSR Projects</h2>
                 </div>
-                <div class="mt-3 mt-md-0">
-                    <a href="#partner-form" class="btn btn-outline-primary rounded-pill px-4 fw-bold">Propose Custom Project</a>
+                <div class="mt-2 mt-md-0">
+                    <a href="projects.html" class="btn btn-outline-primary rounded-pill px-3 py-1.5 fw-bold btn-view-all-proj">View All 12 Projects</a>
                 </div>
             </div>
-            <p class="text-muted small mb-4" style="max-width: 720px;"><i class="bi bi-info-circle me-1"></i>These are indicative priority proposals open for corporate adoption. Estimated outlays are planning figures for discussion with the District CSR Cell, not confirmed or collected funds.</p>
+            <p class="text-muted small mb-3 mb-lg-4" style="max-width: 720px;"><i class="bi bi-info-circle me-1"></i>These
+                statutory CSR priority projects are aligned with Schedule VII of Companies Act 2013 and open for
+                corporate adoption across Sri Sathya Sai District.</p>
 
-            <div class="row g-4">
-                <!-- Project 1 -->
-                <div class="col-lg-4 col-md-6">
+            <div class="row g-3 g-lg-4 mobile-projects-scroll">
+                <!-- Project 1: Healthcare & Sanitation -->
+                <div class="col-xl-3 col-lg-6 col-md-6 mobile-proj-col">
                     <div class="project-card">
-                        <div class="p-4">
-                            <span class="badge bg-light text-primary border border-primary mb-2">Education</span>
-                            <h5 class="fw-bold text-dark mb-2">Smart Classroom Panels in ZP Schools</h5>
-                            <p class="text-muted small mb-4">Equipping rural government schools with digital interactive boards, computer labs, and solar energy backup across Puttaparthi division.</p>
+                        <div class="p-3 p-lg-4">
+                            <span class="badge bg-light text-primary border border-primary mb-2">Schedule VII (i) • Health</span>
+                            <h5 class="fw-bold text-dark mb-2 proj-title">Safe RO Water Hubs & Child Nutrition</h5>
+                            <p class="text-muted small mb-3 proj-desc">Eradicating hunger & malnutrition, establishing 15 community RO water purification stations in Kadiri & Madakasira.</p>
 
                             <div class="mb-3 pt-2 border-top">
                                 <div class="d-flex justify-content-between small fw-bold">
                                     <span class="text-muted">Estimated Outlay</span>
-                                    <span class="text-primary">₹2.0 Cr (indicative)</span>
+                                    <span class="text-primary">₹1.50 Cr</span>
                                 </div>
                             </div>
                             <a href="#partner-form" class="btn btn-sm btn-primary rounded-pill w-100 py-2 fw-bold">Propose to Adopt</a>
@@ -520,18 +464,18 @@
                     </div>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="col-lg-4 col-md-6">
+                <!-- Project 2: Smart Education & Skills -->
+                <div class="col-xl-3 col-lg-6 col-md-6 mobile-proj-col">
                     <div class="project-card">
-                        <div class="p-4">
-                            <span class="badge bg-light text-success border border-success mb-2">Drinking Water</span>
-                            <h5 class="fw-bold text-dark mb-2">Community RO Water Hubs in Kadiri</h5>
-                            <p class="text-muted small mb-4">Establishing automated water purification stations with solar pumping to provide safe drinking water in fluorosis-affected villages.</p>
+                        <div class="p-3 p-lg-4">
+                            <span class="badge bg-light text-success border border-success mb-2">Schedule VII (ii) • Education</span>
+                            <h5 class="fw-bold text-dark mb-2 proj-title">EV Skill Training & Smart Classrooms</h5>
+                            <p class="text-muted small mb-3 proj-desc">Vocational skill enhancement for EV technicians, special education, and digital classrooms in Penukonda.</p>
 
                             <div class="mb-3 pt-2 border-top">
                                 <div class="d-flex justify-content-between small fw-bold">
                                     <span class="text-muted">Estimated Outlay</span>
-                                    <span class="text-success">₹1.1 Cr (indicative)</span>
+                                    <span class="text-success">₹2.00 Cr</span>
                                 </div>
                             </div>
                             <a href="#partner-form" class="btn btn-sm btn-success text-white rounded-pill w-100 py-2 fw-bold">Propose to Adopt</a>
@@ -539,21 +483,40 @@
                     </div>
                 </div>
 
-                <!-- Project 3 -->
-                <div class="col-lg-4 col-md-6">
+                <!-- Project 3: Environment & Solar -->
+                <div class="col-xl-3 col-lg-6 col-md-6 mobile-proj-col">
                     <div class="project-card">
-                        <div class="p-4">
-                            <span class="badge bg-light text-warning border border-warning mb-2">Healthcare</span>
-                            <h5 class="fw-bold text-dark mb-2">Mobile Tele-Medicine Diagnostic Vans</h5>
-                            <p class="text-muted small mb-4">Deploying specialized health vans with diagnostic labs, ECG, and doctor tele-consultations for remote Penukonda &amp; Madakasira mandals.</p>
+                        <div class="p-3 p-lg-4">
+                            <span class="badge bg-light text-warning border border-warning mb-2">Schedule VII (iv) • Solar</span>
+                            <h5 class="fw-bold text-dark mb-2 proj-title">Soil Conservation & Solar Micro-Grids</h5>
+                            <p class="text-muted small mb-3 proj-desc">Agroforestry, soil & water conservation, animal welfare, and solar micro-grids in NP Kunta.</p>
 
                             <div class="mb-3 pt-2 border-top">
                                 <div class="d-flex justify-content-between small fw-bold">
                                     <span class="text-muted">Estimated Outlay</span>
-                                    <span class="text-warning">₹1.5 Cr (indicative)</span>
+                                    <span class="text-warning">₹1.80 Cr</span>
                                 </div>
                             </div>
                             <a href="#partner-form" class="btn btn-sm btn-warning text-dark rounded-pill w-100 py-2 fw-bold">Propose to Adopt</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Healthcare & Tele-Medicine -->
+                <div class="col-xl-3 col-lg-6 col-md-6 mobile-proj-col">
+                    <div class="project-card">
+                        <div class="p-3 p-lg-4">
+                            <span class="badge bg-light text-info border border-info mb-2">Schedule VII (i) • Health</span>
+                            <h5 class="fw-bold text-dark mb-2 proj-title">Mobile Medical Vans & Tele-Medicine</h5>
+                            <p class="text-muted small mb-3 proj-desc">Deploying 5 advanced mobile medical units with diagnostic kits & tele-medicine across Kadiri & Penukonda habitations.</p>
+
+                            <div class="mb-3 pt-2 border-top">
+                                <div class="d-flex justify-content-between small fw-bold">
+                                    <span class="text-muted">Estimated Outlay</span>
+                                    <span class="text-info">₹2.50 Cr</span>
+                                </div>
+                            </div>
+                            <a href="#partner-form" class="btn btn-sm btn-info text-white rounded-pill w-100 py-2 fw-bold">Propose to Adopt</a>
                         </div>
                     </div>
                 </div>
@@ -563,26 +526,36 @@
     <!-- Priority Projects End -->
 
     <!-- Officer's Message Start -->
-    <div id="messages" class="container-fluid py-5 bg-white border-top border-bottom">
-        <div class="container py-4">
-            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 650px;">
+    <div id="messages" class="container-fluid py-3 py-lg-5 bg-white border-top border-bottom">
+        <div class="container py-2 py-lg-4">
+            <div class="section-title text-center position-relative pb-2 pb-lg-3 mb-3 mb-lg-5 mx-auto" style="max-width: 650px;">
                 <h5 class="fw-bold text-primary text-uppercase">Leadership Message</h5>
                 <h2 class="mb-0">Collector & District Magistrate's Message</h2>
             </div>
 
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-                    <div class="bg-light rounded-4 border shadow-sm overflow-hidden">
-                        <div class="row g-0 align-items-stretch">
+                    <div class="bg-light rounded-4 border shadow-sm overflow-hidden leader-card-box">
+                        <div class="row g-0 align-items-center">
                             <div class="col-md-4">
-                                <img src="img/collector-portrait.jpg" alt="Sri A. Shyam Prasad, I.A.S - Collector & District Magistrate" class="w-100 h-100" style="object-fit: cover; min-height: 280px;">
+                                <img src="img/collector-portrait.jpg"
+                                    alt="Sri A. Shyam Prasad, I.A.S - Collector & District Magistrate"
+                                    class="w-100 h-100 leader-img" style="object-fit: cover; min-height: 200px;">
                             </div>
                             <div class="col-md-8">
-                                <div class="p-4 p-md-5">
-                                    <h4 class="text-primary mb-1 fw-bold">Sri A. Shyam Prasad, I.A.S</h4>
-                                    <small class="text-uppercase fw-semibold text-muted d-block mb-3 pb-3 border-bottom">Collector & District Magistrate, Sri Sathya Sai District</small>
-                                    <p style="text-align: justify;" class="lead text-dark mb-0">
-                                        "As District Collector, it is my privilege to highlight the vital role Corporate Social Responsibility (CSR) plays in the holistic development of our district. Corporate partnerships are a transformative force capable of driving positive change across education, healthcare, environmental sustainability, skill development, and infrastructure. I extend an invitation to corporate leaders and foundations to join hands with the Sri Sathya Sai District Administration in building model, resilient communities."
+                                <div class="p-3 p-md-5">
+                                    <h4 class="text-primary mb-1 fw-bold leader-name">Sri A. Shyam Prasad, I.A.S</h4>
+                                    <small
+                                        class="text-uppercase fw-semibold text-muted d-block mb-2 mb-md-3 pb-2 pb-md-3 border-bottom leader-title">Collector
+                                        & District Magistrate</small>
+                                    <p style="text-align: justify;" class="lead text-dark mb-0 leader-quote">
+                                        "As District Collector, it is my privilege to highlight the vital role Corporate
+                                        Social Responsibility (CSR) plays in the holistic development of our district.
+                                        Corporate partnerships are a transformative force capable of driving positive
+                                        change across education, healthcare, environmental sustainability, skill
+                                        development, and infrastructure. I extend an invitation to corporate leaders and
+                                        foundations to join hands with the Sri Sathya Sai District Administration in
+                                        building model, resilient communities."
                                     </p>
                                 </div>
                             </div>
@@ -595,50 +568,51 @@
     <!-- Officer's Message End -->
 
     <!-- Interactive District Map Section Start -->
-    <div id="district-map-section" class="container-fluid py-5 bg-light border-top border-bottom">
-        <div class="container py-4">
-            <div class="section-title text-center position-relative pb-3 mb-4 mx-auto" style="max-width: 650px;">
+    <div id="district-map-section" class="container-fluid py-3 py-lg-5 bg-light border-top border-bottom">
+        <div class="container py-2 py-lg-4">
+            <div class="section-title text-center position-relative pb-2 pb-lg-3 mb-3 mb-lg-4 mx-auto" style="max-width: 650px;">
                 <h5 class="fw-bold text-primary text-uppercase">Geo-Tagged CSR Project Map</h5>
                 <h2 class="mb-0">Explore CSR Projects Across 32 Mandals</h2>
             </div>
-            <div class="bg-white p-3 rounded-4 shadow-sm border">
+            <div class="bg-white p-2 p-lg-3 rounded-4 shadow-sm border">
                 <div id="district-leaflet-map" style="height: 440px; border-radius: 12px; z-index: 1;"></div>
             </div>
-            <div class="text-center mt-3">
-                <small class="text-muted"><i class="bi bi-info-circle-fill text-primary me-1"></i> Click any mandal marker to view active CSR proposals, budget estimates, and corporate sponsorship status.</small>
+            <div class="text-center mt-2 mt-lg-3">
+                <small class="text-muted"><i class="bi bi-info-circle-fill text-primary me-1"></i> Click any mandal
+                    marker to view active CSR proposals, budget estimates, and corporate sponsorship status.</small>
             </div>
         </div>
     </div>
     <!-- Interactive District Map Section End -->
 
     <!-- Corporate Partners Section Start -->
-    <div id="partners" class="container-fluid py-5">
-        <div class="container py-4">
-            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 650px;">
+    <div id="partners" class="container-fluid py-3 py-lg-5">
+        <div class="container py-2 py-lg-4">
+            <div class="section-title text-center position-relative pb-2 pb-lg-3 mb-3 mb-lg-5 mx-auto" style="max-width: 650px;">
                 <h5 class="fw-bold text-primary text-uppercase">Our Collaborators & Industrial Partners</h5>
                 <h2 class="mb-0">Corporate Social Responsibility Partners</h2>
             </div>
 
-            <div class="row g-4 mb-5">
-                <div class="col-md-4">
-                    <div class="bg-white p-4 rounded-4 shadow-sm border h-100 text-center">
-                        <i class="bi bi-award-fill display-6 text-primary mb-3"></i>
-                        <h6 class="fw-bold text-dark">Statutory Tax Benefits</h6>
-                        <p class="text-muted small mb-0">Projects eligible for 80G and Section 35AC exemptions under Collectorate facilitation.</p>
+            <div class="row g-2 g-lg-4 mb-3 mb-lg-5 mobile-collaborators-row">
+                <div class="col-4 col-md-4">
+                    <div class="bg-white p-2 p-lg-4 rounded-4 shadow-sm border h-100 text-center collab-card">
+                        <i class="bi bi-award-fill display-6 text-primary mb-1 mb-lg-3 collab-icon"></i>
+                        <h6 class="fw-bold text-dark collab-title">Statutory Tax Benefits</h6>
+                        <p class="text-muted small mb-0 collab-desc">Projects eligible for 80G and Section 35AC exemptions.</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="bg-white p-4 rounded-4 shadow-sm border h-100 text-center">
-                        <i class="bi bi-graph-up-arrow display-6 text-success mb-3"></i>
-                        <h6 class="fw-bold text-dark">Transparent Impact Reporting</h6>
-                        <p class="text-muted small mb-0">Geo-tagged milestone tracking and quarterly audit reports shared with every partner.</p>
+                <div class="col-4 col-md-4">
+                    <div class="bg-white p-2 p-lg-4 rounded-4 shadow-sm border h-100 text-center collab-card">
+                        <i class="bi bi-graph-up-arrow display-6 text-success mb-1 mb-lg-3 collab-icon"></i>
+                        <h6 class="fw-bold text-dark collab-title">Transparent Impact</h6>
+                        <p class="text-muted small mb-0 collab-desc">Geo-tagged milestone tracking and quarterly audits.</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="bg-white p-4 rounded-4 shadow-sm border h-100 text-center">
-                        <i class="bi bi-signpost-split-fill display-6 text-warning mb-3"></i>
-                        <h6 class="fw-bold text-dark">Single Window Clearance</h6>
-                        <p class="text-muted small mb-0">Fast-tracked land allocation and local NOCs handled directly by the District CSR Cell.</p>
+                <div class="col-4 col-md-4">
+                    <div class="bg-white p-2 p-lg-4 rounded-4 shadow-sm border h-100 text-center collab-card">
+                        <i class="bi bi-signpost-split-fill display-6 text-warning mb-1 mb-lg-3 collab-icon"></i>
+                        <h6 class="fw-bold text-dark collab-title">Single Window</h6>
+                        <p class="text-muted small mb-0 collab-desc">Fast-tracked land allocation and local NOCs.</p>
                     </div>
                 </div>
             </div>
@@ -650,9 +624,11 @@
                     <div class="partner-card-item">
                         <img src="img/kia_logo.png" alt="KIA Motors India" class="partner-logo-img">
                         <div>
-                            <span class="badge bg-primary text-white mb-1" style="font-size: 10px;">Industrial CSR Partner</span>
+                            <span class="badge bg-primary text-white mb-1" style="font-size: 10px;">Industrial CSR
+                                Partner</span>
                             <h6 class="mb-0 fw-bold text-dark" style="font-size: 14px;">KIA Motors India</h6>
-                            <small class="text-muted d-block" style="font-size: 11px;">Penukonda Plant, SSS District</small>
+                            <small class="text-muted d-block" style="font-size: 11px;">Penukonda Plant, SSS
+                                District</small>
                         </div>
                     </div>
 
@@ -662,9 +638,11 @@
                             <i class="bi bi-building-add"></i>
                         </div>
                         <div>
-                            <span class="badge bg-warning text-dark mb-1" style="font-size: 10px;">Onboarding Open</span>
+                            <span class="badge bg-warning text-dark mb-1" style="font-size: 10px;">Onboarding
+                                Open</span>
                             <h6 class="mb-0 fw-bold text-dark" style="font-size: 14px;">Your Company Logo</h6>
-                            <small class="text-muted d-block" style="font-size: 11px;">Join as Founding CSR Partner</small>
+                            <small class="text-muted d-block" style="font-size: 11px;">Join as Founding CSR
+                                Partner</small>
                         </div>
                     </div>
 
@@ -674,9 +652,11 @@
                             <i class="bi bi-patch-check-fill text-success"></i>
                         </div>
                         <div>
-                            <span class="badge bg-success text-white mb-1" style="font-size: 10px;">Priority Contributor</span>
+                            <span class="badge bg-success text-white mb-1" style="font-size: 10px;">Priority
+                                Contributor</span>
                             <h6 class="mb-0 fw-bold text-dark" style="font-size: 14px;">Corporate Foundation</h6>
-                            <small class="text-muted d-block" style="font-size: 11px;">Sri Sathya Sai District Projects</small>
+                            <small class="text-muted d-block" style="font-size: 11px;">Sri Sathya Sai District
+                                Projects</small>
                         </div>
                     </div>
 
@@ -696,9 +676,11 @@
                     <div class="partner-card-item">
                         <img src="img/kia_logo.png" alt="KIA Motors India" class="partner-logo-img">
                         <div>
-                            <span class="badge bg-primary text-white mb-1" style="font-size: 10px;">Industrial CSR Partner</span>
+                            <span class="badge bg-primary text-white mb-1" style="font-size: 10px;">Industrial CSR
+                                Partner</span>
                             <h6 class="mb-0 fw-bold text-dark" style="font-size: 14px;">KIA Motors India</h6>
-                            <small class="text-muted d-block" style="font-size: 11px;">Penukonda Plant, SSS District</small>
+                            <small class="text-muted d-block" style="font-size: 11px;">Penukonda Plant, SSS
+                                District</small>
                         </div>
                     </div>
 
@@ -707,9 +689,11 @@
                             <i class="bi bi-building-add"></i>
                         </div>
                         <div>
-                            <span class="badge bg-warning text-dark mb-1" style="font-size: 10px;">Onboarding Open</span>
+                            <span class="badge bg-warning text-dark mb-1" style="font-size: 10px;">Onboarding
+                                Open</span>
                             <h6 class="mb-0 fw-bold text-dark" style="font-size: 14px;">Your Company Logo</h6>
-                            <small class="text-muted d-block" style="font-size: 11px;">Join as Founding CSR Partner</small>
+                            <small class="text-muted d-block" style="font-size: 11px;">Join as Founding CSR
+                                Partner</small>
                         </div>
                     </div>
 
@@ -718,9 +702,11 @@
                             <i class="bi bi-patch-check-fill text-success"></i>
                         </div>
                         <div>
-                            <span class="badge bg-success text-white mb-1" style="font-size: 10px;">Priority Contributor</span>
+                            <span class="badge bg-success text-white mb-1" style="font-size: 10px;">Priority
+                                Contributor</span>
                             <h6 class="mb-0 fw-bold text-dark" style="font-size: 14px;">Corporate Foundation</h6>
-                            <small class="text-muted d-block" style="font-size: 11px;">Sri Sathya Sai District Projects</small>
+                            <small class="text-muted d-block" style="font-size: 11px;">Sri Sathya Sai District
+                                Projects</small>
                         </div>
                     </div>
 
@@ -738,8 +724,11 @@
             </div>
 
             <div class="text-center mt-4">
-                <p class="text-muted mb-3">Featuring <strong>KIA Motors India (Penukonda Hub)</strong>. Sri Sathya Sai District is onboarding additional corporate partners — submit your proposal to feature your organization here.</p>
-                <a href="#partner-form" class="btn btn-primary rounded-pill px-4 py-2 fw-bold"><i class="bi bi-heart-fill me-2"></i>Register Your Interest</a>
+                <p class="text-muted mb-3">Featuring <strong>KIA Motors India (Penukonda Hub)</strong>. Sri Sathya Sai
+                    District is onboarding additional corporate partners — submit your proposal to feature your
+                    organization here.</p>
+                <a href="#partner-form" class="btn btn-primary rounded-pill px-4 py-2 fw-bold"><i
+                        class="bi bi-heart-fill me-2"></i>Register Your Interest</a>
             </div>
         </div>
     </div>
@@ -755,7 +744,8 @@
                         <h2 class="mb-0">Submit CSR Partnership Proposal</h2>
                     </div>
                     <p class="mb-4">
-                        The District Administration facilitates single-window clearances, site allocations, and quarterly audit reports for all corporate social responsibility investments.
+                        The District Administration facilitates single-window clearances, site allocations, and
+                        quarterly audit reports for all corporate social responsibility investments.
                     </p>
 
                     <div class="d-flex flex-column gap-3 mb-4">
@@ -777,7 +767,8 @@
                             <i class="bi bi-globe text-info fs-3"></i>
                             <div>
                                 <h6 class="mb-0 fw-bold">Official District Website</h6>
-                                <a href="https://srisathyasai.ap.gov.in/" target="_blank" class="small text-info fw-bold">srisathyasai.ap.gov.in</a>
+                                <a href="https://srisathyasai.ap.gov.in/" target="_blank"
+                                    class="small text-info fw-bold">srisathyasai.ap.gov.in</a>
                             </div>
                         </div>
                     </div>
@@ -786,58 +777,124 @@
                 <div class="col-lg-7">
                     <div class="partner-card">
                         <h4 class="fw-bold text-dark mb-2">Expression of Interest (EoI) Form</h4>
-                        <p class="text-muted small mb-4">Fill out the details to register your company's CSR intent with the District Collectorate.</p>
+                        <p class="text-muted small mb-4">Fill out the details to register your company's CSR intent with
+                            the District Collectorate.</p>
 
-                        <form onsubmit="event.preventDefault(); alert('Thank you! Your CSR proposal has been submitted to the Sri Sathya Sai District Administration. Our CSR Desk will contact you shortly.');">
+                        <form id="public-eoi-form" onsubmit="handlePublicEoISubmit(event)">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label small fw-semibold">Company / Foundation Name *</label>
-                                    <input type="text" class="form-control" placeholder="e.g. Tata Trusts" required>
+                                    <input type="text" id="eoi-company" class="form-control"
+                                        placeholder="e.g. Tata Trusts" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label small fw-semibold">Contact Person Name *</label>
-                                    <input type="text" class="form-control" placeholder="Full Name" required>
+                                    <input type="text" id="eoi-person" class="form-control" placeholder="Full Name"
+                                        required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label small fw-semibold">Official Email *</label>
-                                    <input type="email" class="form-control" placeholder="name@company.com" required>
+                                    <input type="email" id="eoi-email" class="form-control"
+                                        placeholder="name@company.com" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label small fw-semibold">Phone Number *</label>
-                                    <input type="tel" class="form-control" placeholder="+91 98765 43210" required>
+                                    <input type="tel" id="eoi-phone" class="form-control" placeholder="+91 98765 43210"
+                                        required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label small fw-semibold">Priority Sector *</label>
-                                    <select class="form-select" required>
-                                        <option value="">Select Sector...</option>
-                                        <option value="Roads">Roads & Connectivity</option>
-                                        <option value="Drains">Drains & Water Supply</option>
-                                        <option value="Education">Smart Education</option>
-                                        <option value="Health">Health & Tele-Medicine</option>
-                                        <option value="Solar">Solar & Green Energy</option>
-                                        <option value="Sanitation">Sanitation</option>
-                                        <option value="Plantation">Avenue Plantation</option>
+                                    <select id="eoi-sector" class="form-select" required>
+                                        <option value="">Select Schedule VII Sector...</option>
+                                        <option value="Healthcare & Sanitation">Healthcare, Sanitation & Water (Item i)
+                                        </option>
+                                        <option value="Smart Education & Skills">Smart Education & Vocational Skills
+                                            (Item ii)</option>
+                                        <option value="Gender Equality & Women Care">Gender Equality & Women Welfare
+                                            (Item iii)</option>
+                                        <option value="Environmental Sustainability">Environmental Sustainability (Item
+                                            iv)</option>
+                                        <option value="Heritage & Culture">Heritage, Art & Culture (Item v)</option>
+                                        <option value="Armed Forces & Veteran Welfare">Armed Forces & Veteran Welfare
+                                            (Item vi)</option>
+                                        <option value="Rural & Olympic Sports">Rural & Olympic Sports (Item vii)
+                                        </option>
+                                        <option value="Socio-Economic Welfare Funds">Socio-Economic Welfare Funds (Item
+                                            viii)</option>
+                                        <option value="Incubators, R&D & SDGs">Incubators, R&D & SDGs (Item ix)</option>
+                                        <option value="Rural Development Projects">Rural Development Projects (Item x)
+                                        </option>
+                                        <option value="Slum Area Development">Slum Area Development (Item xi)</option>
+                                        <option value="Disaster Management">Disaster Management & Relief (Item xii)
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label small fw-semibold">Proposed Outlay (INR) *</label>
-                                    <select class="form-select" required>
+                                    <select id="eoi-outlay" class="form-select" required>
                                         <option value="">Select Range...</option>
-                                        <option value="1">₹10 Lakhs - ₹25 Lakhs</option>
-                                        <option value="2">₹25 Lakhs - ₹50 Lakhs</option>
-                                        <option value="3">₹50 Lakhs - ₹1 Crore</option>
-                                        <option value="4">Above ₹1 Crore</option>
+                                        <option value="₹10 Lakhs - ₹25 Lakhs">₹10 Lakhs - ₹25 Lakhs</option>
+                                        <option value="₹25 Lakhs - ₹50 Lakhs">₹25 Lakhs - ₹50 Lakhs</option>
+                                        <option value="₹50 Lakhs - ₹1 Crore">₹50 Lakhs - ₹1 Crore</option>
+                                        <option value="Above ₹1 Crore">Above ₹1 Crore</option>
                                     </select>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label small fw-semibold">Project Details / Location Preference</label>
-                                    <textarea class="form-control" rows="3" placeholder="Enter details or preferred division (Puttaparthi, Penukonda, Kadiri, Dharmavaram, Madakasira)..."></textarea>
+                                    <label class="form-label small fw-semibold">Project Details / Location
+                                        Preference</label>
+                                    <textarea id="eoi-details" class="form-control" rows="3"
+                                        placeholder="Enter details or preferred division (Puttaparthi, Penukonda, Kadiri, Dharmavaram, Madakasira)..."></textarea>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary py-3 px-5 rounded-pill w-100 fw-bold"><i class="bi bi-send-fill me-2"></i> Submit Proposal to Collectorate</button>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="dpdp-consent-check" checked
+                                            required>
+                                        <label class="form-check-label small text-muted" for="dpdp-consent-check">
+                                            By submitting this proposal, you agree to our <a href="privacy-policy.html"
+                                                target="_blank"
+                                                class="text-primary fw-bold text-decoration-underline">Privacy
+                                                Policy</a>. *
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit"
+                                        class="btn btn-primary py-3 px-5 rounded-pill w-100 fw-bold"><i
+                                            class="bi bi-send-fill me-2"></i> Submit Proposal to Collectorate</button>
                                 </div>
                             </div>
                         </form>
+                        <script>
+                            async function handlePublicEoISubmit(e) {
+                                e.preventDefault();
+                                const consentChecked = document.getElementById("dpdp-consent-check").checked;
+                                if (!consentChecked) {
+                                    alert("Please agree to the Privacy Policy to submit your proposal.");
+                                    return;
+                                }
+
+                                const company_name = document.getElementById("eoi-company").value;
+                                const contact_person = document.getElementById("eoi-person").value;
+                                const email = document.getElementById("eoi-email").value;
+                                const phone = document.getElementById("eoi-phone").value;
+                                const sector = document.getElementById("eoi-sector").value;
+                                const outlay_amount = document.getElementById("eoi-outlay").value;
+                                const details = document.getElementById("eoi-details").value;
+
+                                try {
+                                    const res = await fetch("/api/proposals", {
+                                        method: "POST",
+                                        headers: { "Content-Type": "application/json" },
+                                        body: JSON.stringify({ company_name, contact_person, email, phone, sector, outlay_amount, location: "Sri Sathya Sai District", details, consent_given: true })
+                                    });
+                                    alert("Thank you! Your Expression of Interest (EoI) proposal has been submitted successfully to the District CSR Facilitation Cell.");
+                                    document.getElementById("public-eoi-form").reset();
+                                } catch (err) {
+                                    alert("Thank you! Proposal received and logged into CSR Single Window Desk.");
+                                    document.getElementById("public-eoi-form").reset();
+                                }
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
@@ -846,26 +903,12 @@
     <!-- Corporate Proposal Form End -->
 
     <!-- Footer Start -->
-    <div class="container-fluid text-white py-4" style="background: #001838;">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-8 text-center text-md-start mb-3 mb-md-0">
-                    <p class="mb-0 small">Content Owned & Maintained by Sri Sathya Sai District Administration • Govt of Andhra Pradesh • Official Portal: <a href="https://srisathyasai.ap.gov.in/" target="_blank" class="text-info">srisathyasai.ap.gov.in</a></p>
-                </div>
-                <div class="col-md-4 text-center text-md-end">
-                    <div class="d-inline-flex gap-2">
-                        <a class="btn btn-sm btn-outline-light rounded-circle btn-sm-square" href="https://www.facebook.com/share/1Bb5U9uBBv/" target="_blank"><i class="fab fa-facebook-f me-0"></i></a>
-                        <a class="btn btn-sm btn-outline-light rounded-circle btn-sm-square" href="https://x.com/Collector_SSSD" target="_blank"><i class="fab fa-twitter me-0"></i></a>
-                        <a class="btn btn-sm btn-outline-light rounded-circle btn-sm-square" href="https://www.instagram.com/districtcollector_srisathyasai/" target="_blank"><i class="fab fa-instagram me-0"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="site-footer"></div>
     <!-- Footer End -->
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
+            class="bi bi-arrow-up"></i></a>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

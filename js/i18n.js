@@ -14,8 +14,9 @@
             "nav_about": "About District",
             "nav_projects": "Priority Projects",
             "nav_collaborators": "Collaborators",
-            "nav_login": "Portal Login",
+            "nav_login": "Login",
             "nav_dashboard": "Dashboard",
+            "nav_logout": "Logout",
             "govt_ap": "Govt of Andhra Pradesh",
 
             // Hero Section
@@ -23,7 +24,7 @@
             "hero_title": "Connecting Corporate Social Responsibility with District Development",
             "hero_subtitle": "Facilitating single-window CSR approvals, transparent milestone tracking, and high-impact rural development across Sri Sathya Sai District.",
             "btn_explore_projects": "Explore Priority Projects",
-            "btn_submit_eoi": "Submit CSR Proposal",
+            "btn_submit_eoi": "Partner With Us",
 
             // Stats
             "stat_projects": "Priority Projects",
@@ -31,21 +32,25 @@
             "stat_sectors": "Key Focus Sectors",
             "stat_outlay": "Target Outlay",
 
-            // Sectors
-            "sector_title": "CSR Focus Sectors",
-            "sector_subtitle": "Aligned with District Priorities & Sustainable Development Goals",
-            "sec_roads": "Roads & Connectivity",
-            "sec_drains": "Drains & Water Supply",
-            "sec_education": "Smart Education",
-            "sec_health": "Health & Tele-Medicine",
-            "sec_solar": "Solar & Clean Energy",
-            "sec_sanitation": "Sanitation & Hygeine",
-            "sec_plantation": "Avenue Plantation",
-            "sec_sports": "Sports Infrastructure",
+            // Schedule VII Statutory CSR Focus Sectors
+            "sector_title": "Schedule VII CSR Focus Sectors",
+            "sector_subtitle": "Aligned with Section 135 Companies Act 2013 & Sustainable Development Goals",
+            "sec_health_sanitation": "Healthcare, Sanitation & Water",
+            "sec_education_skills": "Smart Education & Vocational Skills",
+            "sec_gender_women": "Gender Equality & Women Welfare",
+            "sec_environment": "Environmental Sustainability",
+            "sec_heritage_culture": "Heritage, Art & Culture",
+            "sec_veterans_welfare": "Armed Forces & Veteran Welfare",
+            "sec_sports": "Rural & Olympic Sports",
+            "sec_socio_welfare": "Socio-Economic Welfare Funds",
+            "sec_incubators_sdg": "Incubators, R&D & SDGs",
+            "sec_rural_dev": "Rural Development Projects",
+            "sec_slum_dev": "Slum Area Development",
+            "sec_disaster_mgmt": "Disaster Management & Relief",
 
             // Collector's Message
             "collector_name": "Sri A. Shyam Prasad, I.A.S",
-            "collector_designation": "Collector & District Magistrate, Sri Sathya Sai District",
+            "collector_designation": "Collector & District Magistrate, AP",
             "collector_quote": "\"Corporate partnerships are a transformative force capable of driving positive change across education, healthcare, environmental sustainability, skill development, and infrastructure. I extend an invitation to corporate leaders and foundations to join hands with the Sri Sathya Sai District Administration in building model, resilient communities.\"",
 
             // Partners & Scroller
@@ -80,8 +85,11 @@
             "dash_nodal_title": "CSR Nodal Officer Workspace & User Management",
             "dash_sponsor_title": "Corporate Partner CSR Impact Dashboard",
 
-            // Footer
-            "footer_rights": "Content Owned & Maintained by Sri Sathya Sai District Administration • Govt of Andhra Pradesh"
+            // Footer & DPDP Compliance
+            "footer_rights": "Content Owned & Maintained by Sri Sathya Sai District Administration • Govt of Andhra Pradesh",
+            "privacy_policy": "Privacy Policy & DPDP Compliance",
+            "dpdp_consent_title": "Digital Personal Data Protection Act, 2023 Notice",
+            "dpdp_consent_label": "I hereby give free, specific, informed, and explicit consent to Sri Sathya Sai District Administration to collect and process my contact details for corporate CSR proposal facilitation and verification under the Digital Personal Data Protection Act, 2023."
         },
         te: {
             // Header & Navigation
@@ -92,6 +100,7 @@
             "nav_collaborators": "సహకార సంస్థలు",
             "nav_login": "పోర్టల్ లాగిన్",
             "nav_dashboard": "డ్యాష్‌బోర్డ్",
+            "nav_logout": "లాగ్‌అవుట్",
             "govt_ap": "ఆంధ్రప్రదేశ్ ప్రభుత్వం",
 
             // Hero Section
@@ -107,17 +116,21 @@
             "stat_sectors": "ముఖ్య రంగములు",
             "stat_outlay": "లక్ష్య నిధులు",
 
-            // Sectors
-            "sector_title": "సి.ఎస్.ఆర్ ప్రాధాన్యతా రంగాలు",
-            "sector_subtitle": "జిల్లా అవసరాలు మరియు సుస్థిరాభివృద్ధి లక్ష్యాలకు అనుగుణంగా",
-            "sec_roads": "రోడ్లు & రవాణా సౌకర్యాలు",
-            "sec_drains": "మురుగునీటి కాలువలు & తాగునీరు",
-            "sec_education": "స్మార్ట్ విద్య & పాఠశాలలు",
-            "sec_health": "వైద్యం & టెలి-మెడిసిన్",
-            "sec_solar": "సౌర శక్తి & హరిత శక్తి",
-            "sec_sanitation": "పరిశుభ్రత & పారిశుధ్యం",
-            "sec_plantation": "మొక్కల పెంపకం",
-            "sec_sports": "క్రీడా మౌలిక వసతులు",
+            // Schedule VII Statutory CSR Focus Sectors
+            "sector_title": "షెడ్యూల్ VII సి.ఎస్.ఆర్ ప్రాధాన్యతా రంగాలు",
+            "sector_subtitle": "కంపెనీల చట్టం 2013 సెక్షన్ 135 మరియు సుస్థిరాభివృద్ధి లక్ష్యాలకు అనుగుణంగా",
+            "sec_health_sanitation": "వైద్యం, పారిశుధ్యం & సురక్షిత మంచి నీరు",
+            "sec_education_skills": "స్మార్ట్ విద్య & వృత్తి నైపుణ్యాలు",
+            "sec_gender_women": "లింగ సమానత్వం & మహిళా సంక్షేమం",
+            "sec_environment": "పర్యావరణ పరిరక్షణ & హరిత శక్తి",
+            "sec_heritage_culture": "జాతీయ వారసత్వం, కళలు & సంస్కృతి",
+            "sec_veterans_welfare": "సైనిక దళాల రక్షణ & వీరనారుల సంక్షేమం",
+            "sec_sports": "గ్రామీణ & ఒలింపిక్ క్రీడల ప్రోత్సాహం",
+            "sec_socio_welfare": "ఎస్సీ/ఎస్టీ & బలహీన వర్గాల సంక్షేమ నిధులు",
+            "sec_incubators_sdg": "ఇంక్యుబేటర్లు, పరిశోధన & SDGs",
+            "sec_rural_dev": "గ్రామీణాభివృద్ధి ప్రాజెక్టులు",
+            "sec_slum_dev": "స్లమ్ ప్రాంతాల అభివృద్ధి",
+            "sec_disaster_mgmt": "విపత్తు నిర్వహణ & పునరావాసం",
 
             // Collector's Message
             "collector_name": "శ్రీ ఎ. శ్యామ్ ప్రసాద్, ఐ.ఎ.ఎస్",
@@ -156,8 +169,11 @@
             "dash_nodal_title": "నోడల్ ఆఫీసర్ నిర్వహణ వర్క్‌స్పేస్",
             "dash_sponsor_title": "కార్పొరేట్ భాగస్వామి సి.ఎస్.ఆర్ డ్యాష్‌బోర్డ్",
 
-            // Footer
-            "footer_rights": "సమాచారం శ్రీ సత్యసాయి జిల్లా యంత్రాంగం ఆధీనంలో ఉంది • ఆంధ్రప్రదేశ్ ప్రభుత్వం"
+            // Footer & DPDP Compliance
+            "footer_rights": "సమాచారం శ్రీ సత్యసాయి జిల్లా యంత్రాంగం ఆధీనంలో ఉంది • ఆంధ్రప్రదేశ్ ప్రభుత్వం",
+            "privacy_policy": "డిజిటల్ వ్యక్తిగత డేటా రక్షణ విధానం (DPDP)",
+            "dpdp_consent_title": "డిజిటల్ వ్యక్తిగత డేటా రక్షణ చట్టం 2023 నోటీసు",
+            "dpdp_consent_label": "డిజిటల్ వ్యక్తిగత డేటా రక్షణ చట్టం 2023 కింద నా సంప్రదింపు వివరాలను సేకరించి ప్రాసెస్ చేయడానికి నేను శ్రీ సత్యసాయి జిల్లా పరిపాలనకు స్పష్టమైన సమ్మతిని ఇస్తున్నాను."
         }
     };
 

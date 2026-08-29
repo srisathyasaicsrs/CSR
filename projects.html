@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Stylesheets -->
@@ -82,65 +82,9 @@
 </head>
 
 <body>
-    <!-- Topbar Start -->
-    <div class="container-fluid topbar px-5 d-none d-lg-block">
-        <div class="row gx-0 align-items-center" style="height: 42px;">
-            <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
-                <div class="d-inline-flex align-items-center gap-3">
-                    <span class="text-white fw-bold"><i class="bi bi-shield-check text-primary me-1"></i><span data-i18n="govt_ap">Govt of Andhra Pradesh</span></span>
-                    <span class="text-muted">|</span>
-                    <span data-i18n="portal_title">Sri Sathya Sai District CSR Portal</span>
-                </div>
-            </div>
-            <div class="col-lg-4 text-center text-lg-end">
-                <div class="d-inline-flex align-items-center gap-2">
-                    <button id="lang-btn-en" class="btn btn-sm btn-primary py-0 px-2 fw-bold" onclick="i18nEngine.setLanguage('en')">EN</button>
-                    <button id="lang-btn-te" class="btn btn-sm btn-outline-primary py-0 px-2 fw-bold" onclick="i18nEngine.setLanguage('te')">తెలుగు</button>
-                    <a href="login.html" class="btn btn-sm btn-outline-light py-0 px-3 fw-bold ms-2"><i class="bi bi-box-arrow-in-right me-1"></i><span data-i18n="nav_login">Portal Login</span></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Topbar End -->
-
-    <!-- Header Brand Start -->
-    <div class="header-brand-container">
-        <div class="container">
-            <div class="d-flex align-items-center justify-content-between">
-                <div class="d-flex align-items-center gap-3">
-                    <img src="img/csr_logo.png" alt="CSR Logo" style="height: 62px; object-fit: contain;">
-                    <div>
-                        <h4 class="mb-0 fw-bold text-dark" style="color: #002858;" data-i18n="portal_title">Sri Sathya Sai District CSR Portal</h4>
-                        <small class="text-muted fw-semibold">District Collectorate & Magistrate • Puttaparthi</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Header Brand End -->
-
-    <!-- Navbar Start -->
-    <div class="container-fluid position-relative p-0">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5 py-3 py-lg-0" style="background: #001838 !important;">
-            <a href="index.html" class="navbar-brand p-0 d-lg-none">
-                <h2 class="text-primary m-0"><i class="bi bi-building me-2"></i>CSR Portal</h2>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="fa fa-bars"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto py-0">
-                    <a href="index.html" class="nav-item nav-link" data-i18n="nav_home">Home</a>
-                    <a href="about-district.html" class="nav-item nav-link" data-i18n="nav_about">About District</a>
-                    <a href="projects.html" class="nav-item nav-link active" data-i18n="nav_projects">Priority Projects</a>
-                    <a href="index.html#partners" class="nav-item nav-link" data-i18n="nav_collaborators">Collaborators</a>
-                    <a href="login.html" class="nav-item nav-link" data-i18n="nav_login">Portal Login</a>
-                </div>
-                <a href="index.html#partner-form" class="btn btn-primary py-2 px-4 ms-3 rounded-pill fw-bold" data-i18n="btn_submit_eoi">Submit CSR Proposal</a>
-            </div>
-        </nav>
-    </div>
-    <!-- Navbar End -->
+    <!-- Header Component Start -->
+    <div id="site-header"></div>
+    <!-- Header Component End -->
 
     <!-- Hero Title Header -->
     <div class="container-fluid bg-primary py-5 bg-header mb-5">
@@ -165,12 +109,19 @@
                 <div class="col-md-3">
                     <label class="form-label small fw-semibold">Focus Sector</label>
                     <select id="sector-filter" class="form-select">
-                        <option value="All">All Sectors</option>
-                        <option value="Education">Education & Skills</option>
-                        <option value="Health">Healthcare & Tele-Medicine</option>
-                        <option value="Roads">Roads & Connectivity</option>
-                        <option value="Drains">Drains & Water Supply</option>
-                        <option value="Solar">Solar & Green Energy</option>
+                        <option value="All">All 12 Schedule VII Sectors</option>
+                        <option value="Healthcare & Sanitation">Healthcare & Sanitation (Item i)</option>
+                        <option value="Smart Education & Skills">Smart Education & Skills (Item ii)</option>
+                        <option value="Gender Equality & Women Care">Gender Equality & Women Care (Item iii)</option>
+                        <option value="Environmental Sustainability">Environmental Sustainability (Item iv)</option>
+                        <option value="Heritage & Culture">Heritage & Culture (Item v)</option>
+                        <option value="Armed Forces & Veteran Welfare">Armed Forces & Veteran Welfare (Item vi)</option>
+                        <option value="Rural & Olympic Sports">Rural & Olympic Sports (Item vii)</option>
+                        <option value="Socio-Economic Welfare Funds">Socio-Economic Welfare Funds (Item viii)</option>
+                        <option value="Incubators, R&D & SDGs">Incubators, R&D & SDGs (Item ix)</option>
+                        <option value="Rural Development Projects">Rural Development Projects (Item x)</option>
+                        <option value="Slum Area Development">Slum Area Development (Item xi)</option>
+                        <option value="Disaster Management">Disaster Management (Item xii)</option>
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -198,15 +149,7 @@
     </div>
 
     <!-- Footer Start -->
-    <div class="container-fluid text-white py-4 mt-5" style="background: #001838;">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-8 text-center text-md-start mb-3 mb-md-0">
-                    <p class="mb-0 small" data-i18n="footer_rights">Content Owned & Maintained by Sri Sathya Sai District Administration • Govt of Andhra Pradesh</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="site-footer"></div>
     <!-- Footer End -->
 
     <!-- JS Libraries -->
@@ -215,74 +158,141 @@
     <script src="js/i18n.js"></script>
     <script src="js/pdf-generator.js"></script>
     <script src="js/kv-storage.js"></script>
+    <script src="main.js"></script>
     
     <script>
         const sampleProjects = [
             {
-                id: "proj-101",
-                title: "Penukonda EV & Automotive Skill Hub",
-                mandal: "Penukonda",
-                sector: "Education",
-                budget: "₹1.20 Crores",
-                sponsor: "KIA Motors India",
+                id: "proj-701",
+                title: "Safe RO Water Hubs & Child Nutrition Program",
+                mandal: "Kadiri",
+                sector: "Healthcare & Sanitation",
+                budget: "₹1.50 Crores",
+                sponsor: "KIA Motors India Foundation",
                 status: "In Progress",
                 progressPct: 75,
-                description: "State-of-the-art skill development center providing specialized EV technician training for local youth."
+                description: "Schedule VII (i): Eradicating hunger & malnutrition, establishing 15 community RO water purification plants in fluorosis habitations."
             },
             {
-                id: "proj-102",
-                title: "Puttaparthi Tele-Medicine & Health Kiosks",
-                mandal: "Puttaparthi",
-                sector: "Health",
+                id: "proj-702",
+                title: "EV Technician Vocational Skill Center & Smart Schools",
+                mandal: "Penukonda",
+                sector: "Smart Education & Skills",
+                budget: "₹2.00 Crores",
+                sponsor: "Tata Trusts Foundation",
+                status: "In Progress",
+                progressPct: 70,
+                description: "Schedule VII (ii): Vocational skill enhancement for EV technicians, special education, and digital interactive classrooms across ZP schools."
+            },
+            {
+                id: "proj-703",
+                title: "Working Women Hostels & Senior Citizen Daycare Homes",
+                mandal: "Dharmavaram",
+                sector: "Gender Equality & Women Care",
+                budget: "₹1.20 Crores",
+                sponsor: "L&T Construction CSR",
+                status: "Under Review",
+                progressPct: 25,
+                description: "Schedule VII (iii): Safe residential hostels for women weavers, senior citizen daycare centers, and reducing socio-economic inequalities."
+            },
+            {
+                id: "proj-704",
+                title: "Soil/Water Conservation & Solar Micro-Grid Network",
+                mandal: "NP Kunta",
+                sector: "Environmental Sustainability",
+                budget: "₹1.80 Crores",
+                sponsor: "BHEL Corporate CSR",
+                status: "Under Review",
+                progressPct: 15,
+                description: "Schedule VII (iv): Agroforestry, soil & water conservation, animal welfare, and solar micro-grids for PHCs and Gram Panchayats."
+            },
+            {
+                id: "proj-705",
+                title: "Lepakshi Heritage Restoration & E-Library Network",
+                mandal: "Lepakshi",
+                sector: "Heritage & Culture",
                 budget: "₹85 Lakhs",
+                sponsor: "JSW Foundation",
+                status: "Proposed",
+                progressPct: 0,
+                description: "Schedule VII (v): Restoration of historical sites at Penukonda & Lepakshi, public e-libraries, and traditional handicraft artisan support."
+            },
+            {
+                id: "proj-706",
+                title: "Armed Forces Veterans & War Widows Welfare Cell",
+                mandal: "Puttaparthi",
+                sector: "Armed Forces & Veteran Welfare",
+                budget: "₹50 Lakhs",
                 sponsor: "Open for Adoption",
                 status: "Proposed",
                 progressPct: 0,
-                description: "Tele-consultation kiosks connecting remote rural mandal clinics with Puttaparthi super-specialists."
+                description: "Schedule VII (vi): Healthcare, vocational retraining, and education scholarships for CAPF/CPMF veterans, ex-servicemen, and war widows."
             },
             {
-                id: "proj-103",
-                title: "Hindupur Industrial Sub-Division Drainage",
-                mandal: "Hindupur",
-                sector: "Drains",
+                id: "proj-707",
+                title: "Rural Sports Training Complex & Paralympic Coaching",
+                mandal: "Dharmavaram",
+                sector: "Rural & Olympic Sports",
+                budget: "₹75 Lakhs",
+                sponsor: "Open for Adoption",
+                status: "Proposed",
+                progressPct: 0,
+                description: "Schedule VII (vii): Multi-purpose sports grounds, paralympic coaching camps, and equipment for nationally recognized rural sports."
+            },
+            {
+                id: "proj-708",
+                title: "SC/ST & Vulnerable Communities Welfare Infrastructure",
+                mandal: "Madakasira",
+                sector: "Socio-Economic Welfare Funds",
+                budget: "₹1.10 Crores",
+                sponsor: "Open for Adoption",
+                status: "Proposed",
+                progressPct: 0,
+                description: "Schedule VII (viii): Targeted socio-economic development, community halls, and welfare amenities for Scheduled Castes, STs, and OBC habitations."
+            },
+            {
+                id: "proj-709",
+                title: "AgTech Incubator & IIT/CSIR SDG Research Center",
+                mandal: "Puttaparthi",
+                sector: "Incubators, R&D & SDGs",
                 budget: "₹2.50 Crores",
                 sponsor: "Open for Adoption",
                 status: "Proposed",
                 progressPct: 0,
-                description: "Closed storm water network and water recycling bio-filters for the Hindupur commercial zone."
+                description: "Schedule VII (ix): Technology incubators and research grants for Sustainable Development Goals (SDGs) in partnership with IITs and CSIR labs."
             },
             {
-                id: "proj-104",
-                title: "Dharmavaram Weaver Colony Smart Digital Classrooms",
-                mandal: "Dharmavaram",
-                sector: "Education",
-                budget: "₹45 Lakhs",
-                sponsor: "Tata Trusts Foundation",
-                status: "Under Review",
-                progressPct: 20,
-                description: "Smart interactive boards, solar roof backup, and computer labs across 8 weavers' colony schools."
+                id: "proj-710",
+                title: "All-Weather Mandal Connectivity & Solar Street Lights",
+                mandal: "Hindupur",
+                sector: "Rural Development Projects",
+                budget: "₹3.00 Crores",
+                sponsor: "Open for Adoption",
+                status: "Proposed",
+                progressPct: 0,
+                description: "Schedule VII (x): All-weather rural roads, drainage networks, solar street lighting, and Gram Panchayat civic infrastructure."
             },
             {
-                id: "proj-105",
-                title: "Kadiri Clean Drinking Water RO Plants",
+                id: "proj-711",
+                title: "Municipal Slum Area Housing & Underground Drainage",
                 mandal: "Kadiri",
-                sector: "Drains",
-                budget: "₹60 Lakhs",
+                sector: "Slum Area Development",
+                budget: "₹1.40 Crores",
                 sponsor: "Open for Adoption",
                 status: "Proposed",
                 progressPct: 0,
-                description: "15 high-capacity community RO purification stations in drought and fluoride prone habitations."
+                description: "Schedule VII (xi): Upgrading sanitation, drinking water pipelines, underground drainage, and civic facilities in declared urban slums."
             },
             {
-                id: "proj-106",
-                title: "Lepakshi Tourist Corridor Solar Lighting & Plantation",
-                mandal: "Lepakshi",
-                sector: "Solar",
-                budget: "₹35 Lakhs",
+                id: "proj-712",
+                title: "Drought Resilience Check-Dams & Cyclone Shelter Network",
+                mandal: "Bukkapatnam",
+                sector: "Disaster Management",
+                budget: "₹1.60 Crores",
                 sponsor: "Open for Adoption",
                 status: "Proposed",
                 progressPct: 0,
-                description: "Smart standalone solar street lighting and shade tree plantation along the Lepakshi heritage road."
+                description: "Schedule VII (xii): Rainwater check-dams, cyclone shelters, emergency response kits, and post-disaster reconstruction infrastructure."
             }
         ];
 
@@ -302,7 +312,7 @@
             }
 
             container.innerHTML = list.map(p => `
-                <div class="col-md-6 col-lg-4">
+                <div class="col-xl-3 col-lg-6 col-md-6 col-12">
                     <div class="project-card p-4">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <span class="badge bg-primary px-3 py-1">${p.sector}</span>
