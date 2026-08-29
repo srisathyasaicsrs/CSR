@@ -108,19 +108,20 @@
             <!-- Login Form -->
             <form onsubmit="handleLogin(event)">
                 <div class="mb-3">
-                    <label class="form-label small fw-semibold">User ID / Official Email</label>
-                    <input type="text" id="username-input" class="form-control form-control-lg"
-                        value="collector@ap.gov.in" required>
+                    <label class="form-label small fw-semibold">Official Email</label>
+                    <input type="email" id="username-input" class="form-control form-control-lg"
+                        placeholder="name@ap.gov.in" autocomplete="username" required>
                 </div>
                 <div class="mb-4">
                     <label class="form-label small fw-semibold">Password</label>
                     <input type="password" id="password-input" class="form-control form-control-lg"
-                        placeholder="Enter password" required>
+                        placeholder="Enter your password" autocomplete="current-password" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold py-3">
+                <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold py-3 btn-portal">
                     <i class="bi bi-box-arrow-in-right me-2"></i> Enter Authorized Workspace
                 </button>
+                <p id="login-status" class="small mt-3 mb-0 eoi-form-status" role="status" aria-live="polite"></p>
             </form>
 
             <div class="text-center mt-4 d-flex justify-content-center gap-3">
@@ -133,73 +134,11 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.8/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/supabase-client.js"></script>
     <script src="js/i18n.js"></script>
-    <script>
-        let selectedRole = "Collector";
-
-        function selectRole(role) {
-            selectedRole = role;
-            document.querySelectorAll(".role-btn").forEach(b => b.classList.remove("active"));
-
-            if (role === "Collector") {
-                document.getElementById("role-btn-collector").classList.add("active");
-                document.getElementById("username-input").value = "collector@ap.gov.in";
-                document.getElementById("password-input").value = "collector123";
-            } else if (role === "Nodal") {
-                document.getElementById("role-btn-nodal").classList.add("active");
-                document.getElementById("username-input").value = "nodal-csr@ap.gov.in";
-                document.getElementById("password-input").value = "nodal123";
-            } else if (role === "Sponsor") {
-                document.getElementById("role-btn-sponsor").classList.add("active");
-                document.getElementById("username-input").value = "csr.kia@kiamotors.in";
-                document.getElementById("password-input").value = "kia123";
-            }
-        }
-
-        function quickFill(email, role) {
-            selectRole(role);
-            document.getElementById("username-input").value = email;
-        }
-
-        async function handleLogin(e) {
-            e.preventDefault();
-            const username = document.getElementById("username-input").value;
-            const password = document.getElementById("password-input").value;
-
-            try {
-                const res = await fetch("/api/auth/login", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ username, password, role: selectedRole })
-                });
-
-                if (res.ok) {
-                    const data = await res.json();
-                    sessionStorage.setItem("csr_authenticated", "true");
-                    sessionStorage.setItem("csr_current_user", JSON.stringify(data.user));
-                    localStorage.setItem("csr_current_user", JSON.stringify(data.user));
-                    localStorage.setItem("csr_auth_token", data.token);
-                    window.location.href = "dashboard.html";
-                    return;
-                }
-            } catch (err) {
-                console.log("Using local auth fallback");
-            }
-
-            let userObj = {
-                username: username,
-                role: selectedRole,
-                name: selectedRole === "Collector" ? "Sri A. Shyam Prasad, I.A.S" : (selectedRole === "Nodal" ? "Sri M. Ramanaiah, Joint Collector & Nodal Officer" : "KIA Motors India CSR Desk"),
-                title: selectedRole === "Collector" ? "District Collector & Magistrate" : (selectedRole === "Nodal" ? "District CSR Nodal Officer" : "Corporate CSR Partner"),
-                company: selectedRole === "Sponsor" ? "KIA Motors India" : "Sri Sathya Sai District Administration"
-            };
-
-            sessionStorage.setItem("csr_authenticated", "true");
-            sessionStorage.setItem("csr_current_user", JSON.stringify(userObj));
-            localStorage.setItem("csr_current_user", JSON.stringify(userObj));
-            window.location.href = "dashboard.html";
-        }
-    </script>
+    <script src="js/login.js"></script>
 </body>
 
 </html>

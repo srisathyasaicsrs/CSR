@@ -1,58 +1,49 @@
 /**
- * auth-dashboard.js - Dashboard Controller & Cloudflare API Integration
- * Sri Sathya Sai District CSR Portal
+ * Dashboard controller — Supabase session, RLS-backed data, no local fallbacks.
  */
-
 (function () {
     "use strict";
 
     let currentUser = null;
     let proposalsCache = [];
+    const esc = function (value) {
+        return window.csrEscapeHtml(value);
+    };
 
-    document.addEventListener("DOMContentLoaded", function () {
-        // Enforce strict login requirement for dashboard page
-        const userStr = localStorage.getItem("csr_current_user");
-        if (!userStr) {
-            window.location.href = "login.html";
-            return;
-        }
-
+    document.addEventListener("DOMContentLoaded", async function () {
         try {
-            currentUser = JSON.parse(userStr);
-        } catch (e) {
-            localStorage.removeItem("csr_current_user");
-            window.location.href = "login.html";
-            return;
+            currentUser = await window.csrSupabase.requireSession();
+            if (!currentUser) return;
+            hideAuthGate();
+            setupHeaderAndRoleView();
+            await Promise.all([fetchProposalsData(), fetchSponsorsData()]);
+            renderStatsAndCharts();
+            setupEventListeners();
+        } catch (err) {
+            window.location.replace("login.html");
         }
-
-        if (!currentUser || !currentUser.role) {
-            localStorage.removeItem("csr_current_user");
-            window.location.href = "login.html";
-            return;
-        }
-
-        setupHeaderAndRoleView();
-        fetchDashboardStats();
-        fetchProposalsData();
-        fetchSponsorsData();
-        setupEventListeners();
     });
+
+    function hideAuthGate() {
+        const gate = document.getElementById("dash-auth-gate");
+        if (gate) gate.remove();
+        document.body.classList.add("dash-ready");
+    }
 
     function setupHeaderAndRoleView() {
         const userNameEl = document.getElementById("dash-user-name");
         const userTitleEl = document.getElementById("dash-user-title");
         const userAvatarEl = document.getElementById("dash-user-avatar");
         const sidebarRoleBadgeEl = document.getElementById("sidebar-role-badge");
-
         const roleBadgeTag = document.getElementById("role-badge-tag");
         const roleBannerTitle = document.getElementById("role-banner-title");
         const roleBannerSub = document.getElementById("role-banner-sub");
 
-        if (userNameEl) userNameEl.innerText = currentUser.name;
-        if (userTitleEl) userTitleEl.innerText = currentUser.title;
+        if (userNameEl) userNameEl.textContent = currentUser.name;
+        if (userTitleEl) userTitleEl.textContent = currentUser.title || currentUser.role;
         if (userAvatarEl) {
-            const initials = currentUser.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
-            userAvatarEl.innerText = initials || 'AS';
+            const initials = currentUser.name.split(" ").map(function (n) { return n[0]; }).join("").slice(0, 2).toUpperCase();
+            userAvatarEl.textContent = initials || "CSR";
         }
 
         const collectorPanel = document.getElementById("collector-panel");
@@ -60,99 +51,89 @@
         const sponsorPanel = document.getElementById("sponsor-panel");
 
         if (currentUser.role === "Collector") {
-            if (sidebarRoleBadgeEl) sidebarRoleBadgeEl.className = "badge bg-primary px-3 py-2";
-            if (sidebarRoleBadgeEl) sidebarRoleBadgeEl.innerText = "COLLECTOR/EXECUTIVE OFFICER";
-            if (roleBadgeTag) roleBadgeTag.innerText = "DISTRICT COLLECTOR EXECUTIVE DESK";
-            if (roleBannerTitle) roleBannerTitle.innerText = "Sri Sathya Sai District CSR Command Center";
-            if (roleBannerSub) roleBannerSub.innerText = "Macro Financial Outlay Metrics, Sector Allocation & Nodal Verification Queue";
-
+            if (sidebarRoleBadgeEl) {
+                sidebarRoleBadgeEl.className = "badge bg-primary px-3 py-2";
+                sidebarRoleBadgeEl.textContent = "COLLECTOR/EXECUTIVE OFFICER";
+            }
+            if (roleBadgeTag) roleBadgeTag.textContent = "DISTRICT COLLECTOR EXECUTIVE DESK";
+            if (roleBannerTitle) roleBannerTitle.textContent = "Sri Sathya Sai District CSR Command Center";
+            if (roleBannerSub) roleBannerSub.textContent = "Live proposal queue, sector allocation, and nodal verification status";
             if (collectorPanel) collectorPanel.style.display = "block";
             if (nodalPanel) nodalPanel.style.display = "none";
             if (sponsorPanel) sponsorPanel.style.display = "none";
         } else if (currentUser.role === "Nodal") {
-            if (sidebarRoleBadgeEl) sidebarRoleBadgeEl.className = "badge bg-success px-3 py-2";
-            if (sidebarRoleBadgeEl) sidebarRoleBadgeEl.innerText = "NODAL OFFICER";
-            if (roleBadgeTag) roleBadgeTag.innerText = "CSR NODAL OFFICER FIELD DESK";
-            if (roleBannerTitle) roleBannerTitle.innerText = "Proposals Verification & Stage Management Desk";
-            if (roleBannerSub) roleBannerSub.innerText = "Update inspection stages, write official field notes, and issue corporate sponsor logins";
-
+            if (sidebarRoleBadgeEl) {
+                sidebarRoleBadgeEl.className = "badge bg-success px-3 py-2";
+                sidebarRoleBadgeEl.textContent = "NODAL OFFICER";
+            }
+            if (roleBadgeTag) roleBadgeTag.textContent = "CSR NODAL OFFICER FIELD DESK";
+            if (roleBannerTitle) roleBannerTitle.textContent = "Proposals Verification & Stage Management Desk";
+            if (roleBannerSub) roleBannerSub.textContent = "Update inspection stages and register corporate partners";
             if (collectorPanel) collectorPanel.style.display = "none";
             if (nodalPanel) nodalPanel.style.display = "block";
             if (sponsorPanel) sponsorPanel.style.display = "none";
         } else {
-            if (sidebarRoleBadgeEl) sidebarRoleBadgeEl.className = "badge bg-warning text-dark px-3 py-2";
-            if (sidebarRoleBadgeEl) sidebarRoleBadgeEl.innerText = "CORPORATE SPONSOR";
-            if (roleBadgeTag) roleBadgeTag.innerText = "CORPORATE PARTNER CSR IMPACT DESK";
-            if (roleBannerTitle) roleBannerTitle.innerText = `${currentUser.company || 'KIA Motors India'} CSR Portal`;
-            if (roleBannerSub) roleBannerSub.innerText = "Track proposal lifecycle status, milestone progress, and download statutory tax certificates";
-
+            if (sidebarRoleBadgeEl) {
+                sidebarRoleBadgeEl.className = "badge bg-warning text-dark px-3 py-2";
+                sidebarRoleBadgeEl.textContent = "CORPORATE SPONSOR";
+            }
+            if (roleBadgeTag) roleBadgeTag.textContent = "CORPORATE PARTNER CSR IMPACT DESK";
+            if (roleBannerTitle) roleBannerTitle.textContent = (currentUser.company || "Corporate Partner") + " CSR Portal";
+            if (roleBannerSub) roleBannerSub.textContent = "Track proposals linked to this account";
             if (collectorPanel) collectorPanel.style.display = "none";
             if (nodalPanel) nodalPanel.style.display = "none";
             if (sponsorPanel) sponsorPanel.style.display = "block";
+            const sponsorHeading = document.getElementById("sponsor-company-heading");
+            if (sponsorHeading) sponsorHeading.textContent = currentUser.company || currentUser.name;
         }
     }
 
-    // Fetch Stats from API (or fallback)
-    async function fetchDashboardStats() {
-        try {
-            const res = await fetch("/api/dashboard/stats");
-            let data = null;
-            if (res.ok) {
-                data = await res.json();
-            } else {
-                data = getFallbackStats();
-            }
-            renderStatsAndCharts(data);
-        } catch (e) {
-            renderStatsAndCharts(getFallbackStats());
-        }
+    function parseOutlayLakhs(text) {
+        const raw = String(text || "");
+        if (/crore/i.test(raw)) return 100;
+        if (/50 Lakhs - ₹1/.test(raw) || /50 Lakhs – ₹1/.test(raw)) return 75;
+        if (/25 Lakhs - ₹50/.test(raw)) return 37.5;
+        if (/10 Lakhs/.test(raw)) return 17.5;
+        const num = parseFloat(raw.replace(/[^\d.]/g, ""));
+        return Number.isFinite(num) ? num : 0;
     }
 
-    function getFallbackStats() {
-        return {
-            total_received: 24500000,
-            total_mobilized: 9850000,
-            total_proposals: 4,
-            pending_proposals: 3,
-            sectors: [
-                { sector: "Education", amount: 16500000 },
-                { sector: "Roads", amount: 8500000 },
-                { sector: "Health", amount: 8500000 },
-                { sector: "Drains", amount: 6000000 },
-                { sector: "Solar", amount: 9500000 }
-            ],
-            company_split: [
-                { company: "KIA Motors India", total_outlay: 12000000, proposals_count: 1, nodal_status: "Approved by Collectorate" },
-                { company: "L&T Construction Foundation", total_outlay: 8500000, proposals_count: 1, nodal_status: "Under Field Inspection" },
-                { company: "Tata Trusts Foundation", total_outlay: 4500000, proposals_count: 1, nodal_status: "NOC & Site Verified" }
-            ]
-        };
-    }
+    function renderStatsAndCharts() {
+        const byCompany = {};
+        const bySector = {};
+        proposalsCache.forEach(function (p) {
+            const key = p.company_name || "Unknown";
+            if (!byCompany[key]) byCompany[key] = { company: key, total_outlay: 0, proposals_count: 0, nodal_status: p.nodal_status };
+            byCompany[key].total_outlay += parseOutlayLakhs(p.outlay_amount) * 100000;
+            byCompany[key].proposals_count += 1;
+            bySector[p.sector] = (bySector[p.sector] || 0) + 1;
+        });
+        const company_split = Object.keys(byCompany).map(function (k) { return byCompany[k]; });
+        const pending = proposalsCache.filter(function (p) { return p.nodal_status === "Submitted"; }).length;
 
-    function renderStatsAndCharts(data) {
         const kpiReceived = document.getElementById("kpi-received");
         const kpiSpent = document.getElementById("kpi-spent");
         const kpiPartners = document.getElementById("kpi-partners");
         const kpiPending = document.getElementById("kpi-pending");
+        const total = company_split.reduce(function (sum, c) { return sum + c.total_outlay; }, 0);
 
-        if (kpiReceived) kpiReceived.innerText = `₹${(data.total_received / 10000000).toFixed(2)} Cr`;
-        if (kpiSpent) kpiSpent.innerText = `₹${(data.total_mobilized / 100000).toFixed(1)} L`;
-        if (kpiPartners) kpiPartners.innerText = data.company_split ? data.company_split.length : 3;
-        if (kpiPending) kpiPending.innerText = `${data.pending_proposals || 3} Requests`;
+        if (kpiReceived) kpiReceived.textContent = "₹" + (total / 10000000).toFixed(2) + " Cr";
+        if (kpiSpent) kpiSpent.textContent = proposalsCache.length + " EoIs";
+        if (kpiPartners) kpiPartners.textContent = String(company_split.length);
+        if (kpiPending) kpiPending.textContent = pending + " Requests";
 
-        // Render Charts using Chart.js
         if (typeof Chart !== "undefined") {
-            // Bar Chart (Monthly Investment Growth)
             const barCtx = document.getElementById("chart-monthly-bar");
-            if (barCtx) {
+            if (barCtx && !barCtx.dataset.bound) {
+                barCtx.dataset.bound = "1";
                 new Chart(barCtx, {
                     type: "bar",
                     data: {
-                        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                        labels: company_split.length ? company_split.map(function (c) { return c.company; }) : ["No proposals yet"],
                         datasets: [{
-                            label: "CSR Funds Outlay (₹ in Lakhs)",
-                            data: [45, 80, 120, 160, 210, 310, 420, 580, 640, 720, 810, 985],
-                            backgroundColor: "#4f46e5",
+                            label: "Indicative outlay (₹ Lakhs)",
+                            data: company_split.length ? company_split.map(function (c) { return Math.round(c.total_outlay / 100000); }) : [0],
+                            backgroundColor: "#0ea5a8",
                             borderRadius: 6
                         }]
                     },
@@ -160,316 +141,210 @@
                 });
             }
 
-            // Donut Chart (Sector Distribution matching dashboard-mockup.png)
             const donutCtx = document.getElementById("chart-sector-donut");
-            if (donutCtx) {
+            if (donutCtx && !donutCtx.dataset.bound) {
+                donutCtx.dataset.bound = "1";
+                const labels = Object.keys(bySector);
                 new Chart(donutCtx, {
                     type: "doughnut",
                     data: {
-                        labels: ["Smart Education", "Roads & Connectivity", "Healthcare", "Drains & Water", "Solar Energy"],
+                        labels: labels.length ? labels : ["Awaiting proposals"],
                         datasets: [{
-                            data: [35, 25, 20, 12, 8],
-                            backgroundColor: ["#4f46e5", "#06b6d4", "#10b981", "#f59e0b", "#8b5cf6"]
+                            data: labels.length ? labels.map(function (l) { return bySector[l]; }) : [1],
+                            backgroundColor: ["#004293", "#06A3DA", "#10b981", "#f59e0b", "#8b5cf6", "#ef4444"]
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'right',
-                                labels: {
-                                    font: { family: 'Inter', size: 12 },
-                                    usePointStyle: true,
-                                    padding: 15
-                                }
-                            }
-                        }
+                        plugins: { legend: { position: "right" } }
                     }
                 });
             }
         }
 
-        // Render Collector Company Table (NO NODAL STATUS COLUMN)
         const companyTbody = document.getElementById("collector-company-tbody");
-        if (companyTbody && data.company_split) {
-            companyTbody.innerHTML = data.company_split.map(c => `
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <span class="table-avatar-pill">${c.company.slice(0, 2).toUpperCase()}</span>
-                            <strong>${c.company}</strong>
-                        </div>
-                    </td>
-                    <td><span class="badge bg-primary">Infrastructure</span></td>
-                    <td class="fw-bold text-success">₹${(c.total_outlay / 100000).toFixed(1)} Lakhs</td>
-                    <td><span class="status-pill status-contacted">Active Partner</span></td>
-                    <td><span class="badge bg-light text-success border"><i class="bi bi-shield-check me-1"></i> Single Window Cleared</span></td>
-                </tr>
-            `).join('');
+        if (companyTbody) {
+            if (!company_split.length) {
+                companyTbody.innerHTML = '<tr><td colspan="5" class="text-muted">No corporate proposals yet.</td></tr>';
+            } else {
+                companyTbody.innerHTML = company_split.map(function (c) {
+                    return "<tr>" +
+                        "<td><div class=\"d-flex align-items-center\"><span class=\"table-avatar-pill\">" + esc(c.company.slice(0, 2).toUpperCase()) + "</span><strong>" + esc(c.company) + "</strong></div></td>" +
+                        "<td><span class=\"badge bg-primary\">Partner</span></td>" +
+                        "<td class=\"fw-bold text-success\">₹" + (c.total_outlay / 100000).toFixed(1) + " Lakhs*</td>" +
+                        "<td><span class=\"status-pill status-contacted\">" + esc(c.proposals_count + " proposal(s)") + "</span></td>" +
+                        "<td><span class=\"badge bg-light text-success border\">" + esc(c.nodal_status) + "</span></td></tr>";
+                }).join("");
+            }
         }
     }
 
-    // Fetch Proposals
     window.fetchProposalsData = async function () {
-        try {
-            const res = await fetch("/api/proposals");
-            if (res.ok) {
-                proposalsCache = await res.json();
-            } else {
-                proposalsCache = getFallbackProposals();
-            }
-        } catch (e) {
-            proposalsCache = getFallbackProposals();
-        }
+        proposalsCache = await window.csrApi.listProposals();
         renderProposalsTables(proposalsCache);
+        renderSponsorQueue(proposalsCache);
     };
 
-    function getFallbackProposals() {
-        return [
-            {
-                id: "prop-101",
-                company_name: "KIA Motors India",
-                contact_person: "R. Venkat Rao (CSR Lead)",
-                email: "csr.kia@kiamotors.in",
-                sector: "Education",
-                outlay_amount: "₹1.20 Crores",
-                location: "Penukonda Division",
-                nodal_status: "Approved by Collectorate",
-                sponsor_status: "Completed",
-                nodal_notes: "Site inspection completed. NOC issued by Penukonda Revenue Division."
-            },
-            {
-                id: "prop-102",
-                company_name: "L&T Construction Foundation",
-                contact_person: "K. Sunder Raj",
-                email: "csr@lntecc.com",
-                sector: "Roads",
-                outlay_amount: "₹85 Lakhs",
-                location: "Puttaparthi Stretch",
-                nodal_status: "Under Field Inspection",
-                sponsor_status: "Contacted",
-                nodal_notes: "Nodal team inspected road coordinates. Awaiting environmental clearance."
-            },
-            {
-                id: "prop-103",
-                company_name: "Tata Trusts Foundation",
-                contact_person: "Ananya Deshmukh",
-                email: "csr@tatatrusts.org",
-                sector: "Education",
-                outlay_amount: "₹45 Lakhs",
-                location: "Dharmavaram Mandals",
-                nodal_status: "NOC & Site Verified",
-                sponsor_status: "Viewed",
-                nodal_notes: "Local Panchayati Raj clearance verified. Ready for Collectorate signoff."
-            }
-        ];
-    }
-
     function renderProposalsTables(list) {
-        // Update Nodal Summary Stat Counters
-        const pendingCount = list.filter(p => p.nodal_status === 'Submitted').length;
-        const processCount = list.filter(p => p.nodal_status === 'Under Field Inspection' || p.nodal_status === 'NOC & Site Verified').length;
-        const completedCount = list.filter(p => p.nodal_status === 'Approved by Collectorate').length;
+        const pendingCount = list.filter(function (p) { return p.nodal_status === "Submitted"; }).length;
+        const processCount = list.filter(function (p) {
+            return p.nodal_status === "Under Field Inspection" || p.nodal_status === "NOC & Site Verified";
+        }).length;
+        const completedCount = list.filter(function (p) { return p.nodal_status === "Approved by Collectorate"; }).length;
 
         const nodalKpiPending = document.getElementById("nodal-kpi-pending");
         const nodalKpiProcess = document.getElementById("nodal-kpi-process");
         const nodalKpiCompleted = document.getElementById("nodal-kpi-completed");
+        if (nodalKpiPending) nodalKpiPending.textContent = String(pendingCount);
+        if (nodalKpiProcess) nodalKpiProcess.textContent = String(processCount);
+        if (nodalKpiCompleted) nodalKpiCompleted.textContent = String(completedCount);
 
-        if (nodalKpiPending) nodalKpiPending.innerText = pendingCount || 1;
-        if (nodalKpiProcess) nodalKpiProcess.innerText = processCount || 2;
-        if (nodalKpiCompleted) nodalKpiCompleted.innerText = completedCount || 1;
-
-        // Collector View Table (NO ACTION COLUMN)
         const colTbody = document.getElementById("collector-proposals-tbody");
         if (colTbody) {
-            colTbody.innerHTML = list.map(p => `
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <span class="table-avatar-pill">${p.company_name.slice(0, 2).toUpperCase()}</span>
-                            <div>
-                                <strong class="text-dark">${p.company_name}</strong><br>
-                                <small class="text-muted">${p.contact_person}</small>
-                            </div>
-                        </div>
-                    </td>
-                    <td><span class="badge bg-primary">${p.sector}</span></td>
-                    <td><small class="fw-bold">${p.location}</small></td>
-                    <td class="fw-bold text-success">${p.outlay_amount}</td>
-                    <td>
-                        <span class="status-pill ${p.nodal_status === 'Approved by Collectorate' ? 'status-approved' : 'status-inspection'}">
-                            <i class="bi bi-shield-fill-check me-1"></i> ${p.nodal_status}
-                        </span>
-                    </td>
-                    <td><small class="text-muted d-inline-block text-truncate" style="max-width: 250px;">${p.nodal_notes}</small></td>
-                </tr>
-            `).join('');
+            colTbody.innerHTML = list.length ? list.map(function (p) {
+                return "<tr><td><div class=\"d-flex align-items-center\"><span class=\"table-avatar-pill\">" +
+                    esc(String(p.company_name || "").slice(0, 2).toUpperCase()) +
+                    "</span><div><strong class=\"text-dark\">" + esc(p.company_name) +
+                    "</strong><br><small class=\"text-muted\">" + esc(p.contact_person) +
+                    "</small></div></div></td><td><span class=\"badge bg-primary\">" + esc(p.sector) +
+                    "</span></td><td><small class=\"fw-bold\">" + esc(p.location) +
+                    "</small></td><td class=\"fw-bold text-success\">" + esc(p.outlay_amount) +
+                    "</td><td><span class=\"status-pill " + (p.nodal_status === "Approved by Collectorate" ? "status-approved" : "status-inspection") +
+                    "\">" + esc(p.nodal_status) + "</span></td><td><small class=\"text-muted d-inline-block text-truncate\" style=\"max-width: 250px;\">" +
+                    esc(p.nodal_notes || "—") + "</small></td></tr>";
+            }).join("") : '<tr><td colspan="6" class="text-muted">No proposals in the queue.</td></tr>';
         }
 
-        // Nodal Officer View Table (Includes Edit Stage & Notes Action button)
         const nodTbody = document.getElementById("nodal-proposals-tbody");
         if (nodTbody) {
-            nodTbody.innerHTML = list.map(p => `
-                <tr>
-                    <td>
-                        <strong class="text-dark">${p.company_name}</strong><br>
-                        <small class="text-muted">${p.email}</small>
-                    </td>
-                    <td><span class="badge bg-primary">${p.sector}</span></td>
-                    <td><span class="status-pill status-inspection">${p.nodal_status}</span></td>
-                    <td><span class="status-pill status-contacted">${p.sponsor_status || 'Viewed'}</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-primary rounded-pill fw-bold py-1 px-3" onclick="openStageModal('${p.id}')">
-                            <i class="bi bi-gear-fill me-1"></i> Edit Stage & Notes
-                        </button>
-                    </td>
-                </tr>
-            `).join('');
+            nodTbody.innerHTML = list.length ? list.map(function (p) {
+                return "<tr><td><strong class=\"text-dark\">" + esc(p.company_name) +
+                    "</strong><br><small class=\"text-muted\">" + esc(p.email) +
+                    "</small></td><td><span class=\"badge bg-primary\">" + esc(p.sector) +
+                    "</span></td><td><span class=\"status-pill status-inspection\">" + esc(p.nodal_status) +
+                    "</span></td><td><span class=\"status-pill status-contacted\">" + esc(p.sponsor_status || "Viewed") +
+                    "</span></td><td><button class=\"btn btn-sm btn-primary rounded-pill fw-bold py-1 px-3\" data-prop-id=\"" +
+                    esc(p.id) + "\" onclick=\"openStageModal('" + esc(p.id) + "')\"><i class=\"bi bi-gear-fill me-1\"></i> Edit Stage & Notes</button></td></tr>";
+            }).join("") : '<tr><td colspan="5" class="text-muted">No proposals to verify.</td></tr>';
         }
     }
 
-    // Fetch Active Sponsors
+    function renderSponsorQueue(list) {
+        const tbody = document.getElementById("sponsor-proposals-tbody");
+        if (!tbody) return;
+        tbody.innerHTML = list.length ? list.map(function (p) {
+            return "<tr><td>" + esc(p.company_name) + "</td><td>" + esc(p.sector) + "</td><td>" +
+                esc(p.outlay_amount) + "</td><td>" + esc(p.nodal_status) + "</td></tr>";
+        }).join("") : '<tr><td colspan="4" class="text-muted">No proposals are linked to this sponsor login yet.</td></tr>';
+    }
+
     async function fetchSponsorsData() {
         const nodSponsorsTbody = document.getElementById("nodal-sponsors-tbody");
         if (!nodSponsorsTbody) return;
-
         try {
-            const res = await fetch("/api/users/sponsors");
-            let sponsors = [];
-            if (res.ok) {
-                sponsors = await res.json();
-            } else {
-                sponsors = getFallbackSponsors();
-            }
+            const sponsors = await window.csrApi.listSponsors();
             renderSponsorsTable(sponsors);
-        } catch (e) {
-            renderSponsorsTable(getFallbackSponsors());
+        } catch (err) {
+            nodSponsorsTbody.innerHTML = '<tr><td colspan="6" class="text-danger">Unable to load sponsors.</td></tr>';
         }
-    }
-
-    function getFallbackSponsors() {
-        return [
-            { company: "KIA Motors India", email: "csr.kia@kiamotors.in", phone: "+91 98490 12345", sector: "Education", mandal: "Penukonda Division" },
-            { company: "Tata Trusts Foundation", email: "csr@tatatrusts.org", phone: "+91 98200 11223", sector: "Education", mandal: "Dharmavaram Division" }
-        ];
     }
 
     function renderSponsorsTable(list) {
         const nodSponsorsTbody = document.getElementById("nodal-sponsors-tbody");
         if (!nodSponsorsTbody) return;
-        nodSponsorsTbody.innerHTML = list.map(s => `
-            <tr>
-                <td><strong>${s.company}</strong></td>
-                <td><small class="text-primary fw-bold">${s.email}</small></td>
-                <td><small class="fw-semibold text-dark">${s.phone || '+91 98765 43210'}</small></td>
-                <td><span class="badge bg-primary">${s.sector || 'Education'}</span></td>
-                <td><span class="badge bg-light text-dark border">${s.mandal}</span></td>
-                <td><span class="status-pill status-approved">Active Account</span></td>
-            </tr>
-        `).join('');
+        nodSponsorsTbody.innerHTML = list.length ? list.map(function (s) {
+            return "<tr><td><strong>" + esc(s.company) + "</strong></td><td><small class=\"text-primary fw-bold\">" +
+                esc(s.email) + "</small></td><td><small class=\"fw-semibold text-dark\">" + esc(s.phone || "—") +
+                "</small></td><td><span class=\"badge bg-primary\">" + esc(s.sector || "—") +
+                "</span></td><td><span class=\"badge bg-light text-dark border\">" + esc(s.mandal || "—") +
+                "</span></td><td><span class=\"status-pill status-approved\">" + esc(s.status || "Active") +
+                "</span></td></tr>";
+        }).join("") : '<tr><td colspan="6" class="text-muted">No sponsor records yet.</td></tr>';
     }
 
-    // Modal Stage Editor
     window.openStageModal = function (id) {
-        const prop = proposalsCache.find(p => p.id === id);
+        const prop = proposalsCache.find(function (p) { return String(p.id) === String(id); });
         if (!prop) return;
-
         document.getElementById("modal-prop-id").value = prop.id;
         document.getElementById("modal-nodal-status").value = prop.nodal_status || "Submitted";
         document.getElementById("modal-sponsor-status").value = prop.sponsor_status || "Viewed";
-        document.getElementById("modal-note-text").value = "";
-
+        document.getElementById("modal-note-text").value = prop.nodal_notes || "";
         const modal = new bootstrap.Modal(document.getElementById("nodalStageModal"));
         modal.show();
     };
 
     function setupEventListeners() {
-        // Logout Button
         const logoutBtn = document.getElementById("logout-btn");
         if (logoutBtn) {
-            logoutBtn.addEventListener("click", function () {
-                sessionStorage.clear();
-                localStorage.removeItem("csr_current_user");
-                localStorage.removeItem("csr_auth_token");
+            logoutBtn.addEventListener("click", async function () {
+                await window.csrSupabase.signOut();
                 window.location.href = "login.html";
             });
         }
 
-        // Nodal Stage Form Submit
+        const search = document.getElementById("dash-global-search");
+        if (search) {
+            search.addEventListener("input", function () {
+                const q = search.value.toLowerCase();
+                const filtered = proposalsCache.filter(function (p) {
+                    return [p.company_name, p.sector, p.email, p.location].join(" ").toLowerCase().indexOf(q) !== -1;
+                });
+                renderProposalsTables(filtered);
+            });
+        }
+
         const stageForm = document.getElementById("nodal-stage-form");
         if (stageForm) {
             stageForm.addEventListener("submit", async function (e) {
                 e.preventDefault();
                 const id = document.getElementById("modal-prop-id").value;
-                const nodal_status = document.getElementById("modal-nodal-status").value;
-                const sponsor_status = document.getElementById("modal-sponsor-status").value;
-                const note_text = document.getElementById("modal-note-text").value;
-
                 try {
-                    await fetch(`/api/proposals/${id}/stage`, {
-                        method: "PATCH",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            nodal_status,
-                            sponsor_status,
-                            note_text,
-                            author_name: currentUser.name
-                        })
+                    await window.csrApi.updateProposalStage(id, {
+                        nodal_status: document.getElementById("modal-nodal-status").value,
+                        sponsor_status: document.getElementById("modal-sponsor-status").value,
+                        nodal_notes: document.getElementById("modal-note-text").value
                     });
-                    alert("Proposal stage & inspection notes saved successfully!");
                     const modalEl = document.getElementById("nodalStageModal");
                     const modal = bootstrap.Modal.getInstance(modalEl);
                     if (modal) modal.hide();
-                    fetchProposalsData();
+                    await fetchProposalsData();
+                    renderStatsAndCharts();
                 } catch (err) {
-                    alert("Stage saved locally.");
-                    fetchProposalsData();
+                    window.alert("Stage could not be saved. Nodal officers can update proposals; collector accounts are read-only.");
                 }
             });
         }
 
-        // Create Sponsor Form Submit (With Phone & Sector)
         const sponsorForm = document.getElementById("create-sponsor-form");
         if (sponsorForm) {
             sponsorForm.addEventListener("submit", async function (e) {
                 e.preventDefault();
                 const company = document.getElementById("new-sponsor-company").value;
                 const email = document.getElementById("new-sponsor-email").value;
-                const phone = document.getElementById("new-sponsor-phone")?.value || '';
-                const sector = document.getElementById("new-sponsor-sector")?.value || 'Education';
+                const phone = (document.getElementById("new-sponsor-phone") || {}).value || "";
+                const sector = (document.getElementById("new-sponsor-sector") || {}).value || "Education";
                 const mandal = document.getElementById("new-sponsor-mandal").value;
-
                 try {
-                    const res = await fetch("/api/users/sponsor", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ company, email, phone, sector, mandal })
-                    });
-                    const data = await res.json();
-                    alert(`Corporate Sponsor Account Created!\nCompany: ${company}\nUser Email: ${email}\nPhone: ${phone}\nSector: ${sector}`);
+                    await window.csrApi.createSponsor({ company: company, email: email, phone: phone, sector: sector, mandal: mandal });
                     sponsorForm.reset();
-                    fetchSponsorsData();
+                    await fetchSponsorsData();
+                    window.alert("Sponsor record saved. Create a Supabase Auth user for this email and set app metadata csr_role=sponsor so they can log in.");
                 } catch (err) {
-                    alert("Account issued locally.");
-                    sponsorForm.reset();
-                    fetchSponsorsData();
+                    window.alert("Could not save the sponsor record.");
                 }
             });
         }
 
-        // Mobile Sidebar Drawer Toggle Listener
         const sidebarToggleBtn = document.getElementById("sidebar-toggle");
         const sidebarOverlay = document.getElementById("dash-sidebar-overlay");
         const sidebarEl = document.querySelector(".dash-sidebar");
-
         if (sidebarToggleBtn && sidebarEl) {
             sidebarToggleBtn.addEventListener("click", function () {
                 sidebarEl.classList.toggle("open");
                 if (sidebarOverlay) sidebarOverlay.classList.toggle("show");
             });
         }
-
         if (sidebarOverlay && sidebarEl) {
             sidebarOverlay.addEventListener("click", function () {
                 sidebarEl.classList.remove("open");

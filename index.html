@@ -223,9 +223,9 @@
                         Puttaparthi, Penukonda, Kadiri, Dharmavaram, and Madakasira.
                     </p>
                     <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-                        <a href="#focus-sectors" class="btn btn-primary py-3 px-5 rounded-pill fw-bold"><i
+                        <a href="#focus-sectors" class="btn btn-primary py-3 px-5 rounded-pill fw-bold btn-portal"><i
                                 class="bi bi-grid-3x3-gap-fill me-2"></i> Priority Sectors</a>
-                        <a href="about-district.html" class="btn btn-outline-light py-3 px-5 rounded-pill fw-bold"><i
+                        <a href="about-district.html" class="btn btn-outline-light py-3 px-5 rounded-pill fw-bold btn-portal"><i
                                 class="bi bi-info-circle-fill me-2"></i> About District</a>
                     </div>
                 </div>
@@ -847,7 +847,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="dpdp-consent-check" checked
+                                        <input class="form-check-input" type="checkbox" id="dpdp-consent-check"
                                             required>
                                         <label class="form-check-label small text-muted" for="dpdp-consent-check">
                                             By submitting this proposal, you agree to our <a href="privacy-policy.html"
@@ -856,45 +856,19 @@
                                                 Policy</a>. *
                                         </label>
                                     </div>
+                                    <div class="eoi-honeypot" aria-hidden="true">
+                                        <label for="eoi-website">Website</label>
+                                        <input type="text" id="eoi-website" name="website" tabindex="-1" autocomplete="off">
+                                    </div>
                                 </div>
                                 <div class="col-12">
                                     <button type="submit"
-                                        class="btn btn-primary py-3 px-5 rounded-pill w-100 fw-bold"><i
+                                        class="btn btn-primary py-3 px-5 rounded-pill w-100 fw-bold btn-portal"><i
                                             class="bi bi-send-fill me-2"></i> Submit Proposal to Collectorate</button>
+                                    <p id="eoi-form-status" class="small mt-3 mb-0 eoi-form-status" role="status" aria-live="polite"></p>
                                 </div>
                             </div>
                         </form>
-                        <script>
-                            async function handlePublicEoISubmit(e) {
-                                e.preventDefault();
-                                const consentChecked = document.getElementById("dpdp-consent-check").checked;
-                                if (!consentChecked) {
-                                    alert("Please agree to the Privacy Policy to submit your proposal.");
-                                    return;
-                                }
-
-                                const company_name = document.getElementById("eoi-company").value;
-                                const contact_person = document.getElementById("eoi-person").value;
-                                const email = document.getElementById("eoi-email").value;
-                                const phone = document.getElementById("eoi-phone").value;
-                                const sector = document.getElementById("eoi-sector").value;
-                                const outlay_amount = document.getElementById("eoi-outlay").value;
-                                const details = document.getElementById("eoi-details").value;
-
-                                try {
-                                    const res = await fetch("/api/proposals", {
-                                        method: "POST",
-                                        headers: { "Content-Type": "application/json" },
-                                        body: JSON.stringify({ company_name, contact_person, email, phone, sector, outlay_amount, location: "Sri Sathya Sai District", details, consent_given: true })
-                                    });
-                                    alert("Thank you! Your Expression of Interest (EoI) proposal has been submitted successfully to the District CSR Facilitation Cell.");
-                                    document.getElementById("public-eoi-form").reset();
-                                } catch (err) {
-                                    alert("Thank you! Proposal received and logged into CSR Single Window Desk.");
-                                    document.getElementById("public-eoi-form").reset();
-                                }
-                            }
-                        </script>
                     </div>
                 </div>
             </div>
@@ -921,9 +895,13 @@
     <script src="owl.carousel.min.js"></script>
 
     <!-- Custom Portal Modules -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.8/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/csr-api.js"></script>
+    <script src="js/eoi-form.js"></script>
     <script src="js/i18n.js"></script>
     <script src="js/pdf-generator.js"></script>
-    <script src="js/kv-storage.js"></script>
     <script src="js/district-map.js"></script>
 
     <!-- Template Javascript -->

@@ -1568,3 +1568,78 @@ body {
         height: 26px !important;
     }
 }
+
+html {
+    scroll-behavior: smooth;
+}
+
+.btn-portal,
+.btn.rounded-pill {
+    transition: transform 0.55s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.55s cubic-bezier(0.32, 0.72, 0, 1), background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+}
+
+.btn-portal:hover,
+.navbar .nav-link:hover,
+.header-partner-btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-portal:active {
+    transform: scale(0.98);
+}
+
+.stat-icon,
+.officer-img,
+.partner-card-item {
+    transition: transform 0.7s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.7s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.stat-icon {
+    display: inline-block;
+}
+
+.mobile-stats-row .col-3:hover .stat-icon,
+.mobile-stats-row .col-lg-3:hover .stat-icon {
+    transform: translateY(-4px);
+}
+
+.eoi-honeypot {
+    position: absolute;
+    left: -10000px;
+    height: 0;
+    overflow: hidden;
+}
+
+.eoi-form-status--success {
+    color: #047857;
+    font-weight: 600;
+}
+
+.eoi-form-status--error {
+    color: #b91c1c;
+    font-weight: 600;
+}
+
+.eoi-form-status--info {
+    color: #0369a1;
+}
+
+.partner-card,
+.feature-item,
+.service-item {
+    transition: transform 0.7s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.7s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

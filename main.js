@@ -12,10 +12,12 @@
     spinner();
 
     // Global Header Logout Handler
-    window.handleHeaderLogout = function () {
-        sessionStorage.clear();
-        localStorage.removeItem("csr_current_user");
-        localStorage.removeItem("csr_auth_token");
+    window.handleHeaderLogout = async function () {
+        if (window.csrSupabase && window.csrSupabase.signOut) {
+            await window.csrSupabase.signOut();
+        } else {
+            sessionStorage.clear();
+        }
         if (window.location.pathname.indexOf("dashboard.html") !== -1) {
             window.location.href = "index.html";
         } else {
@@ -23,18 +25,15 @@
         }
     };
 
-    // Update Header Auth State if user is logged in
-    function updateHeaderAuthState() {
-        var userStr = sessionStorage.getItem("csr_current_user") || localStorage.getItem("csr_current_user");
-        if (!userStr) return;
-
+    async function updateHeaderAuthState() {
         var user = null;
-        try {
-            user = JSON.parse(userStr);
-        } catch (e) {
-            user = null;
+        if (window.csrSupabase && window.csrSupabase.getCurrentUser) {
+            try {
+                user = await window.csrSupabase.getCurrentUser();
+            } catch (e) {
+                user = null;
+            }
         }
-
         if (!user || !user.role) return;
 
         // 1. Desktop Topbar Auth Container Update (Dashboard & Logout buttons only)
