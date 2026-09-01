@@ -26,7 +26,11 @@ function applySecurity(response) {
   const headers = new Headers(response.headers);
   const extra = securityHeaders();
   for (const [key, value] of Object.entries(extra)) {
-    if (!headers.has(key)) headers.set(key, value);
+    headers.set(key, value);
+  }
+  const contentType = (headers.get("content-type") || "").toLowerCase();
+  if (contentType.includes("text/html")) {
+    headers.set("Cache-Control", "public, max-age=0, must-revalidate");
   }
   return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
 }
@@ -471,12 +475,6 @@ async function handleApi(request, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    const host = url.hostname.toLowerCase();
-    const isLocal = host === "localhost" || host === "127.0.0.1" || host.endsWith(".workers.dev");
-    if (!isLocal && host === "srisathyasaicsr.com") {
-      url.hostname = "www.srisathyasaicsr.com";
-      return Response.redirect(url.toString(), 301);
-    }
     if (url.pathname.startsWith("/api/")) {
       if (request.method === "OPTIONS") {
         return new Response(null, {

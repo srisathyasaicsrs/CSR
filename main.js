@@ -76,7 +76,7 @@
 
     // Load centralized header component into #site-header
     if ($('#site-header').length > 0) {
-        $('#site-header').load('header.html', function () {
+        $('#site-header').load('header.html?v=20260901', function () {
             // Highlight active navigation link
             const currentPath = window.location.pathname.split('/').pop() || 'index.html';
             $('#main-nav-links a').each(function () {
@@ -99,7 +99,7 @@
 
     // Load centralized footer component into #site-footer
     if ($('#site-footer').length > 0) {
-        $('#site-footer').load('footer.html', function () {
+        $('#site-footer').load('footer.html?v=20260901', function () {
             if (window.i18nEngine && typeof window.i18nEngine.setLanguage === 'function') {
                 window.i18nEngine.setLanguage(window.i18nEngine.getCurrentLang());
             }
