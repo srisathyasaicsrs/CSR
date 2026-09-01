@@ -40,7 +40,7 @@
                     <div>
                         <h4 class="fw-bold text-primary mb-1">GOVERNMENT OF ANDHRA PRADESH</h4>
                         <h5 class="fw-semibold text-dark mb-0">District Collectorate & Magistrate, Sri Sathya Sai District</h5>
-                        <small class="text-muted">Corporate Social Responsibility (CSR) Facilitation Cell • srisathyasai.ap.gov.in</small>
+                        <small class="text-muted">Corporate Social Responsibility (CSR) Facilitation Cell • www.srisathyasaicsr.com</small>
                     </div>
                     <img src="${logoUrl}" style="height: 70px; object-fit: contain;" alt="CSR Logo" onerror="this.style.display='none'">
                 </div>

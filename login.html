@@ -8,7 +8,7 @@
     <meta content="District Collector Login, CSR Nodal Officer Login, Corporate Sponsor Portal Login"
         name="description">
 
-    <!-- Favicon -->
+    <link rel="canonical" href="https://www.srisathyasaicsr.com/login.html">
     <link href="img/csr_logo.png" rel="icon" type="image/png">
 
     <!-- Google Web Fonts -->
@@ -25,6 +25,8 @@
     <!-- Stylesheets -->
     <link href="bootstrap.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+    <link href="css/premium.css" rel="stylesheet">
+    <link href="css/ui21.css" rel="stylesheet">
 
     <style>
         body {
@@ -117,7 +119,7 @@
 </head>
 
 <body>
-    <div class="auth-card">
+    <div class="auth-card" id="main-content">
         <div class="auth-header">
             <img src="img/csr_logo.png" style="height: 60px;" alt="Logo" class="mb-2">
             <h4 class="fw-bold mb-1" style="color: #06A3DA;" data-i18n="login_title">District CSR Portal Login</h4>
@@ -160,7 +162,7 @@
                         placeholder="Enter your password" autocomplete="current-password" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold py-3 btn-portal">
+                <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold py-3 btn-portal btn-shine">
                     <i class="bi bi-box-arrow-in-right me-2"></i> Enter Authorized Workspace
                 </button>
             </form>
@@ -180,7 +182,7 @@
                     <label class="form-label small fw-semibold">Password</label>
                     <input type="password" id="sponsor-password-input" class="form-control form-control-lg" placeholder="At least 8 characters" autocomplete="current-password">
                 </div>
-                <button type="button" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold py-3 mb-2" onclick="handleSponsorLogin()">
+                <button type="button" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold py-3 mb-2 btn-shine" onclick="handleSponsorLogin()">
                     Sign in as Sponsor
                 </button>
                 <button type="button" class="btn btn-outline-primary btn-lg w-100 rounded-pill fw-bold py-3" onclick="handleSponsorSignup()">
@@ -202,6 +204,7 @@
     <script src="js/csr-client.js"></script>
     <script src="js/i18n.js"></script>
     <script src="js/login.js"></script>
+    <script src="js/premium-motion.js"></script>
 </body>
 
 </html>

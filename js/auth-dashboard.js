@@ -334,8 +334,8 @@
                     } else {
                         window.alert("Sponsor record saved and linked to the existing account for that email.");
                     }
-                } catch (err) {
-                    window.alert("Could not save the sponsor record.");
+                }                 catch (err) {
+                    window.alert((err && err.message) ? err.message : "Could not save the sponsor record.");
                 }
             });
         }

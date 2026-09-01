@@ -1,0 +1,140 @@
+/* 21st.dev community patterns adapted for this static portal:
+   Shining Button (preetsuthar17), Reveal (asanshay),
+   Magnetic / glow hover (ibelick, easemize), Logo marquee mask (ddoemonn / 7ovr). */
+
+.btn-shine,
+.btn-portal,
+.btn-primary.rounded-pill,
+.btn-read-profile,
+.header-partner-btn,
+#topbar-login-btn {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.btn-shine::before,
+.btn-portal::before,
+.btn-primary.rounded-pill::before,
+.btn-read-profile::before,
+.header-partner-btn::before,
+#topbar-login-btn::before {
+    content: "";
+    position: absolute;
+    top: -40%;
+    left: 0;
+    width: 0.45rem;
+    height: 220%;
+    background: rgb(255 255 255 / 0.85);
+    filter: blur(8px);
+    transform: translateX(-8rem) skewX(-12deg);
+    transition: transform 0.8s cubic-bezier(0.32, 0.72, 0, 1);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.btn-shine:hover::before,
+.btn-portal:hover::before,
+.btn-primary.rounded-pill:hover::before,
+.btn-read-profile:hover::before,
+.header-partner-btn:hover::before,
+#topbar-login-btn:hover::before,
+.btn-shine:focus-visible::before,
+.btn-portal:focus-visible::before {
+    transform: translateX(14rem) skewX(-12deg);
+}
+
+.btn-shine > *,
+.btn-portal > *,
+.btn-primary.rounded-pill > *,
+.header-partner-btn > *,
+#topbar-login-btn > * {
+    position: relative;
+    z-index: 2;
+}
+
+.ui21-magnetic {
+    will-change: transform;
+}
+
+.ui21-glow {
+    position: relative;
+    overflow: hidden;
+}
+
+.ui21-glow::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0;
+    background: radial-gradient(
+        220px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+        rgb(6 163 218 / 0.22),
+        transparent 55%
+    );
+    transition: opacity 0.35s ease;
+}
+
+.ui21-glow:hover::after,
+.ui21-glow:focus-within::after {
+    opacity: 1;
+}
+
+.partner-scroller-container {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.partner-scroller-track.is-static {
+    -webkit-mask-image: none;
+    mask-image: none;
+}
+
+.reveal-up {
+    opacity: 0;
+    transform: translateY(2.5rem);
+    filter: blur(10px);
+}
+
+.reveal-up.is-in {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+    transition:
+        opacity 0.6s ease-out,
+        transform 0.6s ease-out,
+        filter 0.6s ease-out;
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-shine::before,
+    .btn-portal::before,
+    .btn-primary.rounded-pill::before,
+    .btn-read-profile::before,
+    .header-partner-btn::before,
+    #topbar-login-btn::before {
+        display: none;
+    }
+
+    .ui21-magnetic,
+    .ui21-glow::after {
+        transform: none !important;
+        opacity: 0 !important;
+    }
+
+    .partner-scroller-container {
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+
+    .reveal-up,
+    .reveal-up.is-in {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        transition: none !important;
+    }
+}

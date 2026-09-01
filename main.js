@@ -39,27 +39,38 @@
         // 1. Desktop Topbar Auth Container Update (Dashboard & Logout buttons only)
         var authContainer = document.getElementById("header-auth-container");
         if (authContainer) {
-            authContainer.innerHTML = `
-                <a href="dashboard.html" class="btn btn-sm btn-primary text-white py-1 px-3 rounded-pill fw-bold">
-                    <i class="bi bi-speedometer2 me-1"></i> <span data-i18n="nav_dashboard">Dashboard</span>
-                </a>
-                <button onclick="handleHeaderLogout()" class="btn btn-sm btn-danger text-white py-1 px-3 rounded-pill fw-bold border-0" title="Log Out of Portal">
-                    <i class="bi bi-box-arrow-right me-1"></i> <span data-i18n="nav_logout">Logout</span>
-                </button>
-            `;
+            authContainer.replaceChildren();
+            var dashA = document.createElement("a");
+            dashA.href = "dashboard.html";
+            dashA.className = "btn btn-sm btn-primary text-white py-1 px-3 rounded-pill fw-bold btn-shine";
+            dashA.innerHTML = '<i class="bi bi-speedometer2 me-1"></i> <span data-i18n="nav_dashboard">Dashboard</span>';
+            var outBtn = document.createElement("button");
+            outBtn.type = "button";
+            outBtn.className = "btn btn-sm btn-danger text-white py-1 px-3 rounded-pill fw-bold border-0";
+            outBtn.title = "Log Out of Portal";
+            outBtn.innerHTML = '<i class="bi bi-box-arrow-right me-1"></i> <span data-i18n="nav_logout">Logout</span>';
+            outBtn.addEventListener("click", function () { window.handleHeaderLogout(); });
+            authContainer.appendChild(dashA);
+            authContainer.appendChild(outBtn);
         }
 
         // 2. Mobile Auth Container Update (Next to hamburger menu)
         var mobileAuthContainer = document.getElementById("mobile-auth-container");
         if (mobileAuthContainer) {
-            mobileAuthContainer.innerHTML = `
-                <a href="dashboard.html" class="btn btn-primary text-white btn-sm rounded-pill fw-bold px-2 py-1" style="font-size: 12px;">
-                    <i class="bi bi-speedometer2 me-1"></i> Dash
-                </a>
-                <button onclick="handleHeaderLogout()" class="btn btn-danger text-white btn-sm rounded-pill fw-bold px-2 py-1" style="font-size: 12px;">
-                    <i class="bi bi-box-arrow-right me-1"></i> Logout
-                </button>
-            `;
+            mobileAuthContainer.replaceChildren();
+            var mDash = document.createElement("a");
+            mDash.href = "dashboard.html";
+            mDash.className = "btn btn-primary text-white btn-sm rounded-pill fw-bold px-2 py-1 btn-shine";
+            mDash.style.fontSize = "12px";
+            mDash.innerHTML = '<i class="bi bi-speedometer2 me-1"></i> Dash';
+            var mOut = document.createElement("button");
+            mOut.type = "button";
+            mOut.className = "btn btn-danger text-white btn-sm rounded-pill fw-bold px-2 py-1";
+            mOut.style.fontSize = "12px";
+            mOut.innerHTML = '<i class="bi bi-box-arrow-right me-1"></i> Logout';
+            mOut.addEventListener("click", function () { window.handleHeaderLogout(); });
+            mobileAuthContainer.appendChild(mDash);
+            mobileAuthContainer.appendChild(mOut);
         }
     }
 
@@ -82,6 +93,7 @@
             if (window.i18nEngine && typeof window.i18nEngine.setLanguage === 'function') {
                 window.i18nEngine.setLanguage(window.i18nEngine.getCurrentLang());
             }
+            document.dispatchEvent(new Event("header:loaded"));
         });
     }
 

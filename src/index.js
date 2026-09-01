@@ -3,12 +3,57 @@ const COOKIE = "csr_session";
 const PBKDF2_ITERS = 100000;
 
 function json(data, status = 200, extraHeaders) {
-  const headers = new Headers({ "content-type": "application/json; charset=utf-8" });
+  const headers = new Headers(securityHeaders());
+  headers.set("content-type", "application/json; charset=utf-8");
   if (extraHeaders) {
     for (const [key, value] of Object.entries(extraHeaders)) headers.set(key, value);
   }
   return new Response(JSON.stringify(data), { status, headers });
 }
+
+function securityHeaders() {
+  return {
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+    "Content-Security-Policy":
+      "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; script-src 'self' 'unsafe-inline' https://code.jquery.com https://cdn.jsdelivr.net https://unpkg.com; connect-src 'self';"
+  };
+}
+
+function applySecurity(response) {
+  const headers = new Headers(response.headers);
+  const extra = securityHeaders();
+  for (const [key, value] of Object.entries(extra)) {
+    if (!headers.has(key)) headers.set(key, value);
+  }
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+}
+
+const rateBuckets = new Map();
+
+function clientIp(request) {
+  return request.headers.get("CF-Connecting-IP") || request.headers.get("CF-Connecting-IPv6") || "unknown";
+}
+
+function rateLimit(key, limit, windowMs) {
+  const now = Date.now();
+  let rec = rateBuckets.get(key);
+  if (!rec || now - rec.started > windowMs) {
+    rec = { started: now, count: 0 };
+  }
+  rec.count += 1;
+  rateBuckets.set(key, rec);
+  if (rateBuckets.size > 4000) {
+    for (const [k, v] of rateBuckets) {
+      if (now - v.started > windowMs) rateBuckets.delete(k);
+    }
+  }
+  return rec.count <= limit;
+}
+
+const PHONE_RE = /^[0-9+\s-]{8,20}$/;
 
 function error(message, status = 400) {
   return json({ error: message }, status);
@@ -136,7 +181,11 @@ async function readJson(request) {
   const text = await request.text();
   if (!text) return {};
   if (text.length > 20000) throw new Error("Payload too large");
-  return JSON.parse(text);
+  try {
+    return JSON.parse(text);
+  } catch (err) {
+    throw new Error("Invalid JSON");
+  }
 }
 
 async function ensureStaff(env) {
@@ -211,18 +260,21 @@ async function handleApi(request, env) {
   const path = url.pathname.replace(/\/+$/, "") || "/";
   const method = request.method.toUpperCase();
 
-  try {
-    await ensureStaff(env);
-
     if (path === "/api/health" && method === "GET") {
       return json({ ok: true, platform: "cloudflare" });
     }
 
+    try {
+    await ensureStaff(env);
+
     if (path === "/api/auth/login" && method === "POST") {
+      if (!rateLimit("login:" + clientIp(request), 8, 15 * 60 * 1000)) {
+        return error("Too many sign-in attempts. Please wait and try again.", 429);
+      }
       const body = await readJson(request);
       const email = String(body.email || "").trim().toLowerCase();
       const password = String(body.password || "");
-      if (!EMAIL_RE.test(email) || password.length < 4) return error("Invalid email or password.", 401);
+      if (!EMAIL_RE.test(email) || password.length < 8) return error("Invalid email or password.", 401);
       const row = await env.DB.prepare("SELECT * FROM profiles WHERE email = ?").bind(email).first();
       if (!row || !(await verifyPassword(password, row.password_hash))) {
         return error("Invalid email or password.", 401);
@@ -238,6 +290,9 @@ async function handleApi(request, env) {
     }
 
     if (path === "/api/auth/signup" && method === "POST") {
+      if (!rateLimit("signup:" + clientIp(request), 5, 60 * 60 * 1000)) {
+        return error("Too many account requests. Please wait and try again.", 429);
+      }
       const body = await readJson(request);
       const email = String(body.email || "").trim().toLowerCase();
       const password = String(body.password || "");
@@ -271,6 +326,9 @@ async function handleApi(request, env) {
     }
 
     if (path === "/api/proposals" && method === "POST") {
+      if (!rateLimit("eoi:" + clientIp(request), 6, 60 * 60 * 1000)) {
+        return error("Too many proposals from this network. Please try again later.", 429);
+      }
       const body = await readJson(request);
       const company_name = String(body.company_name || "").trim();
       const contact_person = String(body.contact_person || "").trim();
@@ -280,16 +338,24 @@ async function handleApi(request, env) {
       const outlay_amount = String(body.outlay_amount || "").trim();
       const location = String(body.location || "Sri Sathya Sai District").trim();
       const details = String(body.details || "").trim() || null;
+      const consent_given = body.consent_given === true || body.consent_given === 1 || body.consent_given === "1";
+      if (!consent_given) {
+        return error("Affirmative consent under the Digital Personal Data Protection Act, 2023 is required.");
+      }
       if (company_name.length < 2 || contact_person.length < 2 || !EMAIL_RE.test(email) || !phone || !sector || !outlay_amount) {
         return error("Please complete all required proposal fields.");
       }
-      await env.DB.prepare(
+      if (!PHONE_RE.test(phone) || phone.replace(/\D/g, "").length < 10) {
+        return error("Enter a valid phone number with at least 10 digits.");
+      }
+      const insert = await env.DB.prepare(
         `INSERT INTO proposals (company_name, contact_person, email, phone, sector, outlay_amount, location, details, consent_given, nodal_status, sponsor_status)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, 'Submitted', 'Viewed')`
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, 'Submitted', 'Viewed')
+         RETURNING id`
       )
         .bind(company_name.slice(0, 200), contact_person.slice(0, 120), email, phone.slice(0, 40), sector.slice(0, 80), outlay_amount.slice(0, 80), location.slice(0, 120), details)
-        .run();
-      return json({ ok: true }, 201);
+        .first();
+      return json({ ok: true, id: insert && insert.id ? insert.id : null }, 201);
     }
 
     if (path === "/api/proposals" && method === "GET") {
@@ -396,6 +462,7 @@ async function handleApi(request, env) {
   } catch (err) {
     const message = err && err.message ? err.message : "Server error";
     if (message === "Payload too large") return error(message, 413);
+    if (message === "Invalid JSON") return error("Invalid request body.", 400);
     console.log(JSON.stringify({ level: "error", msg: String(err && err.message), stack: String(err && err.stack || "") }));
     return error("Request failed.", 500);
   }
@@ -404,15 +471,25 @@ async function handleApi(request, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const host = url.hostname.toLowerCase();
+    const isLocal = host === "localhost" || host === "127.0.0.1" || host.endsWith(".workers.dev");
+    if (!isLocal && host === "srisathyasaicsr.com") {
+      url.hostname = "www.srisathyasaicsr.com";
+      return Response.redirect(url.toString(), 301);
+    }
     if (url.pathname.startsWith("/api/")) {
       if (request.method === "OPTIONS") {
-        return new Response(null, { status: 204, headers: { Allow: "GET,POST,PATCH,OPTIONS" } });
+        return new Response(null, {
+          status: 204,
+          headers: Object.assign(securityHeaders(), { Allow: "GET,POST,PATCH,OPTIONS" })
+        });
       }
       return handleApi(request, env);
     }
     if (url.pathname === "/" || url.pathname === "") {
-      return env.ASSETS.fetch(new Request(new URL("/index.html", request.url), request));
+      const indexRes = await env.ASSETS.fetch(new Request(new URL("/index.html", request.url), request));
+      return applySecurity(indexRes);
     }
-    return env.ASSETS.fetch(request);
+    return applySecurity(await env.ASSETS.fetch(request));
   }
 };

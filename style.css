@@ -860,7 +860,8 @@ h6,
     display: flex;
     gap: 24px;
     width: max-content;
-    animation: partnerScroll 25s linear infinite;
+    animation: partnerScroll 40s linear infinite;
+    will-change: transform;
 }
 
 .partner-scroller-container:hover .partner-scroller-track {
@@ -877,6 +878,59 @@ h6,
     }
 }
 
+.partner-scroller-track.is-static {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .partner-scroller-track {
+        animation: none;
+    }
+
+    .partner-card-item--clone {
+        display: none !important;
+    }
+}
+
+.fund-stat-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    padding: 1.25rem 1rem;
+    backdrop-filter: blur(6px);
+}
+
+.fund-stat-card--accent {
+    background: rgba(6, 163, 218, 0.18);
+    border-color: rgba(6, 163, 218, 0.45);
+}
+
+.fund-stat-label {
+    color: #94A3B8;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+}
+
+.fund-stat-value {
+    color: #FFFFFF;
+    font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 0.35rem;
+}
+
+.fund-stat-meta {
+    color: #CBD5E1;
+    font-size: 0.78rem;
+    line-height: 1.35;
+}
+
 .partner-card-item {
     width: 320px;
     flex-shrink: 0;
@@ -887,7 +941,7 @@ h6,
     display: flex;
     align-items: center;
     gap: 16px;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .partner-card-item:hover {
@@ -898,12 +952,12 @@ h6,
 }
 
 .partner-logo-img {
-    width: 68px;
-    height: 68px;
+    width: 88px;
+    height: 64px;
     object-fit: contain;
     background: #FFFFFF;
     border-radius: 10px;
-    padding: 6px;
+    padding: 8px;
     border: 1px solid #E2E8F0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
@@ -1604,10 +1658,14 @@ html {
 }
 
 .eoi-honeypot {
-    position: absolute;
-    left: -10000px;
-    height: 0;
-    overflow: hidden;
+    position: absolute !important;
+    left: -10000px !important;
+    top: auto !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 .eoi-form-status--success {

@@ -86,7 +86,6 @@
             "dash_sponsor_title": "Corporate Partner CSR Impact Dashboard",
 
             // Footer & DPDP Compliance
-            "footer_rights": "Content Owned & Maintained by Sri Sathya Sai District Administration • Govt of Andhra Pradesh",
             "privacy_policy": "Privacy Policy & DPDP Compliance",
             "dpdp_consent_title": "Digital Personal Data Protection Act, 2023 Notice",
             "dpdp_consent_label": "I hereby give free, specific, informed, and explicit consent to Sri Sathya Sai District Administration to collect and process my contact details for corporate CSR proposal facilitation and verification under the Digital Personal Data Protection Act, 2023."
@@ -170,7 +169,6 @@
             "dash_sponsor_title": "కార్పొరేట్ భాగస్వామి సి.ఎస్.ఆర్ డ్యాష్‌బోర్డ్",
 
             // Footer & DPDP Compliance
-            "footer_rights": "సమాచారం శ్రీ సత్యసాయి జిల్లా యంత్రాంగం ఆధీనంలో ఉంది • ఆంధ్రప్రదేశ్ ప్రభుత్వం",
             "privacy_policy": "డిజిటల్ వ్యక్తిగత డేటా రక్షణ విధానం (DPDP)",
             "dpdp_consent_title": "డిజిటల్ వ్యక్తిగత డేటా రక్షణ చట్టం 2023 నోటీసు",
             "dpdp_consent_label": "డిజిటల్ వ్యక్తిగత డేటా రక్షణ చట్టం 2023 కింద నా సంప్రదింపు వివరాలను సేకరించి ప్రాసెస్ చేయడానికి నేను శ్రీ సత్యసాయి జిల్లా పరిపాలనకు స్పష్టమైన సమ్మతిని ఇస్తున్నాను."

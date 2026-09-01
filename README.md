@@ -2,7 +2,8 @@
 
 A static website for the Corporate Social Responsibility (CSR) Facilitation Cell of Sri Sathya Sai District, Government of Andhra Pradesh. It connects corporate CSR funding with district development priorities — infrastructure, education, healthcare, water supply, sanitation, and clean energy — and gives companies a single-window channel to propose and adopt projects with the District Administration.
 
-**Live site:** https://csr-srisathyasai.vercel.app/
+**Live site:** https://www.srisathyasaicsr.com/  
+**Cloudflare Worker (staging):** https://sss-csr-portal.csr-sssdistrict.workers.dev/
 **Official district portal:** https://srisathyasai.ap.gov.in/
 
 ## Pages
@@ -54,7 +55,7 @@ python -m http.server 8000
 
 ## Deployment
 
-Deployed on [Vercel](https://vercel.com/), connected to this GitHub repository. Pushing to `main` triggers an automatic production redeploy — no `vercel.json` or build configuration needed since the site is served as static files.
+Hosted on **Cloudflare Workers** with static assets and D1 database (`wrangler deploy`). Custom domain: `www.srisathyasaicsr.com` (apex `srisathyasaicsr.com` redirects to www).
 
 ## Content accuracy notes
 

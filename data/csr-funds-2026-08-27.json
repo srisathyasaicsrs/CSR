@@ -1,0 +1,55 @@
+{
+  "as_of": "2026-08-27",
+  "source": "SSS Dist - Information on CSR DMF P4 Funds dt. 27.08.2026.xlsx",
+  "department": "BC Welfare Department, Sri Sathya Sai District",
+  "funds": {
+    "csr": {
+      "label": "CSR Funds",
+      "hostels": 42,
+      "repairs_inr": 1000000,
+      "amenities_inr": 2986300,
+      "total_inr": 3986300
+    },
+    "dmf": {
+      "label": "DMF Funds",
+      "hostels": 34,
+      "repairs_inr": 31715000,
+      "additional_facilities_inr": 7750000,
+      "total_inr": 39465000
+    },
+    "p4": {
+      "label": "P4 Programme",
+      "hostels": 5,
+      "amenities_inr": 205000,
+      "total_inr": 205000
+    }
+  },
+  "grand_total_inr": 43656300,
+  "partners": [
+    {
+      "id": "kia",
+      "name": "Kia India",
+      "subtitle": "Penukonda Plant, SSS District",
+      "badge": "Industrial CSR Partner",
+      "logo": "img/partners/kia-india.jpg",
+      "logo_source": "https://mma.prnewswire.com/media/1498080/KIA_India_Logo.jpg"
+    },
+    {
+      "id": "sungwoo",
+      "name": "Sungwoo Hitech India",
+      "subtitle": "Ammavaripalli, Penukonda",
+      "badge": "CSR / Amenity Partner",
+      "logo": "img/partners/sungwoo-hitech-india.jpg",
+      "logo_source": "https://sungwooindia.com/wp-content/uploads/2025/07/cropped-new_logo_sun.jpg"
+    },
+    {
+      "id": "ksh",
+      "name": "KSH Automotive",
+      "subtitle": "Saehan Ind. · Penukonda plant",
+      "badge": "CSR Partner",
+      "logo": "img/partners/ksh-automotive.jpg",
+      "logo_source": "http://saehani.co.kr/img/logo.jpg",
+      "note": "KSH Automotive Pvt Ltd is a wholly owned subsidiary of Saehan Ind. Co., Ltd.; official parent CI logo used."
+    }
+  ]
+}

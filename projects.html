@@ -9,6 +9,7 @@
 
     <!-- Favicon -->
     <link href="img/csr_logo.png" rel="icon" type="image/png">
+    <link rel="canonical" href="https://www.srisathyasaicsr.com/projects.html">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,6 +24,8 @@
     <link href="animate.min.css" rel="stylesheet">
     <link href="bootstrap.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+    <link href="css/premium.css" rel="stylesheet">
+    <link href="css/ui21.css" rel="stylesheet">
 
     <style>
         :root {
@@ -87,7 +90,7 @@
     <!-- Header Component End -->
 
     <!-- Hero Title Header -->
-    <div class="container-fluid bg-primary py-5 bg-header mb-5">
+    <div id="main-content" class="container-fluid bg-primary py-5 bg-header mb-5">
         <div class="row py-4">
             <div class="col-12 text-center">
                 <h1 class="display-5 text-white animated zoomIn fw-bold" data-i18n="nav_projects">Priority Projects Directory</h1>
@@ -160,6 +163,7 @@
     <script src="js/csr-client.js"></script>
     <script src="js/csr-api.js"></script>
     <script src="main.js"></script>
+    <script src="js/premium-motion.js"></script>
     
     <script>
         const sampleProjects = [
@@ -342,7 +346,7 @@
                             <button class="btn btn-sm btn-outline-primary w-50 fw-bold" data-project-id="${p.id}" onclick="downloadProjectPDF(sampleProjects.find(x=>x.id==='${p.id}'))">
                                 <i class="bi bi-file-earmark-pdf me-1"></i> PDF Brief
                             </button>
-                            <a href="index.html#partner-form" class="btn btn-sm btn-primary w-50 fw-bold">
+                            <a href="index.html#partner-form" class="btn btn-sm btn-primary w-50 fw-bold btn-shine">
                                 <i class="bi bi-heart-fill me-1"></i> Adopt
                             </a>
                         </div>
@@ -364,6 +368,7 @@
             });
 
             renderProjectCards(filtered);
+            if (typeof window.ui21Enhance === "function") window.ui21Enhance();
         }
 
         function resetFilters() {
@@ -371,10 +376,12 @@
             document.getElementById("sector-filter").value = "All";
             document.getElementById("mandal-filter").value = "All";
             renderProjectCards(sampleProjects);
+            if (typeof window.ui21Enhance === "function") window.ui21Enhance();
         }
 
         document.addEventListener("DOMContentLoaded", () => {
             renderProjectCards(sampleProjects);
+            if (typeof window.ui21Enhance === "function") window.ui21Enhance();
             document.getElementById("search-input").addEventListener("input", filterProjects);
             document.getElementById("sector-filter").addEventListener("change", filterProjects);
             document.getElementById("mandal-filter").addEventListener("change", filterProjects);

@@ -6,7 +6,7 @@
     <title>Management Dashboard | Sri Sathya Sai District CSR Cell</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <!-- Favicon -->
+    <link rel="canonical" href="https://www.srisathyasaicsr.com/dashboard.html">
     <link href="img/csr_logo.png" rel="icon" type="image/png">
 
     <!-- Google Web Fonts -->
@@ -23,6 +23,8 @@
     <!-- Stylesheets -->
     <link href="bootstrap.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+    <link href="css/premium.css" rel="stylesheet">
+    <link href="css/ui21.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
 
     <!-- Strict session check is handled by js/auth-dashboard.js via Supabase Auth -->
@@ -32,7 +34,7 @@
     <div id="dash-auth-gate" class="dash-auth-gate" role="status">Verifying secure session…</div>
     <div class="dash-wrapper">
         <!-- Main Workspace Area -->
-        <main class="dash-main">
+        <main class="dash-main" id="main-content">
             <!-- Header Bar -->
             <header class="dash-header px-4 py-3">
                 <!-- Portal Section Heading -->
@@ -500,7 +502,7 @@
 
             <footer class="footer mt-auto py-3 bg-white border-top text-center text-muted small">
                 <div class="container-fluid">
-                    Content Owned & Maintained by Sri Sathya Sai District Administration • Govt of Andhra Pradesh • <a href="privacy-policy.html" target="_blank" class="text-warning fw-bold text-decoration-none"><i class="bi bi-shield-lock me-1"></i> Privacy Policy & DPDP Compliance</a>
+                    <a href="privacy-policy.html" target="_blank" class="text-warning fw-bold text-decoration-none"><i class="bi bi-shield-lock me-1"></i> Privacy Policy & DPDP Compliance</a>
                 </div>
             </footer>
         </main>
@@ -563,6 +565,7 @@
     <script src="js/csr-api.js"></script>
     <script src="js/i18n.js"></script>
     <script src="js/auth-dashboard.js"></script>
+    <script src="js/premium-motion.js"></script>
 </body>
 
 </html>

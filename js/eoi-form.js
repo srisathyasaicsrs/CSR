@@ -1,8 +1,21 @@
 (function () {
     "use strict";
 
-    window.handlePublicEoISubmit = async function (event) {
-        event.preventDefault();
+    function setStatus(statusEl, message, type) {
+        if (!statusEl) return;
+        statusEl.textContent = message;
+        statusEl.className = "small mt-3 mb-0 eoi-form-status eoi-form-status--" + type;
+    }
+
+    function readField(id) {
+        const el = document.getElementById(id);
+        return el ? String(el.value || "").trim() : "";
+    }
+
+    async function handlePublicEoISubmit(event) {
+        if (event && typeof event.preventDefault === "function") {
+            event.preventDefault();
+        }
 
         const form = document.getElementById("public-eoi-form");
         const statusEl = document.getElementById("eoi-form-status");
@@ -10,38 +23,48 @@
         const honeypot = document.getElementById("eoi-website");
         const consent = document.getElementById("dpdp-consent-check");
 
-        function setStatus(message, type) {
-            if (!statusEl) return;
-            statusEl.textContent = message;
-            statusEl.className = "small mt-3 mb-0 eoi-form-status eoi-form-status--" + type;
-        }
-
         if (honeypot && honeypot.value) {
-            setStatus("Proposal received.", "success");
-            return;
+            setStatus(statusEl, "Proposal received.", "success");
+            return false;
         }
 
         if (!consent || !consent.checked) {
-            setStatus("Please agree to the Privacy Policy before submitting.", "error");
-            return;
+            setStatus(statusEl, "Please provide affirmative consent under the DPDP Act, 2023 (check the Privacy Policy box) before submitting.", "error");
+            if (consent) consent.focus();
+            return false;
         }
 
-        const company_name = (document.getElementById("eoi-company").value || "").trim();
-        const contact_person = (document.getElementById("eoi-person").value || "").trim();
-        const email = (document.getElementById("eoi-email").value || "").trim();
-        const phone = (document.getElementById("eoi-phone").value || "").trim();
-        const sector = document.getElementById("eoi-sector").value;
-        const outlay_amount = document.getElementById("eoi-outlay").value;
-        const details = (document.getElementById("eoi-details").value || "").trim();
+        if (!window.csrApi || typeof window.csrApi.submitProposal !== "function") {
+            setStatus(statusEl, "Form scripts failed to load. Please refresh the page and try again.", "error");
+            return false;
+        }
+
+        const company_name = readField("eoi-company");
+        const contact_person = readField("eoi-person");
+        const email = readField("eoi-email");
+        const phone = readField("eoi-phone");
+        const sector = readField("eoi-sector");
+        const outlay_amount = readField("eoi-outlay");
+        const details = readField("eoi-details");
+
+        if (company_name.length < 2 || contact_person.length < 2 || !email || !phone || !sector || !outlay_amount) {
+            setStatus(statusEl, "Please complete all required proposal fields.", "error");
+            return false;
+        }
+
+        if (!/^[0-9+\s-]{8,20}$/.test(phone) || phone.replace(/\D/g, "").length < 10) {
+            setStatus(statusEl, "Enter a valid phone number with at least 10 digits.", "error");
+            return false;
+        }
 
         if (submitBtn) {
             submitBtn.disabled = true;
             submitBtn.setAttribute("aria-busy", "true");
         }
-        setStatus("Sending your proposal to the District CSR Cell…", "info");
+        setStatus(statusEl, "Sending your proposal to the District CSR Cell…", "info");
 
         try {
-            await window.csrApi.submitProposal({
+            const result = await window.csrApi.submitProposal({
                 company_name: company_name,
                 contact_person: contact_person,
                 email: email,
@@ -49,18 +72,47 @@
                 sector: sector,
                 outlay_amount: outlay_amount,
                 location: "Sri Sathya Sai District",
-                details: details
+                details: details,
+                consent_given: true
             });
             form.reset();
             if (consent) consent.checked = false;
-            setStatus("Thank you. Your Expression of Interest has been recorded with the District CSR Facilitation Cell.", "success");
+            if (honeypot) honeypot.value = "";
+            const ref = result && result.id ? " Reference ID: #" + result.id + "." : "";
+            setStatus(
+                statusEl,
+                "Thank you. Your Expression of Interest has been recorded with the District CSR Facilitation Cell." + ref,
+                "success"
+            );
         } catch (err) {
-            setStatus("The proposal could not be sent. Please check your details and try again, or email collector-sssai@ap.gov.in.", "error");
+            const msg = err && err.message ? err.message : "Request failed.";
+            setStatus(
+                statusEl,
+                "The proposal could not be sent (" + msg + "). Please try again or email collector-sssai@ap.gov.in.",
+                "error"
+            );
         } finally {
             if (submitBtn) {
                 submitBtn.disabled = false;
                 submitBtn.removeAttribute("aria-busy");
             }
         }
-    };
+        return false;
+    }
+
+    window.handlePublicEoISubmit = handlePublicEoISubmit;
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("public-eoi-form");
+        if (!form) return;
+        form.removeAttribute("onsubmit");
+        form.addEventListener("submit", handlePublicEoISubmit);
+
+        const honeypot = document.getElementById("eoi-website");
+        if (honeypot) {
+            honeypot.value = "";
+            honeypot.setAttribute("autocomplete", "off");
+            honeypot.setAttribute("tabindex", "-1");
+        }
+    });
 })();
