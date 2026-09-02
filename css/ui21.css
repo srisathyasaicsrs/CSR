@@ -1,7 +1,8 @@
-/* 21st.dev community patterns adapted for this static portal:
-   Shining Button (preetsuthar17), Reveal (asanshay),
-   Magnetic / glow / tilt (ibelick, easemize, tom_ui),
-   Cursor follow (preetsuthar17), Logo marquee mask (ddoemonn / 7ovr). */
+/* 21st.dev community design patterns:
+   - Shining Specular Button (preetsuthar17)
+   - Radial Spotlight Hover (ibelick, easemize)
+   - Magnetic & Cursor Physics (tom_ui, preetsuthar17)
+   - Logo Marquee Edge Masking (ddoemonn / 7ovr) */
 
 .btn-shine,
 .btn-portal,
@@ -12,6 +13,7 @@
     position: relative;
     overflow: hidden;
     isolation: isolate;
+    transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.35s cubic-bezier(0.32, 0.72, 0, 1), background-color 0.35s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .btn-shine::before,
@@ -22,14 +24,19 @@
 #topbar-login-btn::before {
     content: "";
     position: absolute;
-    top: -40%;
+    top: -50%;
     left: 0;
-    width: 0.45rem;
-    height: 220%;
-    background: rgb(255 255 255 / 0.85);
-    filter: blur(8px);
-    transform: translateX(-8rem) skewX(-12deg);
-    transition: transform 0.8s cubic-bezier(0.32, 0.72, 0, 1);
+    width: 0.6rem;
+    height: 240%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.95),
+        transparent
+    );
+    filter: blur(4px);
+    transform: translateX(-10rem) skewX(-15deg);
+    transition: transform 0.75s cubic-bezier(0.32, 0.72, 0, 1);
     pointer-events: none;
     z-index: 1;
 }
@@ -42,7 +49,15 @@
 #topbar-login-btn:hover::before,
 .btn-shine:focus-visible::before,
 .btn-portal:focus-visible::before {
-    transform: translateX(14rem) skewX(-12deg);
+    transform: translateX(16rem) skewX(-15deg);
+}
+
+.btn-shine:active,
+.btn-portal:active,
+.btn-primary.rounded-pill:active,
+.header-partner-btn:active,
+#topbar-login-btn:active {
+    transform: scale(0.97) !important;
 }
 
 .btn-shine > *,
@@ -73,9 +88,9 @@
     border-radius: inherit;
     opacity: 0;
     background: radial-gradient(
-        220px circle at var(--glow-x, 50%) var(--glow-y, 50%),
-        rgb(6 163 218 / 0.22),
-        transparent 55%
+        260px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+        rgba(6, 163, 218, 0.2),
+        transparent 60%
     );
     transition: opacity 0.35s ease;
     z-index: 1;
@@ -84,6 +99,25 @@
 .ui21-glow:hover::after,
 .ui21-glow:focus-within::after {
     opacity: 1;
+}
+
+.project-card,
+.collab-card,
+.partner-card,
+.sitemap-group,
+.fund-stat-card,
+.auth-card {
+    transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.4s cubic-bezier(0.32, 0.72, 0, 1), border-color 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.project-card:hover,
+.collab-card:hover,
+.partner-card:hover,
+.sitemap-group:hover,
+.fund-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 40, 88, 0.12) !important;
+    border-color: rgba(6, 163, 218, 0.35) !important;
 }
 
 .scroll-rail {
@@ -104,7 +138,7 @@
     margin-top: -9px;
     background: #ffffff;
     border-radius: 2px;
-    box-shadow: 0 0 0 1px rgb(0 24 56 / 0.25);
+    box-shadow: 0 0 0 1px rgba(0, 24, 56, 0.25);
     will-change: transform;
 }
 
@@ -178,8 +212,8 @@
     inset: -20% -10% auto;
     height: 70%;
     background:
-        radial-gradient(ellipse at 20% 40%, rgb(6 163 218 / 0.28), transparent 55%),
-        radial-gradient(ellipse at 80% 20%, rgb(255 176 32 / 0.16), transparent 50%);
+        radial-gradient(ellipse at 20% 40%, rgba(6, 163, 218, 0.28), transparent 55%),
+        radial-gradient(ellipse at 80% 20%, rgba(255, 176, 32, 0.16), transparent 50%);
     animation: ui21-aurora 16s ease-in-out infinite alternate;
     pointer-events: none;
     z-index: 0;
@@ -246,16 +280,7 @@
 
 @media (hover: hover) and (pointer: fine) {
     body.ui21-has-cursor {
-        cursor: none;
-    }
-
-    body.ui21-has-cursor a,
-    body.ui21-has-cursor button,
-    body.ui21-has-cursor input,
-    body.ui21-has-cursor select,
-    body.ui21-has-cursor textarea,
-    body.ui21-has-cursor .btn {
-        cursor: none;
+        cursor: auto;
     }
 
     .ui21-cursor,
@@ -270,16 +295,16 @@
     }
 
     .ui21-cursor {
-        width: 34px;
-        height: 34px;
-        border: 1.5px solid rgb(6 163 218 / 0.7);
+        width: 32px;
+        height: 32px;
+        border: 1.5px solid rgba(6, 163, 218, 0.65);
         transition: width 0.25s ease, height 0.25s ease, background 0.25s ease, border-color 0.25s ease;
     }
 
     .ui21-cursor.is-grab {
-        width: 52px;
-        height: 52px;
-        background: rgb(6 163 218 / 0.12);
+        width: 48px;
+        height: 48px;
+        background: rgba(6, 163, 218, 0.1);
         border-color: #06a3da;
     }
 
@@ -314,16 +339,6 @@
 
     .ui21-glow::after {
         opacity: 0 !important;
-    }
-
-    .officer-img,
-    .stat-icon {
-        opacity: 1 !important;
-    }
-
-    .partner-scroller-container {
-        -webkit-mask-image: none;
-        mask-image: none;
     }
 
     .reveal-up,

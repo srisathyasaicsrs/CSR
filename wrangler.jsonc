@@ -1,5 +1,6 @@
 {
   "name": "sss-csr-portal",
+  "account_id": "dee21334b5c77859d1be78cb7be13a3b",
   "main": "src/index.js",
   "compatibility_date": "2026-08-29",
   "compatibility_flags": ["nodejs_compat"],
