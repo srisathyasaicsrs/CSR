@@ -215,21 +215,7 @@ a:focus-visible {
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
 
-    .reveal-up,
-    .navbar-nav .nav-link,
-    .btn-portal,
-    .project-card {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-        animation: none !important;
-    }
-}
 
 @media (max-width: 991.98px) {
     .navbar.bottom-header-navbar {

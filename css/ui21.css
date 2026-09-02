@@ -325,38 +325,3 @@
         background: #06a3da;
     }
 }
-
-@media (prefers-reduced-motion: reduce) {
-    .btn-shine::before,
-    .btn-portal::before,
-    .btn-primary.rounded-pill::before,
-    .btn-read-profile::before,
-    .header-partner-btn::before,
-    #topbar-login-btn::before,
-    .hero-banner::before,
-    .hero-canvas,
-    .ui21-cursor,
-    .ui21-cursor-dot {
-        display: none !important;
-        animation: none !important;
-    }
-
-    .ui21-magnetic,
-    .officer-img,
-    .stat-icon {
-        transform: none !important;
-        animation: none !important;
-    }
-
-    .ui21-glow::after {
-        opacity: 0 !important;
-    }
-
-    .reveal-up,
-    .reveal-up.is-in {
-        opacity: 1 !important;
-        transform: none !important;
-        filter: none !important;
-        transition: none !important;
-    }
-}

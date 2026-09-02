@@ -3,7 +3,6 @@
 
     var canvas = document.getElementById("hero-canvas");
     if (!canvas) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     function initInteractiveCanvas() {
         var ctx = canvas.getContext("2d");

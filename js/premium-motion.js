@@ -24,7 +24,6 @@
     var ScrollTrigger = window.ScrollTrigger;
     if (ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
 
-    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var magnetBound = typeof WeakSet !== "undefined" ? new WeakSet() : null;
     var glowBound = typeof WeakSet !== "undefined" ? new WeakSet() : null;
     var tiltBound = typeof WeakSet !== "undefined" ? new WeakSet() : null;
@@ -32,7 +31,7 @@
     var staged = false;
 
     function bindGlow(el) {
-        if (reduce || !el || (glowBound && glowBound.has(el))) return;
+        if (!el || (glowBound && glowBound.has(el))) return;
         if (glowBound) glowBound.add(el);
         el.classList.add("ui21-glow");
         el.addEventListener("mousemove", function (e) {
@@ -43,7 +42,7 @@
     }
 
     function bindTilt(el) {
-        if (reduce || !el || (tiltBound && tiltBound.has(el))) return;
+        if (!el || (tiltBound && tiltBound.has(el))) return;
         if (tiltBound) tiltBound.add(el);
         el.classList.add("ui21-tilt");
         var rxTo = gsap.quickTo(el, "rotateX", { duration: 0.35, ease: "power2.out" });
@@ -66,7 +65,7 @@
     }
 
     function bindMagnetic(el) {
-        if (reduce || !el || (magnetBound && magnetBound.has(el))) return;
+        if (!el || (magnetBound && magnetBound.has(el))) return;
         if (magnetBound) magnetBound.add(el);
         el.classList.add("ui21-magnetic");
         var xTo = gsap.quickTo(el, "x", { duration: 0.35, ease: "power3.out" });
@@ -84,7 +83,7 @@
 
     function setupCursor() {
         var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-        if (reduce || !fine || cursorReady) return;
+        if (!fine || cursorReady) return;
         cursorReady = true;
         var ring = document.createElement("div");
         var dot = document.createElement("div");
@@ -137,62 +136,55 @@
     }
 
     function choreograph() {
-        var mm = gsap.matchMedia();
-        mm.add("(prefers-reduced-motion: no-preference)", function () {
-            var heroBits = document.querySelectorAll(
-                ".hero-banner .badge, .hero-banner h1, .hero-banner .fs-5, .hero-banner .btn-portal"
-            );
-            if (heroBits.length) {
-                gsap.from(heroBits, {
-                    y: 28,
-                    autoAlpha: 0,
-                    duration: 0.55,
-                    stagger: 0.09,
-                    ease: "power2.out"
-                });
-            }
+        var heroBits = document.querySelectorAll(
+            ".hero-banner .badge, .hero-banner h1, .hero-banner .fs-5, .hero-banner .btn-portal"
+        );
+        if (heroBits.length) {
+            gsap.from(heroBits, {
+                y: 28,
+                autoAlpha: 0,
+                duration: 0.55,
+                stagger: 0.09,
+                ease: "power2.out"
+            });
+        }
 
-            var batchTargets = document.querySelectorAll(
-                ".sector-box-item, .project-card, .collab-card, .partner-card, .partner-card-item, .district-mandate-box, .auth-card, .sitemap-group, .fund-stat-card, .leader-card-box"
-            );
-            if (ScrollTrigger && batchTargets.length) {
-                gsap.set(batchTargets, { y: 28, autoAlpha: 0 });
-                ScrollTrigger.batch(batchTargets, {
-                    start: "top 90%",
-                    once: true,
-                    onEnter: function (elements) {
-                        gsap.to(elements, {
-                            y: 0,
-                            autoAlpha: 1,
-                            duration: 0.45,
-                            stagger: 0.06,
-                            ease: "power2.out",
-                            overwrite: "auto"
-                        });
-                    }
-                });
-            }
+        var batchTargets = document.querySelectorAll(
+            ".sector-box-item, .project-card, .collab-card, .partner-card, .partner-card-item, .district-mandate-box, .auth-card, .sitemap-group, .fund-stat-card, .leader-card-box"
+        );
+        if (ScrollTrigger && batchTargets.length) {
+            gsap.set(batchTargets, { y: 28, autoAlpha: 0 });
+            ScrollTrigger.batch(batchTargets, {
+                start: "top 90%",
+                once: true,
+                onEnter: function (elements) {
+                    gsap.to(elements, {
+                        y: 0,
+                        autoAlpha: 1,
+                        duration: 0.45,
+                        stagger: 0.06,
+                        ease: "power2.out",
+                        overwrite: "auto"
+                    });
+                }
+            });
+        }
 
-            var magnets = document.querySelectorAll(
-                ".btn-portal, .btn-read-profile, .btn-shine, .header-partner-btn, #topbar-login-btn, .btn-primary.rounded-pill"
-            );
-            for (var i = 0; i < magnets.length; i++) bindMagnetic(magnets[i]);
+        var magnets = document.querySelectorAll(
+            ".btn-portal, .btn-read-profile, .btn-shine, .header-partner-btn, #topbar-login-btn, .btn-primary.rounded-pill"
+        );
+        for (var i = 0; i < magnets.length; i++) bindMagnetic(magnets[i]);
 
-            var cardsToEnhance = document.querySelectorAll(
-                ".sector-box-item, .project-card, .partner-card-item, .partner-card, .collab-card, .fund-stat-card, .auth-card, .district-mandate-box, .sitemap-group, .leader-card-box"
-            );
-            for (var g = 0; g < cardsToEnhance.length; g++) {
-                bindGlow(cardsToEnhance[g]);
-                bindTilt(cardsToEnhance[g]);
-            }
+        var cardsToEnhance = document.querySelectorAll(
+            ".sector-box-item, .project-card, .partner-card-item, .partner-card, .collab-card, .fund-stat-card, .auth-card, .district-mandate-box, .sitemap-group, .leader-card-box"
+        );
+        for (var g = 0; g < cardsToEnhance.length; g++) {
+            bindGlow(cardsToEnhance[g]);
+            bindTilt(cardsToEnhance[g]);
+        }
 
-            setupCursor();
-            setupHeroRail();
-
-            return function () {
-                if (ScrollTrigger) ScrollTrigger.getAll().forEach(function (st) { st.kill(); });
-            };
-        });
+        setupCursor();
+        setupHeroRail();
     }
 
     function boot() {

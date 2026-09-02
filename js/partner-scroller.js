@@ -28,12 +28,6 @@
         var track = document.getElementById("partner-scroller-track");
         if (!track) return;
 
-        var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        if (reduce) {
-            track.classList.add("is-static");
-            return;
-        }
-
         var originals = track.querySelectorAll(".partner-card-item:not([aria-hidden='true'])");
         if (originals.length > 0 && !track.querySelector("[aria-hidden='true']")) {
             for (var i = 0; i < originals.length; i++) {
