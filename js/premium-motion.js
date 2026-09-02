@@ -46,8 +46,8 @@
         if (reduce || !el || (tiltBound && tiltBound.has(el))) return;
         if (tiltBound) tiltBound.add(el);
         el.classList.add("ui21-tilt");
-        var rxTo = gsap.quickTo(el, "rotateX", { duration: 0.4, ease: "power2.out" });
-        var ryTo = gsap.quickTo(el, "rotateY", { duration: 0.4, ease: "power2.out" });
+        var rxTo = gsap.quickTo(el, "rotateX", { duration: 0.35, ease: "power2.out" });
+        var ryTo = gsap.quickTo(el, "rotateY", { duration: 0.35, ease: "power2.out" });
 
         el.addEventListener("mousemove", function (e) {
             var box = el.getBoundingClientRect();
@@ -55,8 +55,8 @@
             var cy = box.top + box.height / 2;
             var dx = (e.clientX - cx) / (box.width / 2);
             var dy = (e.clientY - cy) / (box.height / 2);
-            rxTo(-dy * 5);
-            ryTo(dx * 5);
+            rxTo(-dy * 6);
+            ryTo(dx * 6);
         });
 
         el.addEventListener("mouseleave", function () {
@@ -73,8 +73,8 @@
         var yTo = gsap.quickTo(el, "y", { duration: 0.35, ease: "power3.out" });
         el.addEventListener("mousemove", function (e) {
             var box = el.getBoundingClientRect();
-            xTo((e.clientX - (box.left + box.width / 2)) / 12);
-            yTo((e.clientY - (box.top + box.height / 2)) / 12);
+            xTo((e.clientX - (box.left + box.width / 2)) / 10);
+            yTo((e.clientY - (box.top + box.height / 2)) / 10);
         });
         el.addEventListener("mouseleave", function () {
             xTo(0);
@@ -113,7 +113,7 @@
         );
 
         document.addEventListener("mouseover", function (e) {
-            var grab = e.target.closest("a, button, .btn, .project-card, .partner-card-item, .collab-card");
+            var grab = e.target.closest("a, button, .btn, .project-card, .partner-card-item, .collab-card, .sector-box-item");
             ring.classList.toggle("is-grab", !!grab);
         });
     }
@@ -153,19 +153,19 @@
             }
 
             var batchTargets = document.querySelectorAll(
-                ".project-card, .collab-card, .partner-card, .district-mandate-box, .auth-card, .sitemap-group"
+                ".sector-box-item, .project-card, .collab-card, .partner-card, .partner-card-item, .district-mandate-box, .auth-card, .sitemap-group, .fund-stat-card, .leader-card-box"
             );
             if (ScrollTrigger && batchTargets.length) {
-                gsap.set(batchTargets, { y: 32, autoAlpha: 0 });
+                gsap.set(batchTargets, { y: 28, autoAlpha: 0 });
                 ScrollTrigger.batch(batchTargets, {
-                    start: "top 88%",
+                    start: "top 90%",
                     once: true,
                     onEnter: function (elements) {
                         gsap.to(elements, {
                             y: 0,
                             autoAlpha: 1,
-                            duration: 0.42,
-                            stagger: 0.08,
+                            duration: 0.45,
+                            stagger: 0.06,
                             ease: "power2.out",
                             overwrite: "auto"
                         });
@@ -178,12 +178,12 @@
             );
             for (var i = 0; i < magnets.length; i++) bindMagnetic(magnets[i]);
 
-            var glows = document.querySelectorAll(
-                ".project-card, .partner-card-item, .partner-card, .collab-card, .fund-stat-card, .auth-card, .district-mandate-box, .sitemap-group"
+            var cardsToEnhance = document.querySelectorAll(
+                ".sector-box-item, .project-card, .partner-card-item, .partner-card, .collab-card, .fund-stat-card, .auth-card, .district-mandate-box, .sitemap-group, .leader-card-box"
             );
-            for (var g = 0; g < glows.length; g++) {
-                bindGlow(glows[g]);
-                bindTilt(glows[g]);
+            for (var g = 0; g < cardsToEnhance.length; g++) {
+                bindGlow(cardsToEnhance[g]);
+                bindTilt(cardsToEnhance[g]);
             }
 
             setupCursor();

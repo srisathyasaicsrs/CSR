@@ -9,7 +9,7 @@
 .box_roads {
     background-color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/roads.png);
+    background-image: url(img/roads.png);
     background-repeat: no-repeat;
     background-position-x: center;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -19,7 +19,7 @@
     background-color: #004293;
     color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/roads_active.png);
+    background-image: url(img/roads_active.png);
     background-repeat: no-repeat;
     background-position-x: center;
     transform: translateY(-5px);
@@ -29,18 +29,17 @@
 .box_drainage {
     background-color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/drainage.png);
+    background-image: url(img/drainage.png);
     background-repeat: no-repeat;
     background-position-x: center;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-
 .box_drainage:hover {
     background-color: #004293;
     color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/drainage_active.png);
+    background-image: url(img/drainage_active.png);
     background-repeat: no-repeat;
     background-position-x: center;
     transform: translateY(-5px);
@@ -50,17 +49,16 @@
 .box_endowments {
     background-color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/endowments.png);
+    background-image: url(img/endowments.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
-
 
 .box_endowments:hover {
     background-color: #004293;
     color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/endowments_active.png);
+    background-image: url(img/endowments_active.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
@@ -68,17 +66,16 @@
 .box_sports {
     background-color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/sports.png);
+    background-image: url(img/sports.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
-
 
 .box_sports:hover {
     background-color: #004293;
     color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/sports_active.png);
+    background-image: url(img/sports_active.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
@@ -86,17 +83,16 @@
 .box_education {
     background-color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/education.png);
+    background-image: url(img/education.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
-
 
 .box_education:hover {
     background-color: #004293;
     color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/education_active.png);
+    background-image: url(img/education_active.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
@@ -104,17 +100,16 @@
 .box_disaster {
     background-color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/disaster.png);
+    background-image: url(img/disaster.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
-
 
 .box_disaster:hover {
     background-color: #004293;
     color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/disaster_active.png);
+    background-image: url(img/disaster_active.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
@@ -122,17 +117,16 @@
 .box_fisheries {
     background-color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/fisheries.png);
+    background-image: url(img/fisheries.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
-
 
 .box_fisheries:hover {
     background-color: #004293;
     color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/fisheries_active.png);
+    background-image: url(img/fisheries_active.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
@@ -140,17 +134,16 @@
 .box_health {
     background-color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/health.png);
+    background-image: url(img/health.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
-
 
 .box_health:hover {
     background-color: #004293;
     color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/health_active.png);
+    background-image: url(img/health_active.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
@@ -158,17 +151,16 @@
 .box_sanitation {
     background-color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/sanitation.png);
+    background-image: url(img/sanitation.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
-
 
 .box_sanitation:hover {
     background-color: #004293;
     color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/sanitation_active.png);
+    background-image: url(img/sanitation_active.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
@@ -176,17 +168,16 @@
 .box_solar {
     background-color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/solar.png);
+    background-image: url(img/solar.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
-
 
 .box_solar:hover {
     background-color: #004293;
     color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/solar_active.png);
+    background-image: url(img/solar_active.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
@@ -194,17 +185,16 @@
 .box_plantation {
     background-color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/plantation.png);
+    background-image: url(img/plantation.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
-
 
 .box_plantation:hover {
     background-color: #004293;
     color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/plantation_active.png);
+    background-image: url(img/plantation_active.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
@@ -212,17 +202,16 @@
 .box_public_Utilities {
     background-color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/public_utilities.png);
+    background-image: url(img/public_utilities.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
-
 
 .box_public_Utilities:hover {
     background-color: #004293;
     color: #FFFFFF;
     text-align: center;
-    background-image: url(../img/public_utilities_active.png);
+    background-image: url(img/public_utilities_active.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
