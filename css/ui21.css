@@ -1,6 +1,7 @@
 /* 21st.dev community patterns adapted for this static portal:
    Shining Button (preetsuthar17), Reveal (asanshay),
-   Magnetic / glow hover (ibelick, easemize), Logo marquee mask (ddoemonn / 7ovr). */
+   Magnetic / glow / tilt (ibelick, easemize, tom_ui),
+   Cursor follow (preetsuthar17), Logo marquee mask (ddoemonn / 7ovr). */
 
 .btn-shine,
 .btn-portal,
@@ -57,9 +58,11 @@
     will-change: transform;
 }
 
-.ui21-glow {
+.ui21-glow,
+.ui21-tilt {
     position: relative;
     overflow: hidden;
+    transform-style: preserve-3d;
 }
 
 .ui21-glow::after {
@@ -75,6 +78,7 @@
         transparent 55%
     );
     transition: opacity 0.35s ease;
+    z-index: 1;
 }
 
 .ui21-glow:hover::after,
@@ -82,14 +86,53 @@
     opacity: 1;
 }
 
-.partner-scroller-container {
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+.scroll-rail {
+    position: relative;
+    height: 8px;
+    border-radius: 999px;
+    background: #06a3da;
+    overflow: visible;
+    pointer-events: none;
 }
 
-.partner-scroller-track.is-static {
+.scroll-rail-thumb {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 4px;
+    height: 18px;
+    margin-top: -9px;
+    background: #ffffff;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgb(0 24 56 / 0.25);
+    will-change: transform;
+}
+
+.scroll-rail--hero {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: 28px;
+    z-index: 2;
+}
+
+.partner-scroller-container {
+    padding-bottom: 28px;
     -webkit-mask-image: none;
     mask-image: none;
+}
+
+.scroll-rail--partners {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: 12px;
+    z-index: 3;
+    background: #06a3da;
+}
+
+.partner-scroller-track.is-gsap {
+    animation: none;
 }
 
 .reveal-up {
@@ -103,10 +146,148 @@
     transform: none;
     filter: blur(0);
     transition:
-        opacity 0.6s ease-out,
-        transform 0.6s ease-out,
-        filter 0.6s ease-out;
+        opacity 0.7s cubic-bezier(0.32, 0.72, 0, 1),
+        transform 0.7s cubic-bezier(0.32, 0.72, 0, 1),
+        filter 0.7s cubic-bezier(0.32, 0.72, 0, 1);
     transition-delay: var(--reveal-delay, 0ms);
+}
+
+.hero-banner {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 118px;
+}
+
+.hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero-banner .container {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-banner::before {
+    content: "";
+    position: absolute;
+    inset: -20% -10% auto;
+    height: 70%;
+    background:
+        radial-gradient(ellipse at 20% 40%, rgb(6 163 218 / 0.28), transparent 55%),
+        radial-gradient(ellipse at 80% 20%, rgb(255 176 32 / 0.16), transparent 50%);
+    animation: ui21-aurora 16s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes ui21-aurora {
+    0% { transform: translate3d(-4%, 0, 0) scale(1); }
+    100% { transform: translate3d(5%, 6%, 0) scale(1.08); }
+}
+
+.navbar-nav .nav-link {
+    position: relative;
+}
+
+.navbar-nav .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0.9rem;
+    right: 0.9rem;
+    bottom: 0.28rem;
+    height: 2px;
+    border-radius: 99px;
+    background: #06a3da;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+    transform: scaleX(1);
+}
+
+.officer-img {
+    animation: ui21-float 5.5s ease-in-out infinite;
+}
+
+.officer-badge:nth-child(2) .officer-img {
+    animation-delay: 0.6s;
+}
+
+.officer-badge:nth-child(3) .officer-img {
+    animation-delay: 1.2s;
+}
+
+@keyframes ui21-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+.stat-icon {
+    animation: ui21-pulse 3.8s ease-in-out infinite;
+}
+
+@keyframes ui21-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+}
+
+.ui21-cursor,
+.ui21-cursor-dot {
+    display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    body.ui21-has-cursor {
+        cursor: none;
+    }
+
+    body.ui21-has-cursor a,
+    body.ui21-has-cursor button,
+    body.ui21-has-cursor input,
+    body.ui21-has-cursor select,
+    body.ui21-has-cursor textarea,
+    body.ui21-has-cursor .btn {
+        cursor: none;
+    }
+
+    .ui21-cursor,
+    .ui21-cursor-dot {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        border-radius: 50%;
+    }
+
+    .ui21-cursor {
+        width: 34px;
+        height: 34px;
+        border: 1.5px solid rgb(6 163 218 / 0.7);
+        transition: width 0.25s ease, height 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .ui21-cursor.is-grab {
+        width: 52px;
+        height: 52px;
+        background: rgb(6 163 218 / 0.12);
+        border-color: #06a3da;
+    }
+
+    .ui21-cursor-dot {
+        width: 6px;
+        height: 6px;
+        background: #06a3da;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -115,14 +296,29 @@
     .btn-primary.rounded-pill::before,
     .btn-read-profile::before,
     .header-partner-btn::before,
-    #topbar-login-btn::before {
-        display: none;
+    #topbar-login-btn::before,
+    .hero-banner::before,
+    .hero-canvas,
+    .ui21-cursor,
+    .ui21-cursor-dot {
+        display: none !important;
+        animation: none !important;
     }
 
     .ui21-magnetic,
-    .ui21-glow::after {
+    .officer-img,
+    .stat-icon {
         transform: none !important;
+        animation: none !important;
+    }
+
+    .ui21-glow::after {
         opacity: 0 !important;
+    }
+
+    .officer-img,
+    .stat-icon {
+        opacity: 1 !important;
     }
 
     .partner-scroller-container {

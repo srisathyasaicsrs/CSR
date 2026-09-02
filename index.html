@@ -45,7 +45,7 @@
     <!-- Template Stylesheet -->
     <link href="style.css" rel="stylesheet">
     <link href="css/premium.css" rel="stylesheet">
-    <link href="css/ui21.css" rel="stylesheet">
+    <link href="css/ui21.css?v=20260901e" rel="stylesheet">
 
     <style>
         /* Modern Design System Extensions */
@@ -210,6 +210,7 @@
 
     <!-- Hero Banner Start -->
     <div id="main-content" class="hero-banner">
+        <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-8 text-center text-lg-start">
@@ -233,6 +234,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="scroll-rail scroll-rail--hero" aria-hidden="true">
+            <span class="scroll-rail-thumb" id="hero-scroll-thumb"></span>
         </div>
     </div>
     <!-- Hero Banner End -->
@@ -690,6 +694,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="scroll-rail scroll-rail--partners" aria-hidden="true">
+                    <span class="scroll-rail-thumb" id="partner-scroll-thumb"></span>
+                </div>
             </div>
 
             <div class="text-center mt-4">
@@ -881,8 +888,12 @@
 
     <!-- Template Javascript -->
     <script src="main.js"></script>
-    <script src="js/partner-scroller.js"></script>
-    <script src="js/premium-motion.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="js/partner-scroller.js?v=20260901e"></script>
+    <script src="js/premium-motion.js?v=20260901e"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
+    <script src="js/hero-scene.js?v=20260901e"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             if (typeof initDistrictMap === "function") {

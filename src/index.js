@@ -193,7 +193,12 @@ async function readJson(request) {
 }
 
 async function ensureStaff(env) {
-  const existing = await env.DB.prepare("SELECT COUNT(*) AS c FROM profiles WHERE role IN ('collector', 'nodal')").first();
+  let existing;
+  try {
+    existing = await env.DB.prepare("SELECT COUNT(*) AS c FROM profiles WHERE role IN ('collector', 'nodal')").first();
+  } catch (_err) {
+    return;
+  }
   if (existing && Number(existing.c) > 0) return;
   const collectorPass = String(env.COLLECTOR_PASSWORD || "").replace(/\r?\n/g, "");
   const nodalPass = String(env.NODAL_PASSWORD || "").replace(/\r?\n/g, "");
@@ -268,6 +273,44 @@ async function handleApi(request, env) {
       return json({ ok: true, platform: "cloudflare" });
     }
 
+    if (path === "/api/proposals" && method === "POST") {
+      if (!rateLimit("eoi:" + clientIp(request), 6, 60 * 60 * 1000)) {
+        return error("Too many proposals from this network. Please try again later.", 429);
+      }
+      try {
+        const body = await readJson(request);
+        const company_name = String(body.company_name || "").trim();
+        const contact_person = String(body.contact_person || "").trim();
+        const email = String(body.email || "").trim().toLowerCase();
+        const phone = String(body.phone || "").trim();
+        const sector = String(body.sector || "").trim();
+        const outlay_amount = String(body.outlay_amount || "").trim();
+        const location = String(body.location || "Sri Sathya Sai District").trim();
+        const details = String(body.details || "").trim() || null;
+        const consent_given = body.consent_given === true || body.consent_given === 1 || body.consent_given === "1";
+        if (!consent_given) {
+          return error("Affirmative consent under the Digital Personal Data Protection Act, 2023 is required.");
+        }
+        if (company_name.length < 2 || contact_person.length < 2 || !EMAIL_RE.test(email) || !phone || !sector || !outlay_amount) {
+          return error("Please complete all required proposal fields.");
+        }
+        if (!PHONE_RE.test(phone) || phone.replace(/\D/g, "").length < 10) {
+          return error("Enter a valid phone number with at least 10 digits.");
+        }
+        const insert = await env.DB.prepare(
+          `INSERT INTO proposals (company_name, contact_person, email, phone, sector, outlay_amount, location, details, consent_given, nodal_status, sponsor_status)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, 'Submitted', 'Viewed')
+           RETURNING id`
+        )
+          .bind(company_name.slice(0, 200), contact_person.slice(0, 120), email, phone.slice(0, 40), sector.slice(0, 80), outlay_amount.slice(0, 80), location.slice(0, 120), details)
+          .first();
+        return json({ ok: true, id: insert && insert.id ? insert.id : null }, 201);
+      } catch (err) {
+        console.log(JSON.stringify({ level: "error", msg: String(err && err.message), stack: String(err && err.stack || "") }));
+        return error("Request failed.", 500);
+      }
+    }
+
     try {
     await ensureStaff(env);
 
@@ -327,39 +370,6 @@ async function handleApi(request, env) {
       const user = await getUserFromRequest(request, env);
       if (!user) return json({ user: null });
       return json({ user: publicProfile(user) });
-    }
-
-    if (path === "/api/proposals" && method === "POST") {
-      if (!rateLimit("eoi:" + clientIp(request), 6, 60 * 60 * 1000)) {
-        return error("Too many proposals from this network. Please try again later.", 429);
-      }
-      const body = await readJson(request);
-      const company_name = String(body.company_name || "").trim();
-      const contact_person = String(body.contact_person || "").trim();
-      const email = String(body.email || "").trim().toLowerCase();
-      const phone = String(body.phone || "").trim();
-      const sector = String(body.sector || "").trim();
-      const outlay_amount = String(body.outlay_amount || "").trim();
-      const location = String(body.location || "Sri Sathya Sai District").trim();
-      const details = String(body.details || "").trim() || null;
-      const consent_given = body.consent_given === true || body.consent_given === 1 || body.consent_given === "1";
-      if (!consent_given) {
-        return error("Affirmative consent under the Digital Personal Data Protection Act, 2023 is required.");
-      }
-      if (company_name.length < 2 || contact_person.length < 2 || !EMAIL_RE.test(email) || !phone || !sector || !outlay_amount) {
-        return error("Please complete all required proposal fields.");
-      }
-      if (!PHONE_RE.test(phone) || phone.replace(/\D/g, "").length < 10) {
-        return error("Enter a valid phone number with at least 10 digits.");
-      }
-      const insert = await env.DB.prepare(
-        `INSERT INTO proposals (company_name, contact_person, email, phone, sector, outlay_amount, location, details, consent_given, nodal_status, sponsor_status)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, 'Submitted', 'Viewed')
-         RETURNING id`
-      )
-        .bind(company_name.slice(0, 200), contact_person.slice(0, 120), email, phone.slice(0, 40), sector.slice(0, 80), outlay_amount.slice(0, 80), location.slice(0, 120), details)
-        .first();
-      return json({ ok: true, id: insert && insert.id ? insert.id : null }, 201);
     }
 
     if (path === "/api/proposals" && method === "GET") {
