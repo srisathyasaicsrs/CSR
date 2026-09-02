@@ -122,9 +122,9 @@
 
 .scroll-rail {
     position: relative;
-    height: 8px;
+    height: 4px;
     border-radius: 999px;
-    background: #06a3da;
+    background: rgba(6, 163, 218, 0.2);
     overflow: visible;
     pointer-events: none;
 }
@@ -133,12 +133,12 @@
     position: absolute;
     top: 50%;
     left: 0;
-    width: 4px;
-    height: 18px;
-    margin-top: -9px;
-    background: #ffffff;
-    border-radius: 2px;
-    box-shadow: 0 0 0 1px rgba(0, 24, 56, 0.25);
+    width: 48px;
+    height: 6px;
+    margin-top: -3px;
+    background: linear-gradient(90deg, #002858, #06a3da, #ffb020);
+    border-radius: 999px;
+    box-shadow: 0 0 12px rgba(6, 163, 218, 0.8), 0 0 4px #ffffff;
     will-change: transform;
 }
 
@@ -152,8 +152,7 @@
 
 .partner-scroller-container {
     padding-bottom: 28px;
-    -webkit-mask-image: none;
-    mask-image: none;
+    position: relative;
 }
 
 .scroll-rail--partners {
@@ -162,7 +161,6 @@
     right: 10%;
     bottom: 12px;
     z-index: 3;
-    background: #06a3da;
 }
 
 .partner-scroller-track.is-gsap {

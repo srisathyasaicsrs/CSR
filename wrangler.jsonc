@@ -5,16 +5,6 @@
   "compatibility_date": "2026-08-29",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
-  "routes": [
-    {
-      "pattern": "srisathyasaicsr.com",
-      "custom_domain": true
-    },
-    {
-      "pattern": "www.srisathyasaicsr.com",
-      "custom_domain": true
-    }
-  ],
   "assets": {
     "directory": ".",
     "binding": "ASSETS",
