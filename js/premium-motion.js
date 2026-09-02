@@ -27,6 +27,7 @@
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var magnetBound = typeof WeakSet !== "undefined" ? new WeakSet() : null;
     var glowBound = typeof WeakSet !== "undefined" ? new WeakSet() : null;
+    var tiltBound = typeof WeakSet !== "undefined" ? new WeakSet() : null;
     var cursorReady = false;
     var staged = false;
 
@@ -38,6 +39,29 @@
             var box = el.getBoundingClientRect();
             el.style.setProperty("--glow-x", e.clientX - box.left + "px");
             el.style.setProperty("--glow-y", e.clientY - box.top + "px");
+        });
+    }
+
+    function bindTilt(el) {
+        if (reduce || !el || (tiltBound && tiltBound.has(el))) return;
+        if (tiltBound) tiltBound.add(el);
+        el.classList.add("ui21-tilt");
+        var rxTo = gsap.quickTo(el, "rotateX", { duration: 0.4, ease: "power2.out" });
+        var ryTo = gsap.quickTo(el, "rotateY", { duration: 0.4, ease: "power2.out" });
+
+        el.addEventListener("mousemove", function (e) {
+            var box = el.getBoundingClientRect();
+            var cx = box.left + box.width / 2;
+            var cy = box.top + box.height / 2;
+            var dx = (e.clientX - cx) / (box.width / 2);
+            var dy = (e.clientY - cy) / (box.height / 2);
+            rxTo(-dy * 5);
+            ryTo(dx * 5);
+        });
+
+        el.addEventListener("mouseleave", function () {
+            rxTo(0);
+            ryTo(0);
         });
     }
 
@@ -155,9 +179,12 @@
             for (var i = 0; i < magnets.length; i++) bindMagnetic(magnets[i]);
 
             var glows = document.querySelectorAll(
-                ".project-card, .partner-card-item, .partner-card, .collab-card, .fund-stat-card, .auth-card, .district-mandate-box"
+                ".project-card, .partner-card-item, .partner-card, .collab-card, .fund-stat-card, .auth-card, .district-mandate-box, .sitemap-group"
             );
-            for (var g = 0; g < glows.length; g++) bindGlow(glows[g]);
+            for (var g = 0; g < glows.length; g++) {
+                bindGlow(glows[g]);
+                bindTilt(glows[g]);
+            }
 
             setupCursor();
             setupHeroRail();
