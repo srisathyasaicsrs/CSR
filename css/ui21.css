@@ -139,7 +139,7 @@
     background: linear-gradient(90deg, #002858, #06a3da, #ffb020);
     border-radius: 999px;
     box-shadow: 0 0 12px rgba(6, 163, 218, 0.8), 0 0 4px #ffffff;
-    will-change: transform;
+    will-change: transform, left;
 }
 
 .scroll-rail--hero {
@@ -163,8 +163,21 @@
     z-index: 3;
 }
 
-.partner-scroller-track.is-gsap {
-    animation: none;
+.scroll-rail--partners #partner-scroll-thumb {
+    animation: partner-rail-glide 20s linear infinite;
+}
+
+.partner-scroller-container:hover .scroll-rail--partners #partner-scroll-thumb {
+    animation-play-state: paused;
+}
+
+@keyframes partner-rail-glide {
+    0% {
+        left: 0%;
+    }
+    100% {
+        left: calc(100% - 48px);
+    }
 }
 
 .reveal-up {

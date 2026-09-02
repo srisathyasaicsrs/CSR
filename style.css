@@ -553,52 +553,52 @@ h6,
 .section-title::after {
     position: absolute;
     content: "";
-    width: 28px;
+    width: 32px;
     height: 6px;
     bottom: -1px;
     left: 0;
-    background: linear-gradient(90deg, transparent, #ffffff, transparent);
+    background: #ffffff;
     border-radius: 999px;
-    box-shadow: 0 0 10px #ffffff, 0 0 18px #06a3da;
-    animation: section-title-glow 3s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    box-shadow: 0 0 8px #ffffff, 0 0 16px #06a3da, 0 0 24px #06a3da;
+    animation: section-title-glow 2.5s ease-in-out infinite alternate;
 }
 
 .section-title.section-title-sm::after {
-    width: 18px;
+    width: 20px;
     height: 4px;
 }
 
 .section-title.text-center::after {
     left: 50%;
     margin-left: -70px;
-    animation: section-title-glow-center 3s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    animation: section-title-glow-center 2.5s ease-in-out infinite alternate;
 }
 
 @keyframes section-title-glow {
     0% {
         transform: translateX(0);
-        opacity: 0.4;
+        opacity: 0.7;
     }
     50% {
         opacity: 1;
     }
     100% {
-        transform: translateX(112px);
-        opacity: 0.4;
+        transform: translateX(108px);
+        opacity: 0.7;
     }
 }
 
 @keyframes section-title-glow-center {
     0% {
         transform: translateX(0);
-        opacity: 0.4;
+        opacity: 0.7;
     }
     50% {
         opacity: 1;
     }
     100% {
-        transform: translateX(112px);
-        opacity: 0.4;
+        transform: translateX(108px);
+        opacity: 0.7;
     }
 }
 
@@ -831,7 +831,7 @@ h6,
     display: flex;
     gap: 24px;
     width: max-content;
-    animation: partnerScroll 40s linear infinite;
+    animation: partnerScroll 20s linear infinite;
     will-change: transform;
 }
 
